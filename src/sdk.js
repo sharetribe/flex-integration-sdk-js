@@ -39,8 +39,8 @@ const defaultSdkConfig = {
 
    Currently we have two apis:
 
-   - `api`: the marketplace API
-   - `auth`: the authentication API
+   - `api`: the Integration API
+   - `auth`: the Authentication API
 
    These configurations will be passed to Axios library.
    They define how to do the requets to the APIs, e.g.
