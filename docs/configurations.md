@@ -11,20 +11,6 @@ var sdk = sharetribeSdk.createInstance({
   // The API ClientID (mandatory)
   clientId: "08ec69f6-d37e-414d-83eb-324e94afddf0",
 
-  // Token store
-  //
-  // Token store instance to use. Token store is where the SDK saves the session information.
-  //
-  // Built-in token stores:
-  //
-  // - sharetribeSdk.tokenStore.browserCookieStore
-  // - sharetribeSdk.tokenStore.expressCookieStore
-  // - sharetribeSdk.tokenStore.memoryStore
-  //
-  // Default: sharetribeSdk.tokenStore.browserCookieStore()
-  //
-  tokenStore: sharetribeSdk.tokenStore.browserCookieStore(),
-
   // List of custom type handlers
   typeHandlers: [
     {
@@ -56,11 +42,6 @@ var sdk = sharetribeSdk.createInstance({
   //
   httpAgent: httpAgent,
   httpsAgent: httpsAgent,
-
-  // If true and default browser token store is used,
-  // the cookie is never transferred without HTTPS connection.
-  // Default: false
-  secure: false,
 
   // SDK uses Transit format to communicate with the API.
   // If this configuration is `true` a verbose Transit mode is enabled.

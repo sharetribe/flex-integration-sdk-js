@@ -675,11 +675,9 @@ const createSdkFn = ({ method, ...sdkFnParams }) => {
 };
 
 // Take SDK configurations, do transformation and return.
-const transformSdkConfig = ({ baseUrl, tokenStore, ...sdkConfig }) => ({
+const transformSdkConfig = ({ baseUrl, ...sdkConfig }) => ({
   ...sdkConfig,
   baseUrl: trimEndSlash(baseUrl),
-  tokenStore:
-    tokenStore || createDefaultTokenStore(tokenStore, sdkConfig.clientId, !!sdkConfig.secure),
 });
 
 // Validate SDK configurations, throw an error if invalid, otherwise return.
@@ -743,7 +741,7 @@ export default class SharetribeSdk {
 
     // Create a context object that will be passed to the interceptor context runner
     const ctx = {
-      tokenStore: sdkConfig.tokenStore,
+      tokenStore: createDefaultTokenStore(),
       endpointInterceptors,
       clientId: sdkConfig.clientId,
       typeHandlers: sdkConfig.typeHandlers,
