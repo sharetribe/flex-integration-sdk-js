@@ -1,6 +1,5 @@
 /* eslint-env node */
 const path = require('path');
-const webpack = require('webpack');
 
 // Shared configs
 const entry = './src/index.js';
@@ -15,33 +14,19 @@ const module = {
   rules: [babelLoader],
 };
 
-const output = target => ({
+const output =  {
   path: path.resolve(__dirname, 'build'),
-  filename: `sharetribe-flex-sdk-${target}.js`,
+  filename: `sharetribe-flex-integration-sdk-node.js`,
   library: 'sharetribeSdk',
   libraryTarget: 'umd',
-});
+};
 
-// Node configs
-const nodeConfig = {
+export default {
   entry,
-  output: output('node'),
+  output,
   target: 'node',
   module,
   externals: [
     'axios',
   ],
 };
-
-// Web configs
-const webConfig = {
-  entry,
-  output: output('web'),
-  target: 'web',
-  module,
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
-  ],
-};
-
-export default () => ([nodeConfig, webConfig]);
