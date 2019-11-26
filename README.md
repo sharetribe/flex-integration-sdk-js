@@ -2,7 +2,7 @@
 
 Use Sharetribe Flex Marketplace API with ease.
 
-[![CircleCI](https://circleci.com/gh/sharetribe/flex-sdk-js.svg?style=svg&circle-token=f2209b7cd8300d10f73d359072d7f03f81bff8f4)](https://circleci.com/gh/sharetribe/flex-sdk-js)
+[![CircleCI](https://circleci.com/gh/sharetribe/flex-integration-sdk-js.svg?style=svg&circle-token=5d118cf6f162884ba97e421c29c94f5c848ba28a)](https://circleci.com/gh/sharetribe/flex-integration-sdk-js)
 
 ## Table of Contents
 
