@@ -120,14 +120,11 @@ describe('new SharetribeSdk', () => {
     });
   });
 
-  it('calls listing search with query params', () => {
+  it('calls listing query with query params', () => {
     const { sdk } = createSdk();
 
     return sdk.listings
-      .search({
-        id: new UUID('0e0b60fe-d9a2-11e6-bf26-cec0c932ce01'),
-        origin: new LatLng(40.0, -70.0),
-      })
+      .query()
       .then(res => {
         const { data } = res.data;
 
@@ -439,140 +436,6 @@ describe('new SharetribeSdk', () => {
     );
   });
 
-  it('encodes new listing post body to Transit', () => {
-    const { sdk, adapter } = createSdk();
-
-    const testData = {
-      title: 'A new hope',
-      description: 'Our Nth listing!',
-      address: 'Bulevardi 14, Helsinki, Finland',
-      geolocation: new LatLng(10.152, 15.375),
-    };
-
-    const transitEncoded =
-      '["^ ","~:title","A new hope","~:description","Our Nth listing!","~:address","Bulevardi 14, Helsinki, Finland","~:geolocation",["~#geo",[10.152,15.375]]]';
-
-    return report(
-      sdk
-        .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-        .then(() => sdk.ownListings.create(testData))
-        .then(() => {
-          const req = _.last(adapter.requests);
-          expect(req.data).toEqual(transitEncoded);
-          expect(req.headers).toEqual(
-            expect.objectContaining({
-              'Content-Type': 'application/transit+json',
-            })
-          );
-        })
-    );
-  });
-
-  it('encodes new listing post body to Transit, using type appTypes', () => {
-    class MyLatLng {
-      constructor(lat, lng) {
-        this.val = [lat, lng];
-      }
-    }
-
-    const handlers = [
-      { sdkType: LatLng, appType: MyLatLng, writer: v => new LatLng(v.val[0], v.val[1]) },
-    ];
-
-    const { sdk, adapter } = createSdk({ typeHandlers: handlers });
-
-    const testData = {
-      title: 'A new hope',
-      description: 'Our Nth listing!',
-      address: 'Bulevardi 14, Helsinki, Finland',
-      geolocation: new MyLatLng(10.152, 15.375),
-    };
-
-    const transitEncoded =
-      '["^ ","~:title","A new hope","~:description","Our Nth listing!","~:address","Bulevardi 14, Helsinki, Finland","~:geolocation",["~#geo",[10.152,15.375]]]';
-
-    return report(
-      sdk
-        .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-        .then(() => sdk.ownListings.create(testData))
-        .then(() => {
-          const req = _.last(adapter.requests);
-          expect(req.data).toEqual(transitEncoded);
-          expect(req.headers).toEqual(
-            expect.objectContaining({
-              'Content-Type': 'application/transit+json',
-            })
-          );
-        })
-    );
-  });
-
-  it('encodes new listing post body to Transit, using canHandle fn', () => {
-    const handlers = [
-      {
-        sdkType: LatLng,
-        canHandle: v => v[0] === '__my_lat_lng_type',
-        writer: v => new LatLng(v[1], v[2]),
-      },
-    ];
-
-    const { sdk, adapter } = createSdk({ typeHandlers: handlers });
-
-    const testData = {
-      title: 'A new hope',
-      description: 'Our Nth listing!',
-      address: 'Bulevardi 14, Helsinki, Finland',
-      geolocation: ['__my_lat_lng_type', 10.152, 15.375],
-    };
-
-    const transitEncoded =
-      '["^ ","~:title","A new hope","~:description","Our Nth listing!","~:address","Bulevardi 14, Helsinki, Finland","~:geolocation",["~#geo",[10.152,15.375]]]';
-
-    return report(
-      sdk
-        .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-        .then(() => sdk.ownListings.create(testData))
-        .then(() => {
-          const req = _.last(adapter.requests);
-          expect(req.data).toEqual(transitEncoded);
-          expect(req.headers).toEqual(
-            expect.objectContaining({
-              'Content-Type': 'application/transit+json',
-            })
-          );
-        })
-    );
-  });
-
-  it('encodes new listing post body to Transit JSON Verbose', () => {
-    const { sdk, adapter } = createSdk({ transitVerbose: true });
-
-    const testData = {
-      title: 'A new hope',
-      description: 'Our Nth listing!',
-      address: 'Bulevardi 14, Helsinki, Finland',
-      geolocation: new LatLng(10.152, 15.375),
-    };
-
-    const transitEncoded =
-      '{"~:title":"A new hope","~:description":"Our Nth listing!","~:address":"Bulevardi 14, Helsinki, Finland","~:geolocation":{"~#geo":[10.152,15.375]}}';
-
-    return report(
-      sdk
-        .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-        .then(() => sdk.ownListings.create(testData))
-        .then(() => {
-          const req = _.last(adapter.requests);
-          expect(req.data).toEqual(transitEncoded);
-          expect(req.headers).toEqual(
-            expect.objectContaining({
-              'Content-Type': 'application/transit+json',
-            })
-          );
-        })
-    );
-  });
-
   it('requests the server to send back Transit JSON Verbose', () => {
     const { sdk, adapter } = createSdk({ transitVerbose: true });
 
@@ -585,37 +448,6 @@ describe('new SharetribeSdk', () => {
             Accept: 'application/transit+json',
           })
         );
-      })
-    );
-  });
-
-  it('does not double encode in case we need to retry with fresh token', () => {
-    const { sdk, sdkTokenStore, adapterTokenStore, adapter } = createSdk();
-
-    const testData = {
-      title: 'A new hope',
-      description: 'Our Nth listing!',
-      address: 'Bulevardi 14, Helsinki, Finland',
-      geolocation: new LatLng(10.152, 15.375),
-    };
-
-    const transitEncoded =
-      '["^ ","~:title","A new hope","~:description","Our Nth listing!","~:address","Bulevardi 14, Helsinki, Finland","~:geolocation",["~#geo",[10.152,15.375]]]';
-
-    return report(
-      sdk.login({ username: 'joe.dunphy@example.com', password: 'secret-joe' }).then(() => {
-        const { access_token } = sdkTokenStore.getToken();
-        adapterTokenStore.expireAccessToken(access_token);
-
-        return sdk.ownListings.create(testData).then(() => {
-          const req = _.last(adapter.requests);
-          expect(req.data).toEqual(transitEncoded);
-          expect(req.headers).toEqual(
-            expect.objectContaining({
-              'Content-Type': 'application/transit+json',
-            })
-          );
-        });
       })
     );
   });
@@ -671,48 +503,6 @@ describe('new SharetribeSdk', () => {
     });
   });
 
-  it('allows sending query params in POST request (such as `expand=true`)', () => {
-    const { sdk } = createSdk();
-
-    const params = {
-      title: 'Pelago bike',
-      description: 'City bike for city hipster!',
-      address: 'Bulevardi 14, 00200 Helsinki, Finland',
-      geolocation: new LatLng(40.0, 73.0),
-    };
-
-    return report(
-      sdk
-        .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-        .then(() => sdk.ownListings.create(params))
-        .then(res => {
-          const { data } = res.data;
-          const attrs = data.attributes;
-
-          expect(data).toEqual(
-            expect.objectContaining({
-              id: expect.any(UUID),
-              type: 'ownListing',
-            })
-          );
-          expect(attrs).toBeUndefined();
-        })
-        .then(() => sdk.ownListings.create(params, { expand: true }))
-        .then(res => {
-          const { data } = res.data;
-          const attrs = data.attributes;
-
-          expect(data).toEqual(
-            expect.objectContaining({
-              id: expect.any(UUID),
-              type: 'ownListing',
-            })
-          );
-          expect(attrs).toBeDefined();
-        })
-    );
-  });
-
   it('returns error in expected error format, data as plain text', () => {
     const { sdk } = createSdk();
 
@@ -730,50 +520,6 @@ describe('new SharetribeSdk', () => {
               status: 401,
               statusText: 'Unauthorized',
               data: 'Unauthorized',
-            })
-          );
-          return Promise.resolve();
-        })
-    );
-  });
-
-  it('returns error in expected error format, data as an object', () => {
-    const { sdk } = createSdk();
-
-    return report(
-      sdk
-        .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-        .then(() => sdk.ownListings.create())
-        .then(() => {
-          // Fail
-          expect(true).toEqual(false);
-        })
-        .catch(e => {
-          expect(e).toBeInstanceOf(Error);
-          expect(e).toEqual(
-            expect.objectContaining({
-              status: 400,
-              statusText: 'Bad Request',
-              data: expect.objectContaining({
-                errors: [
-                  expect.objectContaining({
-                    id: expect.any(UUID),
-                    status: 400,
-                    code: 'bad-request',
-                    title: 'Bad request',
-                    details: {
-                      error: {
-                        'body-params': {
-                          title: 'missing-required-key',
-                          description: 'missing-required-key',
-                          address: 'missing-required-key',
-                          geolocation: 'missing-required-key',
-                        },
-                      },
-                    },
-                  }),
-                ],
-              }),
             })
           );
           return Promise.resolve();

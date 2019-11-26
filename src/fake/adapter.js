@@ -70,13 +70,9 @@ const defaultHandler = (config, resolve, reject, tokenStore) => {
       return requireAuth(config, reject, tokenStore).then(() =>
         api.marketplace.show(config, resolve)
       );
-    case 'fake-adapter://fake-api/v1/api/listings/search':
+    case 'fake-adapter://fake-api/v1/api/listings/query':
       return requireAuth(config, reject, tokenStore).then(() =>
-        api.listings.search(config, resolve)
-      );
-    case 'fake-adapter://fake-api/v1/api/own_listings/create':
-      return requireAuth(config, reject, tokenStore).then(() =>
-        api.ownListings.create(config, resolve, reject)
+        api.listings.query(config, resolve)
       );
     case 'fake-adapter://fake-api/v1/auth/token':
       return auth.token(config, resolve, reject, tokenStore);
