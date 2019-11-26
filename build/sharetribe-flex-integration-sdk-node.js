@@ -2811,7 +2811,7 @@ var createStore = function createStore() {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createInstance", function() { return createInstance; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tokenStore", function() { return tokenStore; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sdk__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__integration_sdk__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__types__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__memory_store__ = __webpack_require__(65);
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "types", function() { return __WEBPACK_IMPORTED_MODULE_1__types__; });
@@ -2820,7 +2820,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var createInstance = function createInstance(config) {
-  return new __WEBPACK_IMPORTED_MODULE_0__sdk__["a" /* default */](config);
+  return new __WEBPACK_IMPORTED_MODULE_0__integration_sdk__["a" /* default */](config);
 }; // Export token stores
 
 
