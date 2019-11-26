@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-const sharetribeSdk = require('../../build/sharetribe-flex-sdk-node');
+const sharetribeSdk = require('../../build/sharetribe-flex-integration-sdk-node');
 
 //
 // Printing helpers
