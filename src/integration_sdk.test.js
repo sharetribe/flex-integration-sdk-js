@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import { UUID, LatLng } from './types';
 import createAdapter from './fake/adapter';
-import SharetribeSdk from './sdk';
+import SharetribeSdk from './integration_sdk';
 import memoryStore from './memory_store';
 
 /**

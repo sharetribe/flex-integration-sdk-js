@@ -1,4 +1,4 @@
-import SharetribeSdk from './sdk';
+import SharetribeSdk from './integration_sdk';
 import * as types from './types';
 import memoryStore from './memory_store';
 
