@@ -1,9 +1,13 @@
 /* eslint camelcase: "off" */
 import _ from 'lodash';
 import { UUID, LatLng } from './types';
-import createAdapter from './fake/adapter';
+import { createAdapter, defaultHandler } from './fake/adapter';
 import SharetribeSdk from './integration_sdk';
 import memoryStore from './memory_store';
+
+
+const CLIENT_ID = '08ec69f6-d37e-414d-83eb-324e94afddf0';
+const CLIENT_SECRET = 'client-secret-value';
 
 /**
    Helper to improve error messages.
@@ -32,7 +36,8 @@ const report = responsePromise =>
 const createSdk = (config = {}) => {
   const defaults = {
     baseUrl: 'fake-adapter://fake-api/',
-    clientId: '08ec69f6-d37e-414d-83eb-324e94afddf0',
+    clientId: CLIENT_ID,
+    clientSecret: CLIENT_SECRET,
   };
 
   const sdkTokenStore = memoryStore();
@@ -62,7 +67,7 @@ describe('new SharetribeSdk', () => {
     expect(
       () =>
         new SharetribeSdk({
-          clientId: '08ec69f6-d37e-414d-83eb-324e94afddf0',
+          clientId: CLIENT_ID,
           baseUrl: null,
         })
     ).toThrowError('baseUrl must be provided');
@@ -74,12 +79,21 @@ describe('new SharetribeSdk', () => {
       resolve({ data: { url: config.url } });
     });
 
+    const authToken = adapter
+          .tokenStore
+          .createClientCredentialsToken(CLIENT_ID, CLIENT_SECRET);
+
+    const sdkTokenStore = memoryStore();
+    sdkTokenStore.setToken(authToken);
+
     const sdk = new SharetribeSdk({
-      clientId: '08ec69f6-d37e-414d-83eb-324e94afddf0',
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      tokenStore: sdkTokenStore,
       adapter: adapter.adapterFn,
     });
 
-    return sdk.login().then(res => {
+    return sdk.logout().then(res => {
       expect(res.data.url).toMatch(/^https:\/\/flex-api.sharetribe.com/);
     });
   });
@@ -207,15 +221,35 @@ describe('new SharetribeSdk', () => {
   });
 
   it('reads auth token from store and includes it in request headers', () => {
-    const { sdk, sdkTokenStore, adapterTokenStore } = createSdk({
-      // The Fake server doesn't know this clientId. However, the request passes because
-      // the access_token is in the store
-      clientId: 'daaf8871-4723-45b8-bc97-9e335f46966d',
+    const adapter = createAdapter((config, resolve, reject, tokenStore) => {
+      // Fail auth requests, API call will succeed due to stored auth token
+      if (config.url.startsWith('fake-adapter://fake-api/v1/auth')) {
+        return reject({
+          status: 401,
+          data: '{}',
+        });
+      }
+      return defaultHandler(config, resolve, reject, tokenStore);
     });
 
-    const anonToken = adapterTokenStore.createAnonToken();
+    const clientId =  '08ec69f6-d37e-414d-83eb-324e94afddf0';
+    const clientSecret = 'client-secret-value';
+    const authToken = adapter.tokenStore.createClientCredentialsToken(clientId, clientSecret);
 
-    sdkTokenStore.setToken(anonToken);
+    const sdkTokenStore = memoryStore();
+    sdkTokenStore.setToken(authToken);
+
+    const sdk = new SharetribeSdk({
+      baseUrl: 'fake-adapter://fake-api/',
+
+      // The Fake server doesn't know this clientId/clientSecret. However, the
+      // request passes because the access_token is in the store
+      clientId: 'daaf8871-4723-45b8-bc97-9e335f46966d',
+      clientSecret: 'some-client-secret',
+
+      tokenStore: sdkTokenStore,
+      adapter: adapter.adapterFn,
+    });
 
     return sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(res => {
       const resource = res.data.data;
@@ -247,76 +281,38 @@ describe('new SharetribeSdk', () => {
         })
       );
 
-      expect(token.access_token).toEqual('anonymous-access-1');
+      expect(token.access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
       expect(token.token_type).toEqual('bearer');
       expect(token.expires_in).toEqual(86400);
     });
   });
 
-  it('stores auth token after login', () => {
+  it('stores auth token after an API request', () => {
     const { sdk, sdkTokenStore } = createSdk();
 
-    // First we get the anonymous token
     return report(
       sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-        expect(sdkTokenStore.getToken().access_token).toEqual('anonymous-access-1');
-
-        // After login, the anonymous token will be overriden
-        return sdk
-          .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-          .then(() => {
-            expect(sdkTokenStore.getToken().access_token).toEqual(
-              'joe.dunphy@example.com-secret-joe-access-1'
-            );
-          });
+        expect(sdkTokenStore.getToken().access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
       })
     );
   });
 
-  it('refreshes login token', () => {
+  it('refreshes access token', () => {
     const { sdk, sdkTokenStore, adapterTokenStore } = createSdk();
 
-    // First, login
+    // First, call API to gain access token
     return report(
-      sdk.login({ username: 'joe.dunphy@example.com', password: 'secret-joe' }).then(() => {
+      sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
+
         const { access_token } = sdkTokenStore.getToken();
-        expect(access_token).toEqual('joe.dunphy@example.com-secret-joe-access-1');
+        expect(access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
 
         adapterTokenStore.expireAccessToken(access_token);
 
         return sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(res => {
           expect(sdkTokenStore.getToken().access_token).toEqual(
-            'joe.dunphy@example.com-secret-joe-access-2'
+            `${CLIENT_ID}-${CLIENT_SECRET}-access-2`
           );
-
-          const resource = res.data.data;
-          const attrs = resource.attributes;
-
-          expect(resource.id).toEqual(new UUID('0e0b60fe-d9a2-11e6-bf26-cec0c932ce01'));
-          expect(attrs).toEqual(
-            expect.objectContaining({
-              name: 'Awesome skies.',
-              description: 'Meet and greet with fanatical sky divers.',
-            })
-          );
-        });
-      })
-    );
-  });
-
-  it('refreshes anonymous token', () => {
-    const { sdk, sdkTokenStore, adapterTokenStore } = createSdk();
-
-    // First we get the anonymous token
-    return report(
-      sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-        const { access_token } = sdkTokenStore.getToken();
-        expect(access_token).toEqual('anonymous-access-1');
-
-        adapterTokenStore.expireAccessToken(access_token);
-
-        return sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(res => {
-          expect(sdkTokenStore.getToken().access_token).toEqual('anonymous-access-2');
 
           const resource = res.data.data;
           const attrs = resource.attributes;
@@ -336,11 +332,11 @@ describe('new SharetribeSdk', () => {
   it('revokes token (a.k.a logout)', () => {
     const { sdk, sdkTokenStore } = createSdk();
 
-    // First, login
+    // First, call API to gain access token
     return report(
-      sdk.login({ username: 'joe.dunphy@example.com', password: 'secret-joe' }).then(() => {
+      sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
         expect(sdkTokenStore.getToken().access_token).toEqual(
-          'joe.dunphy@example.com-secret-joe-access-1'
+          `${CLIENT_ID}-${CLIENT_SECRET}-access-1`
         );
 
         // Revoke token
@@ -348,10 +344,6 @@ describe('new SharetribeSdk', () => {
           expect(res.data.action).toEqual('revoked');
 
           expect(sdkTokenStore.getToken()).toEqual(null);
-
-          return sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-            expect(sdkTokenStore.getToken().access_token).toEqual('anonymous-access-1');
-          });
         });
       })
     );
@@ -360,23 +352,19 @@ describe('new SharetribeSdk', () => {
   it('refreshes token before revoke', () => {
     const { sdk, sdkTokenStore, adapterTokenStore } = createSdk();
 
-    // First, login
+    // First, call API to gain access token
     return report(
-      sdk.login({ username: 'joe.dunphy@example.com', password: 'secret-joe' }).then(() => {
+      sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
+
         const { access_token } = sdkTokenStore.getToken();
-        expect(access_token).toEqual('joe.dunphy@example.com-secret-joe-access-1');
+        expect(access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
 
         adapterTokenStore.expireAccessToken(access_token);
 
         // Revoke token
         return sdk.logout().then(res => {
           expect(res.data.action).toEqual('revoked');
-
           expect(sdkTokenStore.getToken()).toEqual(null);
-
-          return sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-            expect(sdkTokenStore.getToken().access_token).toEqual('anonymous-access-1');
-          });
         });
       })
     );
@@ -385,22 +373,18 @@ describe('new SharetribeSdk', () => {
   it('refreshes token after unsuccessful revoke, but if the refresh fails because of 401, return OK.', () => {
     const { sdk, sdkTokenStore, adapterTokenStore } = createSdk();
 
-    // First, login
+    // First, call API to gain access token
     return report(
-      sdk.login({ username: 'joe.dunphy@example.com', password: 'secret-joe' }).then(() => {
+      sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
         const { access_token, refresh_token } = sdkTokenStore.getToken();
-        expect(access_token).toEqual('joe.dunphy@example.com-secret-joe-access-1');
+        expect(access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
 
         adapterTokenStore.expireAccessToken(access_token);
-        adapterTokenStore.revokePasswordToken(refresh_token);
+        adapterTokenStore.revokeClientCredentialsToken(refresh_token);
 
         // Revoke token
         return sdk.logout().then(() => {
           expect(sdkTokenStore.getToken()).toEqual(null);
-
-          return sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-            expect(sdkTokenStore.getToken().access_token).toEqual('anonymous-access-1');
-          });
         });
       })
     );
@@ -409,17 +393,17 @@ describe('new SharetribeSdk', () => {
   it('refreshes token after unsuccessful revoke, but if the refresh fails because of network error, fail.', () => {
     const { sdk, sdkTokenStore, adapterTokenStore, adapter } = createSdk();
 
-    // Two requests passes (login and first revoke try), but after that the server goes down
+    // Two requests passes (show marketplace and first revoke try), but after that the server goes down
     adapter.offlineAfter(2);
 
-    // First, login
+    // First, show marketplace
     return report(
-      sdk.login({ username: 'joe.dunphy@example.com', password: 'secret-joe' }).then(() => {
+      sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
         const { access_token, refresh_token } = sdkTokenStore.getToken();
-        expect(access_token).toEqual('joe.dunphy@example.com-secret-joe-access-1');
+        expect(access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
 
         adapterTokenStore.expireAccessToken(access_token);
-        adapterTokenStore.revokePasswordToken(refresh_token);
+        adapterTokenStore.revokeClientCredentialsToken(refresh_token);
 
         // Revoke token
         return sdk
@@ -468,16 +452,7 @@ describe('new SharetribeSdk', () => {
               .show()
               .then(sdk.authInfo)
               .then(authInfo => {
-                // Anonymous token
-                expect(authInfo.grantType).toEqual('client_credentials');
-              })
-          )
-          .then(() =>
-            sdk
-              .login({ username: 'joe.dunphy@example.com', password: 'secret-joe' })
-              .then(sdk.authInfo)
-              .then(authInfo => {
-                // Login token
+                // Client credentials token
                 expect(authInfo.grantType).toEqual('refresh_token');
               })
           )
@@ -504,11 +479,11 @@ describe('new SharetribeSdk', () => {
   });
 
   it('returns error in expected error format, data as plain text', () => {
-    const { sdk } = createSdk();
+    const { sdk } = createSdk({ clientSecret: 'some-client-secret' });
 
     return report(
       sdk
-        .login({ username: 'wrong username', password: 'wrong password' })
+        .marketplace.show()
         .then(() => {
           // Fail
           expect(true).toEqual(false);

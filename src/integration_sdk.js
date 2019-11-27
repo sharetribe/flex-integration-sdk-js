@@ -4,16 +4,11 @@ import { fnPath as urlPathToFnPath, trimEndSlash, formData } from './utils';
 import paramsSerializer from './params_serializer';
 import AddAuthHeader from './interceptors/add_auth_header';
 import RetryWithRefreshToken from './interceptors/retry_with_refresh_token';
-import RetryWithAnonToken from './interceptors/retry_with_anon_token';
 import ClearTokenAfterRevoke from './interceptors/clear_token_after_revoke';
 import FetchRefreshTokenForRevoke from './interceptors/fetch_refresh_token_for_revoke';
-import AddAuthTokenResponse from './interceptors/add_auth_token_response';
-import SaveToken from './interceptors/save_token';
 import FetchAuthTokenFromApi from './interceptors/fetch_auth_token_from_api';
 import FetchAuthTokenFromStore from './interceptors/fetch_auth_token_from_store';
-import AddClientIdToParams from './interceptors/add_client_id_to_params';
 import AuthInfo from './interceptors/auth_info';
-import defaultParams from './interceptors/default_params';
 import TransitResponse from './interceptors/transit_response';
 import { createDefaultTokenStore } from './token_store';
 import contextRunner from './context_runner';
@@ -158,16 +153,8 @@ const endpointDefinitions = [
 const authenticateInterceptors = [
   new FetchAuthTokenFromStore(),
   new FetchAuthTokenFromApi(),
-  new RetryWithAnonToken(),
   new RetryWithRefreshToken(),
   new AddAuthHeader(),
-];
-
-const loginInterceptors = [
-  defaultParams({ grant_type: 'password', scope: 'user' }),
-  new AddClientIdToParams(),
-  new SaveToken(),
-  new AddAuthTokenResponse(),
 ];
 
 const logoutInterceptors = [
@@ -214,15 +201,9 @@ const endpointSdkFnDefinitions = sdkFnDefsFromEndpointDefs(endpointDefinitions);
    List of SDK methods that are not derived from the endpoints.
  */
 const additionalSdkFnDefinitions = [
-  { path: 'login', endpointInterceptorPath: 'auth.token', interceptors: loginInterceptors },
   { path: 'logout', endpointInterceptorPath: 'auth.revoke', interceptors: [...logoutInterceptors] },
   { path: 'authInfo', interceptors: [new AuthInfo()] },
 ];
-
-// const logAndReturn = (data) => {
-//   console.log(data);
-//   return data;
-// };
 
 const handleSuccessResponse = response => {
   const { status, statusText, data } = response;
@@ -435,6 +416,7 @@ export default class SharetribeSdk {
       tokenStore: sdkConfig.tokenStore,
       endpointInterceptors,
       clientId: sdkConfig.clientId,
+      clientSecret: sdkConfig.clientSecret,
       typeHandlers: sdkConfig.typeHandlers,
       transitVerbose: sdkConfig.transitVerbose,
     };

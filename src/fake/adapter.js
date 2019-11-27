@@ -62,7 +62,7 @@ const requireAuth = (config, reject, tokenStore) => {
   });
 };
 
-const defaultHandler = (config, resolve, reject, tokenStore) => {
+export const defaultHandler = (config, resolve, reject, tokenStore) => {
   switch (config.url) {
     case 'fake-adapter://fake-api/v1/integration-api/users/show':
       return requireAuth(config, reject, tokenStore).then(() => api.users.show(config, resolve));
@@ -94,7 +94,7 @@ const defaultHandler = (config, resolve, reject, tokenStore) => {
    - Store all requests (so that they can be inspected in tests)
    - Implement fake token store
 */
-const createAdapter = handlerFn => {
+export const createAdapter = handlerFn => {
   const requests = [];
   const tokenStore = createTokenStore();
   let offlineAfter;
@@ -120,5 +120,3 @@ const createAdapter = handlerFn => {
     }),
   };
 };
-
-export default createAdapter;
