@@ -37,7 +37,7 @@ const defaultSdkConfig = {
 
    Currently we have two apis:
 
-   - `api`: the Integration API
+   - `integration-api`: the Integration API
    - `auth`: the Authentication API
 
    These configurations will be passed to Axios library.
@@ -61,7 +61,7 @@ const createHeaders = transitVerbose => {
 };
 
 const apis = {
-  api: ({ baseUrl, version, adapter, httpAgent, httpsAgent, transitVerbose }) => ({
+  'integration-api': ({ baseUrl, version, adapter, httpAgent, httpsAgent, transitVerbose }) => ({
     headers: createHeaders(transitVerbose),
     baseURL: `${baseUrl}/${version}`,
     transformRequest: v => v,
@@ -71,7 +71,7 @@ const apis = {
     httpAgent,
     httpsAgent,
   }),
-  auth: ({ baseUrl, version, adapter, httpAgent, httpsAgent }) => ({
+  'auth': ({ baseUrl, version, adapter, httpAgent, httpsAgent }) => ({
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Accept: 'application/json',
@@ -97,49 +97,49 @@ const apis = {
  */
 const endpointDefinitions = [
   {
-    apiName: 'api',
+    apiName: 'integration-api',
     path: 'marketplace/show',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'api',
+    apiName: 'integration-api',
     path: 'users/show',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'api',
+    apiName: 'integration-api',
     path: 'users/query',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'api',
+    apiName: 'integration-api',
     path: 'listings/show',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'api',
+    apiName: 'integration-api',
     path: 'listings/query',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'api',
+    apiName: 'integration-api',
     path: 'transactions/query',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'api',
+    apiName: 'integration-api',
     path: 'transactions/show',
     internal: false,
     method: 'get',
