@@ -93,7 +93,7 @@ describe('new SharetribeSdk', () => {
       adapter: adapter.adapterFn,
     });
 
-    return sdk.logout().then(res => {
+    return sdk.revoke().then(res => {
       expect(res.data.url).toMatch(/^https:\/\/flex-api.sharetribe.com/);
     });
   });
@@ -329,7 +329,7 @@ describe('new SharetribeSdk', () => {
     );
   });
 
-  it('revokes token (a.k.a logout)', () => {
+  it('revokes token', () => {
     const { sdk, sdkTokenStore } = createSdk();
 
     // First, call API to gain access token
@@ -340,7 +340,7 @@ describe('new SharetribeSdk', () => {
         );
 
         // Revoke token
-        return sdk.logout().then(res => {
+        return sdk.revoke().then(res => {
           expect(res.data.action).toEqual('revoked');
 
           expect(sdkTokenStore.getToken()).toEqual(null);
@@ -362,7 +362,7 @@ describe('new SharetribeSdk', () => {
         adapterTokenStore.expireAccessToken(access_token);
 
         // Revoke token
-        return sdk.logout().then(res => {
+        return sdk.revoke().then(res => {
           expect(res.data.action).toEqual('revoked');
           expect(sdkTokenStore.getToken()).toEqual(null);
         });
@@ -383,7 +383,7 @@ describe('new SharetribeSdk', () => {
         adapterTokenStore.revokeClientCredentialsToken(refresh_token);
 
         // Revoke token
-        return sdk.logout().then(() => {
+        return sdk.revoke().then(() => {
           expect(sdkTokenStore.getToken()).toEqual(null);
         });
       })
@@ -407,7 +407,7 @@ describe('new SharetribeSdk', () => {
 
         // Revoke token
         return sdk
-          .logout()
+          .revoke()
           .then(() => {
             // Should not pass
             expect(true).toEqual(false);
@@ -458,16 +458,15 @@ describe('new SharetribeSdk', () => {
           )
           .then(() =>
             sdk
-              .logout()
+              .revoke()
               .then(sdk.authInfo)
               .then(authInfo => {
-                // Logout
                 expect(authInfo.grantType).toBeUndefined();
               })
           )
           .then(() =>
             sdk
-              .logout()
+              .revoke()
               .then(sdk.authInfo)
               .then(authInfo => {
                 // Logging out already logged out user does nothing

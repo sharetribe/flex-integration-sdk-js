@@ -157,7 +157,7 @@ const authenticateInterceptors = [
   new AddAuthHeader(),
 ];
 
-const logoutInterceptors = [
+const revokeInterceptors = [
   new FetchAuthTokenFromStore(),
   new ClearTokenAfterRevoke(),
   new RetryWithRefreshToken(),
@@ -201,7 +201,7 @@ const endpointSdkFnDefinitions = sdkFnDefsFromEndpointDefs(endpointDefinitions);
    List of SDK methods that are not derived from the endpoints.
  */
 const additionalSdkFnDefinitions = [
-  { path: 'logout', endpointInterceptorPath: 'auth.revoke', interceptors: [...logoutInterceptors] },
+  { path: 'revoke', endpointInterceptorPath: 'auth.revoke', interceptors: [...revokeInterceptors] },
   { path: 'authInfo', interceptors: [new AuthInfo()] },
 ];
 
