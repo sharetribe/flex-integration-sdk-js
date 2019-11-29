@@ -64,19 +64,15 @@ const requireAuth = (config, reject, tokenStore) => {
 
 const defaultHandler = (config, resolve, reject, tokenStore) => {
   switch (config.url) {
-    case 'fake-adapter://fake-api/v1/api/users/show':
+    case 'fake-adapter://fake-api/v1/integration-api/users/show':
       return requireAuth(config, reject, tokenStore).then(() => api.users.show(config, resolve));
-    case 'fake-adapter://fake-api/v1/api/marketplace/show':
+    case 'fake-adapter://fake-api/v1/integration-api/marketplace/show':
       return requireAuth(config, reject, tokenStore).then(() =>
         api.marketplace.show(config, resolve)
       );
-    case 'fake-adapter://fake-api/v1/api/listings/search':
+    case 'fake-adapter://fake-api/v1/integration-api/listings/query':
       return requireAuth(config, reject, tokenStore).then(() =>
-        api.listings.search(config, resolve)
-      );
-    case 'fake-adapter://fake-api/v1/api/own_listings/create':
-      return requireAuth(config, reject, tokenStore).then(() =>
-        api.ownListings.create(config, resolve, reject)
+        api.listings.query(config, resolve)
       );
     case 'fake-adapter://fake-api/v1/auth/token':
       return auth.token(config, resolve, reject, tokenStore);
