@@ -329,6 +329,41 @@ describe('new SharetribeSdk', () => {
     );
   });
 
+  it('requests a new auth token using client credentials if refresh token has exipred', () => {
+    const { sdk, sdkTokenStore, adapterTokenStore } = createSdk();
+
+    // First, call API to gain access token
+    return report(
+
+      sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
+
+        const token1 = sdkTokenStore.getToken();
+        expect(token1.access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
+        expect(token1.refresh_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-refresh-1`);
+
+        adapterTokenStore.expireAccessToken(token1.access_token);
+        adapterTokenStore.expireRefreshToken(token1.refresh_token);
+
+        return sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(res => {
+          const token2 = sdkTokenStore.getToken();
+          expect(token2.access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-2`);
+          expect(token2.refresh_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-refresh-2`);
+
+          const resource = res.data.data;
+          const attrs = resource.attributes;
+
+          expect(resource.id).toEqual(new UUID('0e0b60fe-d9a2-11e6-bf26-cec0c932ce01'));
+          expect(attrs).toEqual(
+            expect.objectContaining({
+              name: 'Awesome skies.',
+              description: 'Meet and greet with fanatical sky divers.',
+            })
+          );
+        });
+      })
+    );
+  });
+
   it('revokes token', () => {
     const { sdk, sdkTokenStore } = createSdk();
 

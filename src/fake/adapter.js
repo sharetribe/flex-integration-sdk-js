@@ -50,7 +50,7 @@ const requireAuth = (config, reject, tokenStore) => {
     });
   }
 
-  const validToken = tokenStore.validToken(accessToken, tokenType);
+  const validToken = tokenStore.validAccessToken(accessToken, tokenType);
 
   if (validToken) {
     return Promise.resolve();

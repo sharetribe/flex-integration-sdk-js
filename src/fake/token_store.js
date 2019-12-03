@@ -21,7 +21,7 @@ const createTokenStore = () => {
 
   // Public
 
-  const validToken = (accessToken, tokenType) =>
+  const validAccessToken = (accessToken, tokenType) =>
     _.find(
       tokens,
       ({ token }) =>
@@ -33,17 +33,20 @@ const createTokenStore = () => {
         token.token_type.toLowerCase() === tokenType.toLowerCase()
     );
 
-  const createClientCredentialsToken = (clientId, clientSecret) => {
+  const createClientCredentialsToken = (clientId, clientSecret, validRefreshToken) => {
     const client = _.find(knownClients, u => _.isEqual(u, [clientId, clientSecret]));
 
     if (!client) {
       return null;
     }
 
+    const refreshToken = validRefreshToken ||
+          generateClientCredentialsRefreshToken(clientId, clientSecret);
+
     const token = {
       token: {
         access_token: generateClientCredentialsAccessToken(clientId, clientSecret),
-        refresh_token: generateClientCredentialsRefreshToken(clientId, clientSecret),
+        refresh_token: refreshToken,
         token_type: 'bearer',
         expires_in: 86400,
       },
@@ -69,15 +72,27 @@ const createTokenStore = () => {
     });
   };
 
+  const expireRefreshToken = refreshToken => {
+    _.map(tokens, t => {
+      const { token } = t;
+
+      if (token.refresh_token === refreshToken) {
+        token.refresh_token = null;
+      }
+
+      return t;
+    });
+  };
+
   const revokeClientCredentialsToken = refreshToken =>
     _.remove(tokens, t => t.token.refresh_token === refreshToken);
 
   const freshClientCredentialsToken = refreshToken => {
-    const existingToken = revokeClientCredentialsToken(refreshToken);
+    const existingToken = revokeClientCredentialsToken(refreshToken)[0];
 
-    if (existingToken.length) {
+    if (existingToken) {
 
-      const { clientId, clientSecret } = existingToken[0].client;
+      const { clientId, clientSecret } = existingToken.client;
       return createClientCredentialsToken(clientId, clientSecret);
     }
 
@@ -88,8 +103,9 @@ const createTokenStore = () => {
     createClientCredentialsToken,
     freshClientCredentialsToken,
     revokeClientCredentialsToken,
-    validToken,
+    validAccessToken,
     expireAccessToken,
+    expireRefreshToken,
   };
 };
 

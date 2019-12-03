@@ -4,6 +4,7 @@ import { fnPath as urlPathToFnPath, trimEndSlash, formData } from './utils';
 import paramsSerializer from './params_serializer';
 import AddAuthHeader from './interceptors/add_auth_header';
 import RetryWithRefreshToken from './interceptors/retry_with_refresh_token';
+import RetryWithClientCredentials from './interceptors/retry_with_client_credentials';
 import ClearTokenAfterRevoke from './interceptors/clear_token_after_revoke';
 import FetchRefreshTokenForRevoke from './interceptors/fetch_refresh_token_for_revoke';
 import FetchAuthTokenFromApi from './interceptors/fetch_auth_token_from_api';
@@ -153,6 +154,7 @@ const endpointDefinitions = [
 const authenticateInterceptors = [
   new FetchAuthTokenFromStore(),
   new FetchAuthTokenFromApi(),
+  new RetryWithClientCredentials(),
   new RetryWithRefreshToken(),
   new AddAuthHeader(),
 ];
