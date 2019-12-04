@@ -22,7 +22,14 @@ const tokenFilePath = path.join(configDir, 'file-store-token.json');
 const createConfigDir = () => fs.promises.mkdir(configDir, { recursive: true });
 
 const getToken = () => fs.promises.readFile(tokenFilePath)
-    .then(contents => JSON.parse(contents));
+      .then(contents => JSON.parse(contents))
+      .catch(e => {
+        if (e.code === ERROR_CODE_NOT_FOUND) {
+          // File does not exist i.e. token not found
+          return Promise.resolve(null);
+        }
+        throw e;
+      });
 
 const setToken = token => {
   const writeToken = () => fs.promises.writeFile(tokenFilePath, JSON.stringify(token));
@@ -37,7 +44,7 @@ const setToken = token => {
     });
 };
 
-const removeToken = () => 
+const removeToken = () =>
   // Remove the whole token file
    fs.promises.unlink(tokenFilePath)
     .catch(e => {
