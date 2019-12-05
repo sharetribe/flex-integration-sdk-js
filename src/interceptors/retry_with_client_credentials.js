@@ -50,7 +50,7 @@ export default class RetryWithClientCredentials {
           client_id: clientId,
           client_secret: clientSecret,
           grant_type: 'client_credentials',
-          scope: 'integration',
+          scope: 'integ',
         },
         tokenStore,
       })
