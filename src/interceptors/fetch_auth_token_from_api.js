@@ -26,7 +26,7 @@ export default class FetchAuthTokenFromApi {
         client_id: clientId,
         client_secret: clientSecret,
         grant_type: 'client_credentials',
-        scope: 'integration',
+        scope: 'integ',
       },
       tokenStore,
     }).then(({ authToken: newAuthToken }) => ({ ...ctx, authToken: newAuthToken }));
