@@ -19,18 +19,9 @@
     });
   }
 
-  function printWelcomeMessage() {
-    console.log("");
-    console.log("✨ Try the SDK in browser! ✨");
-    console.log("");
-    console.log("The SDK is loaded in window.sharetribeSdk global variable.");
-    console.log("");
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     // Render anchors when page is loaded
     renderAnchors();
-    printWelcomeMessage();
   }, false);
 
   document.addEventListener('pjax:success', function() {

@@ -4,20 +4,19 @@ There are a few configuration options that can given to the
 `createInstance` method:
 
 ``` js
-const sharetribeSdk = require('sharetribe-flex-sdk');
+const sharetribeIntegrationSdk = require('sharetribe-flex-sdk');
 
-var sdk = sharetribeSdk.createInstance({
+var integrationSdk = sharetribeIntegrationSdk.createInstance({
 
-  // The API ClientID (mandatory)
-  clientId: "08ec69f6-d37e-414d-83eb-324e94afddf0",
+  // The API Client ID and client secret (mandatory)
+  clientId: "<your client ID here>",
+  clientSecret: "<your client secret here>",
 
   // List of custom type handlers
   typeHandlers: [
     {
       sdkType: UUID,
-      // "type" was renamed to "sdkType" on v1.4.0
       appType: MyUuidType,
-      // "customType" was renamed to "appType" on v1.4.0
 
       // Writer fn type signature must be:
       // appType -> sdkType
@@ -35,13 +34,14 @@ var sdk = sharetribeSdk.createInstance({
     }
   ],
 
-  // Node.js only.
   // HTTP and HTTPS agents to be used when performing
   // http and https request. This allows defining non-default
-  // options for agent, such as `{ keepAlive: true }`.
-  //
+  // options for agent, such as `{ keepAlive: false }`.
   httpAgent: httpAgent,
   httpsAgent: httpsAgent,
+
+  // Token store
+  tokenStore: sharetribeIntegrationSdk.tokenStore.memoryStore(),
 
   // SDK uses Transit format to communicate with the API.
   // If this configuration is `true` a verbose Transit mode is enabled.

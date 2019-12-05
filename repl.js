@@ -6,7 +6,7 @@
 
 const colors = require('colors');
 const repl = require('repl');
-const sharetribeSdk = require('./src/index');
+const sharetribeIntegrationSdk = require('./src/index');
 
 // Start REPL
 const replInstance = repl.start('> ');
@@ -16,7 +16,7 @@ require('repl.history')(replInstance, './.repl_history');
 
 // Assign SDK as global
 const ctx = replInstance.context;
-ctx.sharetribeSdk = sharetribeSdk;
+ctx.sharetribeIntegrationSdk = sharetribeIntegrationSdk;
 
 // Welcome message
 
@@ -43,24 +43,26 @@ console.log('  ## Globals'.h2);
 console.log('  ');
 console.log('  The following globals are available:');
 console.log('  ');
-console.log(`  - ${'`sharetribeSdk`'.inline}: The SDK module`);
+console.log(`  - ${'`sharetribeIntegrationSdk`'.inline}: The SDK module`);
 console.log('  ');
 console.log('  ## Example usage'.h2);
 console.log('  ');
 console.log('  Create new SDK instance:');
 console.log('  ');
 console.log('  ```'.block);
-console.log('  const clientId = "<your clientId here>";'.block);
-console.log('  const sdk = sharetribeSdk.createInstance({'.block);
+console.log('  const clientId = "<your client ID here>";'.block);
+console.log('  const clientSecret = "<your client secret here>";'.block);
+console.log('  const integrationSdk = sharetribeIntegrationSdk.createInstance({'.block);
 console.log('    clientId,'.block);
-console.log('    tokenStore: sharetribeSdk.tokenStore.memoryStore()'.block);
+console.log('    clientSecret,'.block);
+console.log('    tokenStore: sharetribeIntegrationSdk.tokenStore.memoryStore()'.block);
 console.log('  });'.block);
 console.log('  ```'.block);
 console.log('  ');
 console.log('  Fetch 10 listings:');
 console.log('  ');
 console.log('  ```'.block);
-console.log('  sdk.listings.query({per_page: 10}).then(response => {'.block);
+console.log('  integrationSdk.listings.query({per_page: 10}).then(response => {'.block);
 console.log('    console.log("Fetched " + response.data.data.length + " listings.");'.block);
 console.log('    response.data.data.forEach(listing => {'.block);
 console.log('      console.log(listing.attributes.title);'.block);

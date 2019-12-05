@@ -1,114 +1,90 @@
 # Token store
 
-Token store is a pluggable SDK module, that stores the user's session information.
+Token store is a pluggable SDK module, that stores the authentication tokens
+obtained from the [Authentication
+API](https://www.sharetribe.com/api-reference/authentication.html). It allows
+for [refresh tokens](https://www.sharetribe.com/api-reference/authentication.html#token-types) to be used effectively during the application execution
+and, when a persistent token store is in use, across executions. Ultimately,
+this helps keeping the client secret protected, as it is used less frequently on
+the wire.
 
-The SDK ships with three token store implementations. They are:
-
-### Browser cookie store
-
-Reads and stores the session information to HTTP cookie. This token store
-is used by default, if SDK is used in environment where cookie are
-available (i.e. browser).
-
-The constructor takes the following options:
-
-| Key | Descriotion |
-| --- | ----------- |
-| `clientId` | The clientId |
-| `secure` | Boolean. When `true`, the cookie will be transferred only with HTTPS requests |
-
-**Please note:** Some browsers, like Google Chrome, do not set cookies
-when using `file:///` protocol. In this case, you can use [Memory
-store](#memory-store).
-
-### Express cookie store
-
-This token store is meant to be used with
-[Express.js](https://expressjs.com/) server. Read and stores the
-session information to HTTP cookie.
-
-The constructor takes the following options:
-
-| Key | Descriotion |
-| --- | ----------- |
-| `clientId` | The clientId |
-| `req` | Express.js request |
-| `res` | Express.js response |
-| `secure` | Boolean. When `true`, the cookie will be transferred only with HTTPS requests |
-
-**Example:** Create new SDK instance with Express cookie store:
-
-``` js
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const sharetribeSdk = require('sharetribe-flex-sdk');
-
-const app = express();
-
-// The token store expects that cookieParser middleware is in use
-app.use(cookieParser());
-
-app.get('/', (req, res) => {
-  // Initialize the SDK instance
-  const sdk = sharetribeSdk.createInstance({
-    clientId: "<your Client ID>",
-    baseUrl: "<your Base URL>",
-    tokenStore: sharetribeSdk.tokenStore.expressCookieStore({
-      clientId: "<your Client ID>",
-      req,
-      res,
-      secure: true // Set to true, if you are using HTTPS
-    }),
-  });
-
-  // Call the SDK to preload listings
-  sdk.listings.search({ ... }).then((listingsResult) => {
-    // do rendering etc.
-  });
-});
-```
-
-**Serious security note:** Always create a new SDK instance per each request! Do not store and reuse the SDK instance or you may end up mixing user sessions.
-
-**❌ Example:** DON'T DO THIS!
-
-``` js
-// DON'T DO THIS!
-//
-let sdk;
-
-app.get('/', (req, res) => {
-  // Initialize the SDK instance
-  sdk = sharetribeSdk.createInstance({
-    clientId: "<your Client ID>",
-    baseUrl: "<your Base URL>",
-    tokenStore: sharetribeSdk.tokenStore.expressCookieStore({
-      clientId: "<your Client ID>",
-      req,
-      res,
-      secure: true // Set true, if you are using HTTPS
-    }),
-  });
-
-  // Call the SDK to preload listings
-  sdk.listings.search({ ... }).then((listingsResult) => {
-    // do rendering etc.
-  });
-});
-
-app.get('/something_else', (req, res) => {
-  // OOPS! The previous user session is used here!
-  sdk.listings.search({ ... }).then((listingsResult) => {
-    // do rendering etc.
-  });
-});
-
-```
+The SDK ships with two token store implementations. They are:
 
 ## Memory store
 
-Memory store stores the session information to application memory. The session information is lost when the page is refreshed.
+The memory store preserves the token information in the application memory. The
+information is lost when the application terminates or if the SDK instance is
+reinitialized.
 
-This store is mainly used for testing and development.
+This store provides a balance between security and ease of use, as it does not
+require any external storage.
 
-In case you are testing locally from `file:///`, you may need to use memory store, because some browsers (e.g. Google Chrome) do not save cookies when using `file:///` making the default [Browser cookie store](#browser-cookie-store) unusable.
+Example usage:
+
+```js
+const clientId = "<your client ID here>";
+const clientSecret = "<your client secret here>"
+
+const integrationSdk = sharetribeIntegrationSdk.createInstance({
+  clientId,
+  clientSecret,
+  tokenStore: sharetribeIntegrationSdk.tokenStore.memoryStore()
+});
+```
+
+## File store
+
+The file store persists the token information to a file on the filesystem (in
+`~/.config/flex-integration-sdk/file-store-token.json`). This allows the token
+information to be reused across application invocations. Assuming that the
+execution environment (server, container, computer, etc) is trusted, using the
+file store reduces greatly the need to rely on the application's client secret
+for obtaining access tokens.
+
+The file store is **the recommended token store**, as long as you are aware that
+sensitive token data is written to the file system.
+
+Example usage:
+
+```js
+const clientId = "<your client ID here>";
+const clientSecret = "<your client secret here>"
+
+const integrationSdk = sharetribeIntegrationSdk.createInstance({
+  clientId,
+  clientSecret,
+  tokenStore: sharetribeIntegrationSdk.tokenStore.fileStore()
+});
+```
+
+## Writing your own token store
+
+The built-in stores should cover most common use cases. However, in some cases
+you may need to write your own token store. This could be, for example if:
+
+* you want to share access tokens across multiple instances of your application,
+  running on multiple machines
+* you want to store the sensitive token data in a special purpose database or
+  storage location
+
+### Interface
+
+The token store interface has three methods. Any token store
+implementation must implement all of them:
+
+**`setToken(Object) : null | Promise(null)`**
+
+Stores the new token. Returns either `null` or a `Promise`.
+
+**`getToken() : Object | Promise(Object)`**
+
+Reads the token from the store. Returns either a token or a Promise
+holding the token as a value.
+
+**`removeToken : null | Promise(null)`**
+
+Removes the stored token. Returns either `null` or a Promise.
+
+### Examples
+
+See the built-in token store implementations.

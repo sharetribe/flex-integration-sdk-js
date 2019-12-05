@@ -1,18 +1,15 @@
 # Keep-Alive
 
-*Node.js only*
-
-By default, Node.js `http.Agent` and `https.Agent` create a new
-connection for each request. After the request is completed, the
-connection is closed. By keeping the connection open and reusing it
-for subsequent requests, the request time can be reduced. This is
-escpecially true for HTTPS connections, where the SSL handshake adds
-extra overhead for each request.
-
-The SDK can be configured to use custom `httpAgent` and `httpsAgent`,
-where the `keepAlive` can be set to `true`.
+By default, the SDK configures the Node.js `http.Agent` and `https.Agent` to
+reuse connections across requests. This improves performance, since with HTTPS
+connections, the SSL handshake can add up significant overhead for each new
+connection.
 
 Using persistent Keep-Alive connections is **recommended**.
+
+If you need to disable this default behavior, the SDK can be configured to use
+custom `httpAgent` and `httpsAgent`, where the `keepAlive` can be set to
+`false`.
 
 **Example:**
 
@@ -20,28 +17,27 @@ Using persistent Keep-Alive connections is **recommended**.
 const express = require('express');
 const http = require('http');
 const https = require('https');
-const sharetribeSdk = require('sharetribe-flex-sdk');
+const sharetribeIntegrationSdk = require('sharetribe-flex-integration-sdk');
 
 const app = express();
 
-// Instantiate HTTP(S) Agents with keepAlive set to true.
-// This will reduce the request time for consecutive requests by
-// reusing the existing TCP connection, thus eliminating the time used
-// for setting up new TCP connections.
-const httpAgent = new http.Agent({ keepAlive: true });
-const httpsAgent = new https.Agent({ keepAlive: true });
+// Instantiate HTTP(S) Agents with keepAlive set to false.
+// This can increase the request time for consecutive requests,
+// because each connection has to be set up separately.
+const httpAgent = new http.Agent({ keepAlive: false });
+const httpsAgent = new https.Agent({ keepAlive: false });
 
 app.get('/', (req, res) => {
   // Initialize the SDK instance
-  const sdk = sharetribeSdk.createInstance({
+  const integrationSdk = sharetribeIntegrationSdk.createInstance({
     clientId: "<your Client ID>",
-    baseUrl: "<your Base URL>",
+    clientSecret: "<your Client secret>",
     httpAgent: httpAgent,
     httpsAgent: httpsAgent
   });
 
-  // Call the SDK to preload listings
-  sdk.listings.search({ ... }).then((listingsResult) => {
+  // Call the SDK to load listings
+  integrationSdk.listings.search({ ... }).then((listingsResult) => {
     // do rendering etc.
   });
 });

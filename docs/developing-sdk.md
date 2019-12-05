@@ -32,14 +32,6 @@ $ yarn run lint
 $ yarn run format
 ```
 
-#### Move the built files to `/docs` folder
-
-Docpress only looks for files in the project root and `/docs` folder.
-
-```sh
-$ cp build/sharetribe-flex-sdk-web.js docs/sharetribe-flex-sdk-web.js
-```
-
 #### Serve the docpress docs
 
 ```sh
@@ -55,8 +47,6 @@ $ yarn run build-docs
 #### Update the Github Pages
 
 ```sh
-$ yarn run build
-$ cp build/sharetribe-flex-sdk-web.js docs/sharetribe-flex-sdk-web.js
 $ yarn run build-docs
 $ mv _docpress ../
 $ git checkout gh-pages
@@ -96,7 +86,7 @@ $ // git add, commit, push
     git push --tags
     ```
 
-1.  Go to [Github releases and draft a new release](https://github.com/sharetribe/flex-sdk-js/releases/new)
+1.  Go to [Github releases and draft a new release](https://github.com/sharetribe/flex-integration-sdk-js/releases/new)
 
     Use the following content:
 

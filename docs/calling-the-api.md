@@ -6,11 +6,11 @@ The SDK provides direct mapping from API endpoints to SDK methods.
 
 For example:
 
-`GET /api/marketplace/show` maps to `sdk.marketplace.show(...)`
+`GET /integration_api/marketplace/show` maps to `integrationSdk.marketplace.show(...)`
 
-`GET /api/listings/query` maps to `sdk.listings.query(...)`
+`GET /integration_api/listings/query` maps to `integrationSdk.listings.query(...)`
 
-`POST /api/own_listings/create` maps to `sdk.ownListings.create(...)`
+ `POST /integration_api/listings/create` maps to `integrationSdk.listings.create(...)`
 
 ## Parameters
 
@@ -19,7 +19,7 @@ You can pass a set of parameters to the SDK method you call. The
 take three parameters.
 
 **Please note:** The SDK does not validate the parameters. The
-parameter validation is only done in the client side. In case of
+parameter validation is only done in the server side. In case of
 invalid parameters, the request fill fail.
 
 ### Query method parameters
@@ -31,15 +31,20 @@ The *query* (GET) methods take only one parameter:
 **Example:**
 
 ```js
-sdk.listings.query({perPage: 5})
+integrationSdk.listings.query({perPage: 5})
 
-// Calls GET /api/listings/query?perPage=5
+// Calls GET /integration_api/listings/query?perPage=5
 ```
 
 The `queryParams` is optional. If the endpoint doesn't require any
 query parameters, you can call the SDK method without any parameters.
 
 ### Command method parameters
+
+**Please note:** Some of the commands given as examples in this document may not
+yet be supported by the Integration API. For up-to-date reference on supported
+endpoints, see the [Integration API
+reference](https://www.sharetribe.com/api-reference/integration.html).
 
 The *command* (POST) methods take three parameters:
 
@@ -50,9 +55,9 @@ The *command* (POST) methods take three parameters:
 **Example:**
 
 ```js
-sdk.ownListings.create({title: 'New listings', price: new Money(5000, 'USD')}, {expand: true});
+integrationSdk.listings.create({title: 'New listings', price: new Money(5000, 'USD')}, {expand: true});
 
-// Calls POST /api/own_listings/create?expand=true
+// Calls POST /integration_api/listings/create?expand=true
 // with title and price serialized in the request body
 ```
 
@@ -78,7 +83,7 @@ const logProgress = (progressEvent) => {
   console.log(percentCompleted + '% completed');
 }
 
-sdk.listings.uploadImage({ image: file }, {}, { onUploadProgress: logProgress })
+integrationSdk.listings.uploadImage({ image: file }, {}, { onUploadProgress: logProgress })
 ```
 
 ## Response
@@ -88,7 +93,7 @@ Calling any SDK method will always return a [Promise](https://developer.mozilla.
 **Example:**
 
 ```js
-const promise = sdk.listings.query();
+const promise = integrationSdk.listings.query();
 
 // Handle success response
 promise.then(response => { console.log(response)} );
@@ -214,4 +219,4 @@ The error value is always an `instanceof` [Error](https://developer.mozilla.org/
 
 ## API documentation
 
-Please see the [API documentation](https://flex-api-docs-preview.sharetribe.com/), for more information about the available endpoints, parameters and the response format.
+Please see the [API documentation](https://www.sharetribe.com/api-reference/), for more information about the available endpoints, parameters and the response format.
