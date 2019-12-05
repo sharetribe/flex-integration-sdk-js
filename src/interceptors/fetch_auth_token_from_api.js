@@ -11,7 +11,7 @@ import AddAuthTokenResponse from './add_auth_token_response';
 */
 export default class FetchAuthTokenFromApi {
   enter(ctx) {
-    const { tokenStore, authToken, endpointInterceptors, clientId } = ctx;
+    const { tokenStore, authToken, endpointInterceptors, clientId, clientSecret } = ctx;
 
     if (authToken) {
       return ctx;
@@ -24,8 +24,9 @@ export default class FetchAuthTokenFromApi {
     ])({
       params: {
         client_id: clientId,
+        client_secret: clientSecret,
         grant_type: 'client_credentials',
-        scope: 'public-read',
+        scope: 'integration',
       },
       tokenStore,
     }).then(({ authToken: newAuthToken }) => ({ ...ctx, authToken: newAuthToken }));

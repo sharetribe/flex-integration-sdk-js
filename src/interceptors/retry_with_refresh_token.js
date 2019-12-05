@@ -12,7 +12,7 @@ import AddAuthTokenResponse from './add_auth_token_response';
 
    Changes to `ctx`:
 
-   - add `anonTokenRetry`
+   - add `refreshTokenRetry`
    - add `authToken`
  */
 export default class RetryWithRefreshToken {

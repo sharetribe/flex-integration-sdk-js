@@ -8,7 +8,7 @@ export const revoke = (config, resolve, reject, tokenStore) => {
 
   if (formData.token) {
     if (tokenStore) {
-      const revoked = tokenStore.revokePasswordToken(formData.token);
+      const revoked = tokenStore.revokeClientCredentialsToken(formData.token);
 
       if (revoked.length) {
         return resolve({ data: { action: 'revoked' } });
@@ -29,11 +29,10 @@ export const token = (config, resolve, reject, fakeTokenStore) => {
 
   if (formData.client_id === '08ec69f6-d37e-414d-83eb-324e94afddf0') {
     if (formData.grant_type === 'client_credentials') {
-      res = fakeTokenStore.createAnonToken();
-    } else if (formData.grant_type === 'password') {
-      res = fakeTokenStore.createPasswordToken(formData.username, formData.password);
+      res = fakeTokenStore.createClientCredentialsToken(formData.client_id,
+                                                        formData.client_secret);
     } else if (formData.grant_type === 'refresh_token') {
-      res = fakeTokenStore.freshPasswordToken(formData.refresh_token);
+      res = fakeTokenStore.freshClientCredentialsToken(formData.refresh_token);
     }
   }
 

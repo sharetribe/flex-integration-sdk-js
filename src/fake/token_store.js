@@ -2,32 +2,26 @@ import _ from 'lodash';
 
 const createTokenStore = () => {
   const tokens = [];
-  let anonAccessCount = 0;
-  let passwordAccessCount = 0;
-  let passwordRefreshCount = 0;
+  let clientCredentialsAccessCount = 0;
+  let clientCredentialsRefreshCount = 0;
 
-  const knownUsers = [['joe.dunphy@example.com', 'secret-joe']];
+  const knownClients = [['08ec69f6-d37e-414d-83eb-324e94afddf0', 'client-secret-value']];
 
   // Private
 
-  const generateAnonAccessToken = () => {
-    anonAccessCount += 1;
-    return `anonymous-access-${anonAccessCount}`;
+  const generateClientCredentialsAccessToken = (clientId, clientSecret) => {
+    clientCredentialsAccessCount += 1;
+    return `${clientId}-${clientSecret}-access-${clientCredentialsAccessCount}`;
   };
 
-  const generatePasswordAccessToken = (username, password) => {
-    passwordAccessCount += 1;
-    return `${username}-${password}-access-${passwordAccessCount}`;
-  };
-
-  const generatePasswordRefreshToken = (username, password) => {
-    passwordRefreshCount += 1;
-    return `${username}-${password}-refresh-${passwordRefreshCount}`;
+  const generateClientCredentialsRefreshToken = (clientId, clientSecret) => {
+    clientCredentialsRefreshCount += 1;
+    return `${clientId}-${clientSecret}-refresh-${clientCredentialsRefreshCount}`;
   };
 
   // Public
 
-  const validToken = (accessToken, tokenType) =>
+  const validAccessToken = (accessToken, tokenType) =>
     _.find(
       tokens,
       ({ token }) =>
@@ -39,36 +33,26 @@ const createTokenStore = () => {
         token.token_type.toLowerCase() === tokenType.toLowerCase()
     );
 
-  const createAnonToken = () => {
-    const token = {
-      token: {
-        access_token: generateAnonAccessToken(),
-        token_type: 'bearer',
-        expires_in: 86400,
-      },
-    };
-    tokens.push(token);
+  const createClientCredentialsToken = (clientId, clientSecret, validRefreshToken) => {
+    const client = _.find(knownClients, u => _.isEqual(u, [clientId, clientSecret]));
 
-    return token.token;
-  };
-
-  const createPasswordToken = (username, password) => {
-    const user = _.find(knownUsers, u => _.isEqual(u, [username, password]));
-
-    if (!user) {
+    if (!client) {
       return null;
     }
 
+    const refreshToken = validRefreshToken ||
+          generateClientCredentialsRefreshToken(clientId, clientSecret);
+
     const token = {
       token: {
-        access_token: generatePasswordAccessToken(username, password),
-        refresh_token: generatePasswordRefreshToken(username, password),
+        access_token: generateClientCredentialsAccessToken(clientId, clientSecret),
+        refresh_token: refreshToken,
         token_type: 'bearer',
         expires_in: 86400,
       },
-      user: {
-        username,
-        password,
+      client: {
+        clientId,
+        clientSecret,
       },
     };
     tokens.push(token);
@@ -88,27 +72,40 @@ const createTokenStore = () => {
     });
   };
 
-  const revokePasswordToken = refreshToken =>
+  const expireRefreshToken = refreshToken => {
+    _.map(tokens, t => {
+      const { token } = t;
+
+      if (token.refresh_token === refreshToken) {
+        token.refresh_token = null;
+      }
+
+      return t;
+    });
+  };
+
+  const revokeClientCredentialsToken = refreshToken =>
     _.remove(tokens, t => t.token.refresh_token === refreshToken);
 
-  const freshPasswordToken = refreshToken => {
-    const existingToken = revokePasswordToken(refreshToken);
+  const freshClientCredentialsToken = refreshToken => {
+    const existingToken = revokeClientCredentialsToken(refreshToken)[0];
 
-    if (existingToken.length) {
-      const { username, password } = existingToken[0].user;
-      return createPasswordToken(username, password);
+    if (existingToken) {
+
+      const { clientId, clientSecret } = existingToken.client;
+      return createClientCredentialsToken(clientId, clientSecret);
     }
 
     return null;
   };
 
   return {
-    createAnonToken,
-    createPasswordToken,
-    freshPasswordToken,
-    revokePasswordToken,
-    validToken,
+    createClientCredentialsToken,
+    freshClientCredentialsToken,
+    revokeClientCredentialsToken,
+    validAccessToken,
     expireAccessToken,
+    expireRefreshToken,
   };
 };
 

@@ -3,24 +3,25 @@ import SaveToken from './save_token';
 import AddAuthTokenResponse from './add_auth_token_response';
 
 /**
-   Retries with a fresh anon token.
+   Retries with client credentials.
+
 
    `enter`: Save current `enterQueue` to `retryQueue` and save current `attempts` count
 
-   `error`: Try to fetch new anon token. If successful, save it to `ctx`
+   `error`: Try to fetch new access token. If successful, save it to `ctx`
 
    Changes to `ctx`:
 
-   - add `anonTokenRetry`
+   - add `clientCredentialsRetry`
    - add `authToken`
  */
-export default class RetryWithAnonToken {
+export default class RetryWithClientCredentials {
   enter(enterCtx) {
-    const { enterQueue, anonTokenRetry: { attempts = 0 } = {} } = enterCtx;
+    const { enterQueue, clientCredentialsRetry: { attempts = 0 } = {} } = enterCtx;
     return {
       ...enterCtx,
-      anonTokenRetry: {
-        retryQueue: [...enterQueue, new RetryWithAnonToken()],
+      clientCredentialsRetry: {
+        retryQueue: [...enterQueue, new RetryWithClientCredentials()],
         attempts: attempts + 1,
       },
     };
@@ -29,9 +30,10 @@ export default class RetryWithAnonToken {
   error(errorCtx) {
     const {
       clientId,
+      clientSecret,
       tokenStore,
       endpointInterceptors,
-      anonTokenRetry: { retryQueue, attempts },
+      clientCredentialsRetry: { retryQueue, attempts },
     } = errorCtx;
 
     if (attempts > 1) {
@@ -46,11 +48,22 @@ export default class RetryWithAnonToken {
       ])({
         params: {
           client_id: clientId,
+          client_secret: clientSecret,
           grant_type: 'client_credentials',
-          scope: 'public-read',
+          scope: 'integration',
         },
         tokenStore,
-      }).then(({ authToken }) => ({ ...errorCtx, authToken, enterQueue: retryQueue, error: null }));
+      })
+        .then(({ authToken: newAuthToken }) => ({
+          ...errorCtx,
+          authToken: newAuthToken,
+          enterQueue: retryQueue,
+          error: null,
+        }))
+        .catch(() => ({
+          ...errorCtx,
+          clientCredentialsRetry: { retryQueue, attempts },
+        }));
     }
 
     return errorCtx;
