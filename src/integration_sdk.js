@@ -57,7 +57,7 @@ const createHeaders = transitVerbose => {
 };
 
 const apis = {
-  'integration_api': ({ baseUrl, version, adapter, httpAgent, httpsAgent, transitVerbose }) => ({
+  integration_api: ({ baseUrl, version, adapter, httpAgent, httpsAgent, transitVerbose }) => ({
     headers: createHeaders(transitVerbose),
     baseURL: `${baseUrl}/${version}`,
     transformRequest: v => v,
@@ -67,7 +67,7 @@ const apis = {
     httpAgent,
     httpsAgent,
   }),
-  'auth': ({ baseUrl, version, adapter, httpAgent, httpsAgent }) => ({
+  auth: ({ baseUrl, version, adapter, httpAgent, httpsAgent }) => ({
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Accept: 'application/json',

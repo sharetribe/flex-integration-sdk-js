@@ -29,8 +29,7 @@ export const token = (config, resolve, reject, fakeTokenStore) => {
 
   if (formData.client_id === '08ec69f6-d37e-414d-83eb-324e94afddf0') {
     if (formData.grant_type === 'client_credentials') {
-      res = fakeTokenStore.createClientCredentialsToken(formData.client_id,
-                                                        formData.client_secret);
+      res = fakeTokenStore.createClientCredentialsToken(formData.client_id, formData.client_secret);
     } else if (formData.grant_type === 'refresh_token') {
       res = fakeTokenStore.freshClientCredentialsToken(formData.refresh_token);
     }

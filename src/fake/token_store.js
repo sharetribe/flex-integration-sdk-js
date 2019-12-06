@@ -40,8 +40,8 @@ const createTokenStore = () => {
       return null;
     }
 
-    const refreshToken = validRefreshToken ||
-          generateClientCredentialsRefreshToken(clientId, clientSecret);
+    const refreshToken =
+      validRefreshToken || generateClientCredentialsRefreshToken(clientId, clientSecret);
 
     const token = {
       token: {
@@ -91,7 +91,6 @@ const createTokenStore = () => {
     const existingToken = revokeClientCredentialsToken(refreshToken)[0];
 
     if (existingToken) {
-
       const { clientId, clientSecret } = existingToken.client;
       return createClientCredentialsToken(clientId, clientSecret);
     }
