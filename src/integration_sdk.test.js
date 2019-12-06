@@ -5,7 +5,6 @@ import { createAdapter, defaultHandler } from './fake/adapter';
 import SharetribeSdk from './integration_sdk';
 import memoryStore from './memory_store';
 
-
 const CLIENT_ID = '08ec69f6-d37e-414d-83eb-324e94afddf0';
 const CLIENT_SECRET = 'client-secret-value';
 
@@ -79,9 +78,7 @@ describe('new SharetribeSdk', () => {
       resolve({ data: { url: config.url } });
     });
 
-    const authToken = adapter
-          .tokenStore
-          .createClientCredentialsToken(CLIENT_ID, CLIENT_SECRET);
+    const authToken = adapter.tokenStore.createClientCredentialsToken(CLIENT_ID, CLIENT_SECRET);
 
     const sdkTokenStore = memoryStore();
     sdkTokenStore.setToken(authToken);
@@ -137,21 +134,19 @@ describe('new SharetribeSdk', () => {
   it('calls listing query with query params', () => {
     const { sdk } = createSdk();
 
-    return sdk.listings
-      .query()
-      .then(res => {
-        const { data } = res.data;
+    return sdk.listings.query().then(res => {
+      const { data } = res.data;
 
-        expect(data).toHaveLength(2);
-        expect(data[0].attributes.description).toEqual('27-speed Hybrid. Fully functional.');
-        expect(data[0].attributes.geolocation instanceof LatLng).toEqual(true);
-        expect(data[0].attributes.geolocation).toEqual(new LatLng(40.64542, -74.08508));
-        expect(data[1].attributes.description).toEqual(
-          'Goes together perfectly with a latte and a bow tie.'
-        );
-        expect(data[1].attributes.geolocation instanceof LatLng).toEqual(true);
-        expect(data[1].attributes.geolocation).toEqual(new LatLng(40.64542, -74.08508));
-      });
+      expect(data).toHaveLength(2);
+      expect(data[0].attributes.description).toEqual('27-speed Hybrid. Fully functional.');
+      expect(data[0].attributes.geolocation instanceof LatLng).toEqual(true);
+      expect(data[0].attributes.geolocation).toEqual(new LatLng(40.64542, -74.08508));
+      expect(data[1].attributes.description).toEqual(
+        'Goes together perfectly with a latte and a bow tie.'
+      );
+      expect(data[1].attributes.geolocation instanceof LatLng).toEqual(true);
+      expect(data[1].attributes.geolocation).toEqual(new LatLng(40.64542, -74.08508));
+    });
   });
 
   it('allows user to pass custom read handlers', () => {
@@ -232,7 +227,7 @@ describe('new SharetribeSdk', () => {
       return defaultHandler(config, resolve, reject, tokenStore);
     });
 
-    const clientId =  '08ec69f6-d37e-414d-83eb-324e94afddf0';
+    const clientId = '08ec69f6-d37e-414d-83eb-324e94afddf0';
     const clientSecret = 'client-secret-value';
     const authToken = adapter.tokenStore.createClientCredentialsToken(clientId, clientSecret);
 
@@ -292,7 +287,9 @@ describe('new SharetribeSdk', () => {
 
     return report(
       sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-        expect(sdkTokenStore.getToken().access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
+        expect(sdkTokenStore.getToken().access_token).toEqual(
+          `${CLIENT_ID}-${CLIENT_SECRET}-access-1`
+        );
       })
     );
   });
@@ -303,7 +300,6 @@ describe('new SharetribeSdk', () => {
     // First, call API to gain access token
     return report(
       sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-
         const { access_token } = sdkTokenStore.getToken();
         expect(access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
 
@@ -334,9 +330,7 @@ describe('new SharetribeSdk', () => {
 
     // First, call API to gain access token
     return report(
-
       sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-
         const token1 = sdkTokenStore.getToken();
         expect(token1.access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
         expect(token1.refresh_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-refresh-1`);
@@ -390,7 +384,6 @@ describe('new SharetribeSdk', () => {
     // First, call API to gain access token
     return report(
       sdk.marketplace.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(() => {
-
         const { access_token } = sdkTokenStore.getToken();
         expect(access_token).toEqual(`${CLIENT_ID}-${CLIENT_SECRET}-access-1`);
 
@@ -516,8 +509,8 @@ describe('new SharetribeSdk', () => {
     const { sdk } = createSdk({ clientSecret: 'some-client-secret' });
 
     return report(
-      sdk
-        .marketplace.show()
+      sdk.marketplace
+        .show()
         .then(() => {
           // Fail
           expect(true).toEqual(false);
