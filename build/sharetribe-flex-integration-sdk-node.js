@@ -2563,7 +2563,7 @@ var defaultSdkConfig = {
 
    Currently we have two apis:
 
-   - `integration-api`: the Integration API
+   - `integration_api`: the Integration API
    - `auth`: the Authentication API
 
    These configurations will be passed to Axios library.
@@ -2587,7 +2587,7 @@ var createHeaders = function createHeaders(transitVerbose) {
 };
 
 var apis = {
-  'integration-api': function integrationApi(_ref) {
+  'integration_api': function integration_api(_ref) {
     var baseUrl = _ref.baseUrl,
         version = _ref.version,
         adapter = _ref.adapter,
@@ -2643,43 +2643,43 @@ var apis = {
  */
 
 var endpointDefinitions = [{
-  apiName: 'integration-api',
+  apiName: 'integration_api',
   path: 'marketplace/show',
   internal: false,
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
 }, {
-  apiName: 'integration-api',
+  apiName: 'integration_api',
   path: 'users/show',
   internal: false,
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
 }, {
-  apiName: 'integration-api',
+  apiName: 'integration_api',
   path: 'users/query',
   internal: false,
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
 }, {
-  apiName: 'integration-api',
+  apiName: 'integration_api',
   path: 'listings/show',
   internal: false,
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
 }, {
-  apiName: 'integration-api',
+  apiName: 'integration_api',
   path: 'listings/query',
   internal: false,
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
 }, {
-  apiName: 'integration-api',
+  apiName: 'integration_api',
   path: 'transactions/query',
   internal: false,
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
 }, {
-  apiName: 'integration-api',
+  apiName: 'integration_api',
   path: 'transactions/show',
   internal: false,
   method: 'get',
