@@ -33,7 +33,7 @@ const defaultSdkConfig = {
 
    Currently we have two apis:
 
-   - `integration-api`: the Integration API
+   - `integration_api`: the Integration API
    - `auth`: the Authentication API
 
    These configurations will be passed to Axios library.
@@ -57,7 +57,7 @@ const createHeaders = transitVerbose => {
 };
 
 const apis = {
-  'integration-api': ({ baseUrl, version, adapter, httpAgent, httpsAgent, transitVerbose }) => ({
+  'integration_api': ({ baseUrl, version, adapter, httpAgent, httpsAgent, transitVerbose }) => ({
     headers: createHeaders(transitVerbose),
     baseURL: `${baseUrl}/${version}`,
     transformRequest: v => v,
@@ -93,49 +93,49 @@ const apis = {
  */
 const endpointDefinitions = [
   {
-    apiName: 'integration-api',
+    apiName: 'integration_api',
     path: 'marketplace/show',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'integration-api',
+    apiName: 'integration_api',
     path: 'users/show',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'integration-api',
+    apiName: 'integration_api',
     path: 'users/query',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'integration-api',
+    apiName: 'integration_api',
     path: 'listings/show',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'integration-api',
+    apiName: 'integration_api',
     path: 'listings/query',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'integration-api',
+    apiName: 'integration_api',
     path: 'transactions/query',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
   },
   {
-    apiName: 'integration-api',
+    apiName: 'integration_api',
     path: 'transactions/show',
     internal: false,
     method: 'get',
