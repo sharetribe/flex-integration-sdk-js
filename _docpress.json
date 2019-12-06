@@ -1,0 +1,26 @@
+{
+  "toc": {
+    "sections": [
+      {
+        "title": "Sharetribe Flex Integration SDK for JavaScript",
+        "source": "README.md",
+        "url": "index.html",
+        "slug": "index"
+      }
+    ]
+  },
+  "index": {
+    "index.html": {
+      "source": "README.md",
+      "title": "Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Sharetribe Flex Integration SDK for JavaScript",
+      "slug": "index"
+    }
+  },
+  "sources": {
+    "README.md": "index.html",
+    "docs/docpress.json": "docpress.json",
+    "docs/scripts.js": "scripts.js",
+    "docs/styles.css": "styles.css"
+  }
+}
