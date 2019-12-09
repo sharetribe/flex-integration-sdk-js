@@ -2241,10 +2241,10 @@ module.exports = setToString;
 /* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayReduce = __webpack_require__(154),
+var arrayReduce = __webpack_require__(156),
     baseEach = __webpack_require__(61),
     baseIteratee = __webpack_require__(9),
-    baseReduce = __webpack_require__(156),
+    baseReduce = __webpack_require__(158),
     isArray = __webpack_require__(0);
 
 /**
@@ -2299,7 +2299,7 @@ module.exports = reduce;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseForOwn = __webpack_require__(42),
-    createBaseEach = __webpack_require__(155);
+    createBaseEach = __webpack_require__(157);
 
 /**
  * The base implementation of `_.forEach` without support for iteratee shorthands.
@@ -2319,8 +2319,8 @@ module.exports = baseEach;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseFindIndex = __webpack_require__(63),
-    baseIsNaN = __webpack_require__(160),
-    strictIndexOf = __webpack_require__(161);
+    baseIsNaN = __webpack_require__(162),
+    strictIndexOf = __webpack_require__(163);
 
 /**
  * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
@@ -2376,7 +2376,7 @@ module.exports = baseFindIndex;
 
 var arrayMap = __webpack_require__(25),
     baseIteratee = __webpack_require__(9),
-    baseMap = __webpack_require__(174),
+    baseMap = __webpack_require__(176),
     isArray = __webpack_require__(0);
 
 /**
@@ -2469,7 +2469,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__integration_sdk__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__types__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__memory_store__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__file_store__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__file_store__ = __webpack_require__(199);
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "types", function() { return __WEBPACK_IMPORTED_MODULE_1__types__; });
 
 
@@ -2507,19 +2507,23 @@ var tokenStore = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_pick___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash_pick__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(152);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__params_serializer__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__interceptors_add_auth_header__ = __webpack_require__(175);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__interceptors_retry_with_refresh_token__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interceptors_retry_with_client_credentials__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__interceptors_clear_token_after_revoke__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__interceptors_fetch_refresh_token_for_revoke__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__interceptors_fetch_auth_token_from_api__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interceptors_fetch_auth_token_from_store__ = __webpack_require__(181);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__interceptors_auth_info__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__token_store__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__context_runner__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_http__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_http___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_http__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_https__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_https___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_https__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__params_serializer__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__interceptors_add_auth_header__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__interceptors_retry_with_refresh_token__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__interceptors_retry_with_client_credentials__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__interceptors_clear_token_after_revoke__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__interceptors_fetch_refresh_token_for_revoke__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__interceptors_fetch_auth_token_from_api__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__interceptors_fetch_auth_token_from_store__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__interceptors_auth_info__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__token_store__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__context_runner__ = __webpack_require__(19);
 
 
 
@@ -2560,6 +2564,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
+
+
 /* eslint-disable class-methods-use-this */
 
 var defaultSdkConfig = {
@@ -2569,8 +2575,12 @@ var defaultSdkConfig = {
   endpoints: [],
   adapter: null,
   version: 'v1',
-  httpAgent: null,
-  httpsAgent: null,
+  httpAgent: new __WEBPACK_IMPORTED_MODULE_6_http___default.a.Agent({
+    keepAlive: true
+  }),
+  httpsAgent: new __WEBPACK_IMPORTED_MODULE_7_https___default.a.Agent({
+    keepAlive: true
+  }),
   transitVerbose: false
 };
 /**
@@ -2602,7 +2612,7 @@ var createHeaders = function createHeaders(transitVerbose) {
 };
 
 var apis = {
-  'integration_api': function integration_api(_ref) {
+  integration_api: function integration_api(_ref) {
     var baseUrl = _ref.baseUrl,
         version = _ref.version,
         adapter = _ref.adapter,
@@ -2619,12 +2629,12 @@ var apis = {
         return v;
       },
       adapter: adapter,
-      paramsSerializer: __WEBPACK_IMPORTED_MODULE_7__params_serializer__["a" /* default */],
+      paramsSerializer: __WEBPACK_IMPORTED_MODULE_9__params_serializer__["a" /* default */],
       httpAgent: httpAgent,
       httpsAgent: httpsAgent
     };
   },
-  'auth': function auth(_ref2) {
+  auth: function auth(_ref2) {
     var baseUrl = _ref2.baseUrl,
         version = _ref2.version,
         adapter = _ref2.adapter,
@@ -2637,7 +2647,7 @@ var apis = {
       },
       baseURL: "".concat(baseUrl, "/").concat(version, "/"),
       transformRequest: [function (data) {
-        return Object(__WEBPACK_IMPORTED_MODULE_6__utils__["b" /* formData */])(data);
+        return Object(__WEBPACK_IMPORTED_MODULE_8__utils__["b" /* formData */])(data);
       }],
       // using default transformRequest, which can handle JSON and fallback to plain
       // test if JSON parsing fails
@@ -2662,43 +2672,43 @@ var endpointDefinitions = [{
   path: 'marketplace/show',
   internal: false,
   method: 'get',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
   path: 'users/show',
   internal: false,
   method: 'get',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
   path: 'users/query',
   internal: false,
   method: 'get',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
   path: 'listings/show',
   internal: false,
   method: 'get',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
   path: 'listings/query',
   internal: false,
   method: 'get',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
   path: 'transactions/query',
   internal: false,
   method: 'get',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
   path: 'transactions/show',
   internal: false,
   method: 'get',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_16__interceptors_transit_response__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_18__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'auth',
   path: 'token',
@@ -2712,8 +2722,8 @@ var endpointDefinitions = [{
   method: 'post',
   interceptors: []
 }];
-var authenticateInterceptors = [new __WEBPACK_IMPORTED_MODULE_14__interceptors_fetch_auth_token_from_store__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_13__interceptors_fetch_auth_token_from_api__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_10__interceptors_retry_with_client_credentials__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_9__interceptors_retry_with_refresh_token__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_8__interceptors_add_auth_header__["a" /* default */]()];
-var revokeInterceptors = [new __WEBPACK_IMPORTED_MODULE_14__interceptors_fetch_auth_token_from_store__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_11__interceptors_clear_token_after_revoke__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_9__interceptors_retry_with_refresh_token__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_8__interceptors_add_auth_header__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_12__interceptors_fetch_refresh_token_for_revoke__["a" /* default */]()];
+var authenticateInterceptors = [new __WEBPACK_IMPORTED_MODULE_16__interceptors_fetch_auth_token_from_store__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_15__interceptors_fetch_auth_token_from_api__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_12__interceptors_retry_with_client_credentials__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_11__interceptors_retry_with_refresh_token__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_10__interceptors_add_auth_header__["a" /* default */]()];
+var revokeInterceptors = [new __WEBPACK_IMPORTED_MODULE_16__interceptors_fetch_auth_token_from_store__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_13__interceptors_clear_token_after_revoke__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_11__interceptors_retry_with_refresh_token__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_10__interceptors_add_auth_header__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_14__interceptors_fetch_refresh_token_for_revoke__["a" /* default */]()];
 /**
    Take endpoint definitions and return SDK function definition.
  */
@@ -2727,7 +2737,7 @@ var sdkFnDefsFromEndpointDefs = function sdkFnDefsFromEndpointDefs(epDefs) {
     var apiName = _ref4.apiName,
         path = _ref4.path,
         method = _ref4.method;
-    var fnPath = Object(__WEBPACK_IMPORTED_MODULE_6__utils__["a" /* fnPath */])(path);
+    var fnPath = Object(__WEBPACK_IMPORTED_MODULE_8__utils__["a" /* fnPath */])(path);
     var fullFnPath = [apiName].concat(_toConsumableArray(fnPath));
     return {
       method: method,
@@ -2762,7 +2772,7 @@ var additionalSdkFnDefinitions = [{
   interceptors: [].concat(revokeInterceptors)
 }, {
   path: 'authInfo',
-  interceptors: [new __WEBPACK_IMPORTED_MODULE_15__interceptors_auth_info__["a" /* default */]()]
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_17__interceptors_auth_info__["a" /* default */]()]
 }];
 
 var handleSuccessResponse = function handleSuccessResponse(response) {
@@ -2901,7 +2911,7 @@ var createSdkFnContextRunner = function createSdkFnContextRunner(_ref7) {
       ctx = _ref7.ctx,
       interceptors = _ref7.interceptors,
       endpointInterceptors = _ref7.endpointInterceptors;
-  return Object(__WEBPACK_IMPORTED_MODULE_18__context_runner__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_3_lodash_compact___default()([].concat(_toConsumableArray(interceptors), _toConsumableArray(endpointInterceptors))))(_objectSpread({}, ctx, {
+  return Object(__WEBPACK_IMPORTED_MODULE_20__context_runner__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_3_lodash_compact___default()([].concat(_toConsumableArray(interceptors), _toConsumableArray(endpointInterceptors))))(_objectSpread({}, ctx, {
     params: params,
     queryParams: queryParams,
     perRequestOpts: perRequestOpts
@@ -2960,8 +2970,8 @@ var transformSdkConfig = function transformSdkConfig(_ref10) {
       sdkConfig = _objectWithoutProperties(_ref10, ["baseUrl", "tokenStore"]);
 
   return _objectSpread({}, sdkConfig, {
-    baseUrl: Object(__WEBPACK_IMPORTED_MODULE_6__utils__["c" /* trimEndSlash */])(baseUrl),
-    tokenStore: tokenStore || Object(__WEBPACK_IMPORTED_MODULE_17__token_store__["a" /* createDefaultTokenStore */])()
+    baseUrl: Object(__WEBPACK_IMPORTED_MODULE_8__utils__["c" /* trimEndSlash */])(baseUrl),
+    tokenStore: tokenStore || Object(__WEBPACK_IMPORTED_MODULE_19__token_store__["a" /* createDefaultTokenStore */])()
   });
 }; // Validate SDK configurations, throw an error if invalid, otherwise return.
 
@@ -3003,7 +3013,7 @@ function SharetribeSdk(userSdkConfig) {
         method = epDef.method,
         _epDef$interceptors = epDef.interceptors,
         interceptors = _epDef$interceptors === void 0 ? [] : _epDef$interceptors;
-    var fnPath = Object(__WEBPACK_IMPORTED_MODULE_6__utils__["a" /* fnPath */])(path);
+    var fnPath = Object(__WEBPACK_IMPORTED_MODULE_8__utils__["a" /* fnPath */])(path);
     var fullFnPath = [apiName].concat(_toConsumableArray(fnPath));
     var url = [apiName, path].join('/');
     var httpOpts = apiConfigs[apiName];
@@ -5809,6 +5819,18 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_152__;
 
 /***/ }),
 /* 153 */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports) {
+
+module.exports = require("https");
+
+/***/ }),
+/* 155 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5817,9 +5839,9 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_152__;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return formData; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_reduce__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_reduce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_reduce__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_trimEnd__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_trimEnd__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_trimEnd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_trimEnd__);
 
 
@@ -5854,7 +5876,7 @@ var formData = function formData(params) {
 };
 
 /***/ }),
-/* 154 */
+/* 156 */
 /***/ (function(module, exports) {
 
 /**
@@ -5886,7 +5908,7 @@ module.exports = arrayReduce;
 
 
 /***/ }),
-/* 155 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isArrayLike = __webpack_require__(8);
@@ -5924,7 +5946,7 @@ module.exports = createBaseEach;
 
 
 /***/ }),
-/* 156 */
+/* 158 */
 /***/ (function(module, exports) {
 
 /**
@@ -5953,12 +5975,12 @@ module.exports = baseReduce;
 
 
 /***/ }),
-/* 157 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseDifference = __webpack_require__(158),
-    baseRest = __webpack_require__(163),
-    isArrayLikeObject = __webpack_require__(164);
+var baseDifference = __webpack_require__(160),
+    baseRest = __webpack_require__(165),
+    isArrayLikeObject = __webpack_require__(166);
 
 /**
  * Creates an array excluding all given values using
@@ -5990,12 +6012,12 @@ module.exports = without;
 
 
 /***/ }),
-/* 158 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var SetCache = __webpack_require__(50),
-    arrayIncludes = __webpack_require__(159),
-    arrayIncludesWith = __webpack_require__(162),
+    arrayIncludes = __webpack_require__(161),
+    arrayIncludesWith = __webpack_require__(164),
     arrayMap = __webpack_require__(25),
     baseUnary = __webpack_require__(46),
     cacheHas = __webpack_require__(51);
@@ -6063,7 +6085,7 @@ module.exports = baseDifference;
 
 
 /***/ }),
-/* 159 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIndexOf = __webpack_require__(62);
@@ -6086,7 +6108,7 @@ module.exports = arrayIncludes;
 
 
 /***/ }),
-/* 160 */
+/* 162 */
 /***/ (function(module, exports) {
 
 /**
@@ -6104,7 +6126,7 @@ module.exports = baseIsNaN;
 
 
 /***/ }),
-/* 161 */
+/* 163 */
 /***/ (function(module, exports) {
 
 /**
@@ -6133,7 +6155,7 @@ module.exports = strictIndexOf;
 
 
 /***/ }),
-/* 162 */
+/* 164 */
 /***/ (function(module, exports) {
 
 /**
@@ -6161,7 +6183,7 @@ module.exports = arrayIncludesWith;
 
 
 /***/ }),
-/* 163 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var identity = __webpack_require__(10),
@@ -6184,7 +6206,7 @@ module.exports = baseRest;
 
 
 /***/ }),
-/* 164 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isArrayLike = __webpack_require__(8),
@@ -6223,13 +6245,13 @@ module.exports = isArrayLikeObject;
 
 
 /***/ }),
-/* 165 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseToString = __webpack_require__(39),
-    castSlice = __webpack_require__(166),
-    charsEndIndex = __webpack_require__(168),
-    stringToArray = __webpack_require__(169),
+    castSlice = __webpack_require__(168),
+    charsEndIndex = __webpack_require__(170),
+    stringToArray = __webpack_require__(171),
     toString = __webpack_require__(38);
 
 /** Used to match leading and trailing whitespace. */
@@ -6272,10 +6294,10 @@ module.exports = trimEnd;
 
 
 /***/ }),
-/* 166 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseSlice = __webpack_require__(167);
+var baseSlice = __webpack_require__(169);
 
 /**
  * Casts `array` to a slice if it's needed.
@@ -6296,7 +6318,7 @@ module.exports = castSlice;
 
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, exports) {
 
 /**
@@ -6333,7 +6355,7 @@ module.exports = baseSlice;
 
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIndexOf = __webpack_require__(62);
@@ -6358,12 +6380,12 @@ module.exports = charsEndIndex;
 
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var asciiToArray = __webpack_require__(170),
-    hasUnicode = __webpack_require__(171),
-    unicodeToArray = __webpack_require__(172);
+var asciiToArray = __webpack_require__(172),
+    hasUnicode = __webpack_require__(173),
+    unicodeToArray = __webpack_require__(174);
 
 /**
  * Converts `string` to an array.
@@ -6382,7 +6404,7 @@ module.exports = stringToArray;
 
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, exports) {
 
 /**
@@ -6400,7 +6422,7 @@ module.exports = asciiToArray;
 
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, exports) {
 
 /** Used to compose unicode character classes. */
@@ -6432,7 +6454,7 @@ module.exports = hasUnicode;
 
 
 /***/ }),
-/* 172 */
+/* 174 */
 /***/ (function(module, exports) {
 
 /** Used to compose unicode character classes. */
@@ -6478,7 +6500,7 @@ module.exports = unicodeToArray;
 
 
 /***/ }),
-/* 173 */
+/* 175 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6560,7 +6582,7 @@ var paramsSerializer = function paramsSerializer(params) {
 /* harmony default export */ __webpack_exports__["a"] = (paramsSerializer);
 
 /***/ }),
-/* 174 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseEach = __webpack_require__(61),
@@ -6588,7 +6610,7 @@ module.exports = baseMap;
 
 
 /***/ }),
-/* 175 */
+/* 177 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6661,7 +6683,7 @@ function () {
 
 
 /***/ }),
-/* 176 */
+/* 178 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6779,7 +6801,7 @@ function () {
 
 
 /***/ }),
-/* 177 */
+/* 179 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6897,7 +6919,7 @@ function () {
 
 
 /***/ }),
-/* 178 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6984,7 +7006,7 @@ function () {
 
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7048,7 +7070,7 @@ function () {
 
 
 /***/ }),
-/* 180 */
+/* 182 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7130,7 +7152,7 @@ function () {
 
 
 /***/ }),
-/* 181 */
+/* 183 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7189,7 +7211,7 @@ function () {
 
 
 /***/ }),
-/* 182 */
+/* 184 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7257,14 +7279,14 @@ function () {
 
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TransitResponse; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_update__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_update__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_update___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_update__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__serializer__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__serializer__ = __webpack_require__(189);
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -7327,11 +7349,11 @@ function () {
 
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseUpdate = __webpack_require__(185),
-    castFunction = __webpack_require__(186);
+var baseUpdate = __webpack_require__(187),
+    castFunction = __webpack_require__(188);
 
 /**
  * This method is like `_.set` except that accepts `updater` to produce the
@@ -7368,7 +7390,7 @@ module.exports = update;
 
 
 /***/ }),
-/* 185 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(11),
@@ -7392,7 +7414,7 @@ module.exports = baseUpdate;
 
 
 /***/ }),
-/* 186 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var identity = __webpack_require__(10);
@@ -7412,7 +7434,7 @@ module.exports = castFunction;
 
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7425,15 +7447,15 @@ module.exports = castFunction;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_reduce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_reduce__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_flatten__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_flatten___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_flatten__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_find__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_find__ = __webpack_require__(190);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_find___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_find__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_map__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_fromPairs__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_fromPairs__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_fromPairs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_fromPairs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_identity__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_identity___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_identity__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_transit_js__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_transit_js__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_transit_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_transit_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__types__ = __webpack_require__(30);
 
@@ -7748,11 +7770,11 @@ var createTransitConverters = function createTransitConverters() {
 };
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var createFind = __webpack_require__(189),
-    findIndex = __webpack_require__(190);
+var createFind = __webpack_require__(191),
+    findIndex = __webpack_require__(192);
 
 /**
  * Iterates over elements of `collection`, returning the first element
@@ -7796,7 +7818,7 @@ module.exports = find;
 
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIteratee = __webpack_require__(9),
@@ -7827,12 +7849,12 @@ module.exports = createFind;
 
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseFindIndex = __webpack_require__(63),
     baseIteratee = __webpack_require__(9),
-    toInteger = __webpack_require__(191);
+    toInteger = __webpack_require__(193);
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
@@ -7888,10 +7910,10 @@ module.exports = findIndex;
 
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toFinite = __webpack_require__(192);
+var toFinite = __webpack_require__(194);
 
 /**
  * Converts `value` to an integer.
@@ -7930,10 +7952,10 @@ module.exports = toInteger;
 
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toNumber = __webpack_require__(193);
+var toNumber = __webpack_require__(195);
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0,
@@ -7978,7 +8000,7 @@ module.exports = toFinite;
 
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(4),
@@ -8050,7 +8072,7 @@ module.exports = toNumber;
 
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports) {
 
 /**
@@ -8084,7 +8106,7 @@ module.exports = fromPairs;
 
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports) {
 
 // transit-js 0.8.862
@@ -11954,7 +11976,7 @@ writeCache:com.cognitect.transit.caching.writeCache});
 
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11969,19 +11991,19 @@ var createDefaultTokenStore = function createDefaultTokenStore() {
 };
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var os = __webpack_require__(33);
 
-var fs = __webpack_require__(198);
+var fs = __webpack_require__(200);
 
 var path = __webpack_require__(34);
 
-var xdgBasedir = __webpack_require__(199);
+var xdgBasedir = __webpack_require__(201);
 
-var envPaths = __webpack_require__(200);
+var envPaths = __webpack_require__(202);
 
 var ERROR_CODE_NOT_FOUND = 'ENOENT';
 var dirname = 'flex-integration-sdk'; // In theory this is incorrect. XDG should only be used for Linux,
@@ -12055,13 +12077,13 @@ var createStore = function createStore() {
 /* harmony default export */ __webpack_exports__["a"] = (createStore);
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12096,7 +12118,7 @@ if (exports.config) {
 
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
