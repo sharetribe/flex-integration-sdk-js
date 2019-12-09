@@ -1,5 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
+import http from 'http';
+import https from 'https';
 import { fnPath as urlPathToFnPath, trimEndSlash, formData } from './utils';
 import paramsSerializer from './params_serializer';
 import AddAuthHeader from './interceptors/add_auth_header';
@@ -23,8 +25,8 @@ const defaultSdkConfig = {
   endpoints: [],
   adapter: null,
   version: 'v1',
-  httpAgent: null,
-  httpsAgent: null,
+  httpAgent: new http.Agent({ keepAlive: true }),
+  httpsAgent: new https.Agent({ keepAlive: true }),
   transitVerbose: false,
 };
 
