@@ -19,7 +19,7 @@ const configDir = os.platform() === 'darwin'
 
 const tokenFilePath = path.join(configDir, 'file-store-token.json');
 
-const createConfigDir = () => fs.promises.mkdir(configDir, { recursive: true });
+const createConfigDir = () => fs.promises.mkdir(configDir, { recursive: true, mode: 0o700 });
 
 const getToken = () => fs.promises.readFile(tokenFilePath)
       .then(contents => JSON.parse(contents))
@@ -32,7 +32,9 @@ const getToken = () => fs.promises.readFile(tokenFilePath)
       });
 
 const setToken = token => {
-  const writeToken = () => fs.promises.writeFile(tokenFilePath, JSON.stringify(token));
+  const writeToken = () => fs.promises.writeFile(tokenFilePath,
+                                                 JSON.stringify(token),
+                                                 {mode: 0o600});
 
   return writeToken()
     .catch(e => {
