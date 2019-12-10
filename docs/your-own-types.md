@@ -30,9 +30,9 @@ representation to UUID type class instance.
 ```js
 const { BigDecimal, LatLng } = require('sharetribe-flex-sdk').types;
 
-const sdk = createInstance({
-  clientId: config.sdk.clientId,
-  baseUrl: config.sdk.baseUrl,
+const integrationSdk = createInstance({
+  clientId: "<your client ID>",
+  clientSecret: "<your client secret>",
   typeHandlers: [
     {
       sdkType: BigDecimal,

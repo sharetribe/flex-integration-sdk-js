@@ -14,22 +14,23 @@ Then copy-paste the following commands to the REPL:
 Set your clientId:
 
 ```js
-const clientId = "<your clientId here>";
+const clientId = "<your client ID here>";
+const clientSecret = "<your client secret here>"
 ```
 
 Create new SDK instance:
 
 ```js
-const sdk = sharetribeSdk.createInstance({
+const integrationSdk = sharetribeIntegrationSdk.createInstance({
   clientId,
-  tokenStore: sharetribeSdk.tokenStore.memoryStore()
+  clientSecret
 });
 ```
 
 Fetch 10 listings:
 
 ```js
-sdk.listings.query({per_page: 10}).then(response => {
+integrationSdk.listings.query({per_page: 10}).then(response => {
   console.log("Fetched " + response.data.data.length + " listings.");
   response.data.data.forEach(listing => {
     console.log(listing.attributes.title);

@@ -27,14 +27,12 @@ const roundtrip = JSON.parse(JSON.stringify(testData, replacer), reviver);
 assert(roundtrip.id.constructor.name === 'UUID');
 ```
 
-**Please note:** [Your own types](#your-own-types) are not serialized.
+**Please note:** [Your own types](./your-own-types.md) are not serialized.
 
-**Please note:** When the API call fails, [the error
+**Please note:** When an API call fails, [the error
 response](./calling-the-api.md#error-response) is wrapped in
 [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-object. Stringifying Error object may result in unexpected results,
-e.g. in some browsers `JSON.stringify(new Error("error"))` returns an
-empty object. Because of this, it's recommended that you do not
-stringify the whole SDK responses as is, but instead pick the
-`status`, `statusText` and `data` fields from the response, and store
-and stringify those.
+object. Stringifying an Error object may result in unexpected results. Because of
+this, it's recommended that you do not stringify whole SDK responses as is, but
+instead pick the `status`, `statusText` and `data` fields from the response, and
+store and stringify those.
