@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=90051322">
+    <link rel="stylesheet" href="styles.css?t=6eea839d">
+    <script src="assets/script.js?t=93f1a66c"></script>
+    <script src="scripts.js?t=a9970145"></script>
+    <title>Calling the API - Sharetribe Flex Integration SDK for JavaScript</title>
+    <meta name="viewport" content="width=device-width">
+    <script>if (false || window.location.hostname.indexOf("sharetribe.github.io") === window.location.hostname.length - 20) {
+        (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create',"UA-10178914-13",'auto')
+      }
+    </script>
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-try-it-in-command-line" href="try-it-in-command-line.html">Try it in command-line!</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Getting started</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-authentication" href="authentication.html">Authentication</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title -active link-calling-the-api" href="calling-the-api.html">Calling the API</a>
+                    <ul class="headings heading-list">
+                      <li class="heading-item -depth-2"><a class="hlink link-api-endpoints" href="#api-endpoints">API Endpoints</a>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-parameters" href="#parameters">Parameters</a>
+                        <ul class="heading-list -depth-2">
+                          <li class="heading-item -depth-3"><a class="hlink link-query-method-parameters" href="#query-method-parameters">Query method parameters</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-response" href="#response">Response</a>
+                        <ul class="heading-list -depth-2">
+                          <li class="heading-item -depth-3"><a class="hlink link-success-response" href="#success-response">Success response</a>
+                          </li>
+                          <li class="heading-item -depth-3"><a class="hlink link-error-response" href="#error-response">Error response</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-api-documentation" href="#api-documentation">API documentation</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-types" href="types.html">Types</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Advanced</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-configurations" href="configurations.html">Configurations</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-your-own-types" href="your-own-types.html">Your own types</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-serializing-types-to-json" href="serializing-types-to-json.html">Serializing types to JSON</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-token-store" href="token-store.html">Token store</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-developing-sdk" href="developing-sdk.html">Developing SDK</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-calling-the-api">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/sharetribe/flex-integration-sdk-js" data-title="sharetribe/flex-integration-sdk-js">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="calling-the-api">Calling the API</h1>
+<h2 id="api-endpoints">API Endpoints</h2>
+<p>The SDK provides direct mapping from API endpoints to SDK methods.</p>
+<p>For example:</p>
+<p><code>GET /integration_api/marketplace/show</code> maps to <code>integrationSdk.marketplace.show(...)</code></p>
+<p><code>GET /integration_api/listings/query</code> maps to <code>integrationSdk.listings.query(...)</code></p>
+<!-- `POST /integration_api/listings/create` maps to `integrationSdk.ownListings.create(...)` -->
+<h2 id="parameters">Parameters</h2>
+<p>You can pass a set of parameters to the SDK method you call. The
+<em>query</em> endpoints take one parameter, where as the <em>command</em> endpoints
+take three parameters.</p>
+<p><strong>Please note:</strong> The SDK does not validate the parameters. The
+parameter validation is only done in the server side. In case of
+invalid parameters, the request fill fail.</p>
+<h3 id="query-method-parameters">Query method parameters</h3>
+<p>The <em>query</em> (GET) methods take only one parameter:</p>
+<ul>
+<li><code>queryParams</code>: Object of query parameters</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js">integrationSdk.listings.query({<span class="hljs-attr">perPage</span>: <span class="hljs-number">5</span>})
+
+<span class="pl-c">// Calls GET /integration_api/listings/query?perPage=5</span>
+</code></pre>
+<p>The <code>queryParams</code> is optional. If the endpoint doesn&apos;t require any
+query parameters, you can call the SDK method without any parameters.</p>
+<!--
+### Command method parameters
+
+The *command* (POST) methods take three parameters:
+
+* `bodyParams`: Object of body parameters
+* `queryParams`: Object of query parameters
+* `opts`: Additional options
+
+**Example:**
+
+```js
+integrationSdk.listings.create({title: 'New listings', price: new Money(5000, 'USD')}, {expand: true});
+
+// Calls POST /integration_api/listings/create?expand=true
+// with title and price serialized in the request body
+```
+
+All parameters are optional. If the endpoint doesn't require any body
+parameters, query parameters or options, you can call the SDK method
+without any parameters.
+
+If you wonder what the `new Money(...)` is, have a look at [Types](./types.md).
+
+### Command method options
+
+The third parameter for *command* methods is `opts`.
+
+Here's a list of available `opts`:
+
+* `onUploadProcess`: Takes a callback function that is called with [ProgressEvent](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent).
+
+**Example:**
+
+```js
+const logProgress = (progressEvent) => {
+  const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+  console.log(percentCompleted + '% completed');
+}
+
+integrationSdk.listings.uploadImage({ image: file }, {}, { onUploadProgress: logProgress })
+```
+-->
+<h2 id="response">Response</h2>
+<p>Calling any SDK method will always return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>. The value of the Promise differs whether the request was successful or error. In case of successful request the Promise will be <em>fulfilled</em> where as in case of error the Promise will be <em>rejected</em>.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js"><span class="pl-k">const</span> promise = integrationSdk.listings.query();
+
+<span class="pl-c">// Handle success response</span>
+promise.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> { <span class="pl-c1">console</span>.log(response)} );
+
+<span class="pl-c">// Handle error response</span>
+promise.catch(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> { <span class="pl-c1">console</span>.log(response)} );
+</code></pre>
+<h3 id="success-response">Success response</h3>
+<p>A successful response will have the following format:</p>
+<pre><code>{
+  status: 200,
+  statusText: &apos;OK&apos;,
+  data: // The data returned by the API. Object.
+}
+</code></pre>
+<p>The API returns the data always in the following format:</p>
+<pre><code>{
+  data: // Either an array of resources or just a single resource
+  meta: {} // Object containing metadata, such as pagination information
+  included: [] // Array of included responses
+}
+</code></pre>
+<p><strong>Example:</strong> Response from query that returns multiple listings.</p>
+<pre><code>{
+  status: 200,
+  statusText: &apos;OK&apos;,
+  data: {
+    data: [
+      {
+        id: &apos;5a8d820f-8cb9-4855-96bf-5a6e1db31362&apos;,
+        type: &apos;listing&apos;,
+        attributes: {
+          title: &apos;...&apos;
+          description: &apos;...&apos;,
+
+          // other attributes here ...
+        },
+        relationships: {
+          author: {
+            data: {
+              id: &apos;...&apos;,
+              type: &apos;user&apos;
+            }
+          },
+          images: {
+            data: [
+              {
+                id: &apos;...&apos;,
+                type: &apos;image&apos;
+              }
+
+              // other listing images here ...
+            ]
+          }
+        }
+      }
+    ],
+    meta: {
+      totalItems: 210,
+      totalPages: 210,
+      page: 1,
+      perPage: 1
+    },
+    included: [
+      {
+        id: &apos;...&apos;,
+        type: &apos;image&apos;,
+        attributes: { ... }
+      },
+      {
+        id: &apos;...&apos; ,
+        type: &apos;user&apos;,
+        attributes: { ... }
+      }
+
+      // other included resources here ...
+    ]
+  }
+}
+</code></pre>
+<h3 id="error-response">Error response</h3>
+<p>An error response will have the following format:</p>
+<pre><code>{
+  status: &lt;HTTP Status code, 4xx or 5xx&gt;,
+  statusText: &lt;HTTP Status text&gt;,
+  data: // The data returned by the API, for example:
+  {
+    errors: [
+      {
+        status: &lt;HTTP Status code, 4xx or 5xx&gt;,
+        code: // error code
+        title: &lt;HTTP Status text&gt;,
+        details: {
+          // Additional details, not part of the public API.
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+<p>The error value is always an <code>instanceof</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>.</p>
+<p><strong>Please note</strong> that the content of the <code>details</code> is not part of the public API. This means that:</p>
+<ul>
+<li>You can use <code>details</code> for debugging and error tracking.</li>
+<li>You SHOULD NOT write production code that depends on the content of <code>details</code>.</li>
+<li>The content of <code>details</code> is not well specified and will change in the future.</li>
+</ul>
+<h2 id="api-documentation">API documentation</h2>
+<p>Please see the <a href="https://www.sharetribe.com/api-reference/">API documentation</a>, for more information about the available endpoints, parameters and the response format.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="authentication.html"><span class="title">Authentication</span></a></div>
+          <div class="right"><a href="types.html"><span class="label">Next: </span><span class="title">Types</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

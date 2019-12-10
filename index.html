@@ -22,6 +22,54 @@
           <li class="menu-item -level-0 -parent">
             <ul class="submenu">
               <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+                <ul class="headings heading-list">
+                  <li class="heading-item -depth-2"><a class="hlink link-table-of-contents" href="#table-of-contents">Table of Contents</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-what-is-it" href="#what-is-it">What is it?</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-installation" href="#installation">Installation</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-usage" href="#usage">Usage</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-examples" href="#examples">Examples</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-documentation" href="#documentation">Documentation</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-changelog" href="#changelog">Changelog</a>
+                  </li>
+                  <li class="heading-item -depth-2"><a class="hlink link-license" href="#license">License</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-try-it-in-command-line" href="try-it-in-command-line.html">Try it in command-line!</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Getting started</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-authentication" href="authentication.html">Authentication</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-calling-the-api" href="calling-the-api.html">Calling the API</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-types" href="types.html">Types</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Advanced</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-configurations" href="configurations.html">Configurations</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-your-own-types" href="your-own-types.html">Your own types</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-serializing-types-to-json" href="serializing-types-to-json.html">Serializing types to JSON</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-token-store" href="token-store.html">Token store</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-developing-sdk" href="developing-sdk.html">Developing SDK</a>
               </li>
             </ul>
           </li>
@@ -34,8 +82,67 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="sharetribe-flex-integration-sdk-for-javascript">Sharetribe Flex Integration SDK for JavaScript</h1>
-<p>Coming soon</p>
+<p>Use Sharetribe Flex Integration API with ease.</p>
+<p><a href="https://circleci.com/gh/sharetribe/flex-integration-sdk-js"><img src="https://circleci.com/gh/sharetribe/flex-integration-sdk-js.svg?style=svg&amp;circle-token=5d118cf6f162884ba97e421c29c94f5c848ba28a" alt="CircleCI"></a></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id="what-is-it">What is it?</h2>
+<p>The SDK is the <strong>easiest</strong> way to interact with Sharetribe Flex Integration API.</p>
+<p>It handles <strong>groundwork</strong> such as authentication, renewing authentication tokens
+and serializing and deserializing data to and from JavaScript data structures.</p>
+<p>This lets you to <strong>concentrate on building your integration</strong> instead
+of setting up the necessary boilerplate to communicate with the API.</p>
+<h2 id="installation">Installation</h2>
+<p>Yarn:</p>
+<pre><code class="lang-sh">yarn add sharetribe-flex-integration-sdk
+</code></pre>
+<h2 id="usage">Usage</h2>
+<pre><code class="lang-js"><span class="pl-k">const</span> sharetribeIntegrationSdk = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-integration-sdk&apos;</span>);
 
+<span class="pl-c">// Create new SDK instance</span>
+<span class="pl-k">const</span> integrationSdk = sharetribeSdk.createInstance({
+  <span class="hljs-attr">clientId</span>: <span class="pl-s">&apos;&lt;Your Client ID here&gt;&apos;</span>,
+  <span class="hljs-attr">clientSecret</span>: <span class="pl-s">&apos;&lt;Your Client secret here&gt;&apos;</span>
+});
+
+<span class="pl-c">// Query first 5 listings</span>
+integrationSdk.listings
+  .query({ <span class="hljs-attr">per_page</span>: <span class="hljs-number">5</span> })
+  .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+    <span class="pl-c">// Print listing titles</span>
+    res.data.data.forEach(<span class="hljs-function"><span class="hljs-params">listing</span> =&gt;</span> {
+      <span class="pl-c1">console</span>.log(<span class="pl-s">`Listing: <span class="hljs-subst">${listing.attributes.title}</span>`</span>)
+    });
+  })
+  .catch(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+    <span class="pl-c">// An error occurred</span>
+    <span class="pl-c1">console</span>.log(<span class="pl-s">`Request failed with status: <span class="hljs-subst">${res.status}</span> <span class="hljs-subst">${res.statusText}</span>`</span>);
+  });
+</code></pre>
+<h2 id="examples">Examples</h2>
+<p>See the
+<a href="https://github.com/sharetribe/flex-integration-api-examples">flex-integration-api-examples</a>
+repository on GitHub.</p>
+<h2 id="documentation">Documentation</h2>
+<p><a href="https://sharetribe.github.io/flex-integration-sdk-js/">Documentation can be found
+here</a>.</p>
+<h2 id="changelog">Changelog</h2>
+<p>See
+<a href="https://github.com/sharetribe/flex-integration-sdk-js/blob/master/CHANGELOG.md">CHANGELOG.md</a>.</p>
+<h2 id="license">License</h2>
+<p>Distributed under <a href="https://github.com/sharetribe/flex-integration-sdk-js/tree/master/LICENSE">The Apache License, Version
+2.0</a></p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="right"><a href="features.html"><span class="label">Next: </span><span class="title">Features</span></a></div>
         </div>
       </div>
     </div>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=90051322">
+    <link rel="stylesheet" href="styles.css?t=6eea839d">
+    <script src="assets/script.js?t=93f1a66c"></script>
+    <script src="scripts.js?t=a9970145"></script>
+    <title>Your own types - Sharetribe Flex Integration SDK for JavaScript</title>
+    <meta name="viewport" content="width=device-width">
+    <script>if (false || window.location.hostname.indexOf("sharetribe.github.io") === window.location.hostname.length - 20) {
+        (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create',"UA-10178914-13",'auto')
+      }
+    </script>
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-try-it-in-command-line" href="try-it-in-command-line.html">Try it in command-line!</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Getting started</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-authentication" href="authentication.html">Authentication</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-calling-the-api" href="calling-the-api.html">Calling the API</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-types" href="types.html">Types</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Advanced</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-configurations" href="configurations.html">Configurations</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title -active link-your-own-types" href="your-own-types.html">Your own types</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-serializing-types-to-json" href="serializing-types-to-json.html">Serializing types to JSON</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-token-store" href="token-store.html">Token store</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-developing-sdk" href="developing-sdk.html">Developing SDK</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-your-own-types">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/sharetribe/flex-integration-sdk-js" data-title="sharetribe/flex-integration-sdk-js">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="your-own-types">Your own types</h1>
+<p>In case you are using your own types or types from external library,
+the SDK provides a way to convert the SDK types to and from your own
+types.</p>
+<p>The conversion is handled by &quot;type handlers&quot;. You need to pass
+<code>typeHandlers</code> when you create a new SDK instance.</p>
+<p>A type handler is an object containing the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sdkType</code></td>
+<td>The SDK type.</td>
+</tr>
+<tr>
+<td><code>appType</code></td>
+<td>The application specific type to convert SDK type to/from.</td>
+</tr>
+<tr>
+<td><code>canHandle</code></td>
+<td>A predicate function (i.e. function that returns truthy or falsy) that defines whether the this handler should be used. The SDK makes sure that <code>canHandle</code> will be called only for not <code>null</code> Object values, thus <code>null</code> check can be safely omitted.</td>
+</tr>
+<tr>
+<td><code>reader</code></td>
+<td>Conversion function. Gets an instance of <code>sdkType</code> as an argument, should return instance of <code>appType</code>.</td>
+</tr>
+<tr>
+<td><code>writer</code></td>
+<td>Conversion function. Gets an instance of <code>appType</code> as an argument, should return instance of <code>sdkType</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Either <code>appType</code> or <code>canHandle</code> should be provider, but not both.</p>
+<p>Please note: v1.4.0 renamed <code>type</code> to <code>sdkType</code> and <code>customType</code> to <code>appType</code>.</p>
+<p><strong>Example:</strong> Convert
+<a href="https://developers.google.com/maps/documentation/javascript/reference/3/#LatLng"><code>google.maps.LatLng</code></a>
+to/from <code>LatLng</code>, <a href="https://github.com/MikeMcl/decimal.js/">Decimal.js</a>
+<code>Decimal</code> to/from <code>BigDecimal</code> and own plain object UUID
+representation to UUID type class instance.</p>
+<pre><code class="lang-js"><span class="pl-k">const</span> { BigDecimal, LatLng } = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-sdk&apos;</span>).types;
+
+<span class="pl-k">const</span> integrationSdk = createInstance({
+  <span class="hljs-attr">clientId</span>: <span class="pl-s">&quot;&lt;your client ID&gt;&quot;</span>,
+  <span class="hljs-attr">clientSecret</span>: <span class="pl-s">&quot;&lt;your client secret&gt;&quot;</span>,
+  <span class="hljs-attr">typeHandlers</span>: [
+    {
+      <span class="hljs-attr">sdkType</span>: BigDecimal,
+      <span class="hljs-attr">appType</span>: Decimal,
+      <span class="hljs-attr">writer</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> BigDecimal(v.toString()),
+      <span class="hljs-attr">reader</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> Decimal(v.value),
+    },
+      <span class="hljs-attr">sdkType</span>: LatLng,
+      <span class="hljs-attr">appType</span>: google.maps.LatLng,
+      <span class="hljs-attr">writer</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> LatLng(v.lat(), v.lng()),
+      <span class="hljs-attr">reader</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> google.maps.LatLng(v.lat, v.lng)
+    },
+    {
+      <span class="hljs-attr">sdkType</span>: UUID,
+      <span class="hljs-attr">canHandle</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> v.isMyOwnUuidType,
+      <span class="hljs-attr">writer</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> UUID(v.myOwnUuidValue),
+      <span class="hljs-attr">reader</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> ({<span class="hljs-attr">myOwnUuidValue</span>: v.uuid,
+                     <span class="hljs-attr">isMyOwnUuidType</span>: <span class="pl-c1">true</span>})
+    }
+  ]
+});
+</code></pre>
+<p><strong>Caveat:</strong> Only body parameters are converted. An error <em>Don&apos;t know
+how to serialize query parameter</em> will be thrown if query parameters
+contain your own types.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="configurations.html"><span class="title">Configurations</span></a></div>
+          <div class="right"><a href="serializing-types-to-json.html"><span class="label">Next: </span><span class="title">Serializing types to JSON</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=90051322">
+    <link rel="stylesheet" href="styles.css?t=6eea839d">
+    <script src="assets/script.js?t=93f1a66c"></script>
+    <script src="scripts.js?t=a9970145"></script>
+    <title>Authentication - Sharetribe Flex Integration SDK for JavaScript</title>
+    <meta name="viewport" content="width=device-width">
+    <script>if (false || window.location.hostname.indexOf("sharetribe.github.io") === window.location.hostname.length - 20) {
+        (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create',"UA-10178914-13",'auto')
+      }
+    </script>
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-try-it-in-command-line" href="try-it-in-command-line.html">Try it in command-line!</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Getting started</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title -active link-authentication" href="authentication.html">Authentication</a>
+                    <ul class="headings heading-list">
+                      <li class="heading-item -depth-2"><a class="hlink link-revoke-refresh-token" href="#revoke-refresh-token">Revoke refresh token</a>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-obtain-authentication-information" href="#obtain-authentication-information">Obtain authentication information</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-calling-the-api" href="calling-the-api.html">Calling the API</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-types" href="types.html">Types</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Advanced</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-configurations" href="configurations.html">Configurations</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-your-own-types" href="your-own-types.html">Your own types</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-serializing-types-to-json" href="serializing-types-to-json.html">Serializing types to JSON</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-token-store" href="token-store.html">Token store</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-developing-sdk" href="developing-sdk.html">Developing SDK</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-authentication">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/sharetribe/flex-integration-sdk-js" data-title="sharetribe/flex-integration-sdk-js">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="authentication">Authentication</h1>
+<p>The SDK is ready to make API calls as soon as it is instantiated. It will
+automatically use the Flex Authentication API to obtain access and refresh
+tokens.</p>
+<h2 id="revoke-refresh-token">Revoke refresh token</h2>
+<p><strong><code>integrationSdk.revoke() : Promise</code></strong></p>
+<p>Revokes the current refresh token and returns a Promise.</p>
+<p>The SDK automatically obtains access and refresh tokens from the <a href="https://www.sharetribe.com/api-reference/authentication.html">Flex
+Authentication
+API</a>. It uses the
+configured <a href="token-store.html">token store</a> to hold the tokens. If the store is
+persistent (such as the provided <code>fileStore</code>), the long-lived refresh token is
+left in storage and can be reused in subsequent SDK executions. You can
+explicitly use the <code>revoke()</code> method to revoke that token and make sure it is no
+longer usable.</p>
+<h2 id="obtain-authentication-information">Obtain authentication information</h2>
+<p><strong><code>integrationSdk.authInfo() : Promise(Object)</code></strong></p>
+<p>Returns a Promise with an Object as a value. The object may contain a
+<code>grantType</code> field with either <code>&apos;client_credentials&apos;</code>,
+<code>&apos;refresh_token&apos;</code> as a value. The different values have the following
+meanings:</p>
+<ul>
+<li>No grant type: the SDK hasn&apos;t yet authenticated itself (i.e. hasn&apos;t done any
+requests to the API yet).</li>
+<li>Grant type <code>&apos;client_credentials&apos;</code>: the SDK has authenticated using the client
+ID and client secret.</li>
+<li>Grant type <code>&apos;refresh_token&apos;</code>: the SDK has authenticated using a previously
+obtained refresh token. It will do so automatically whenever the current
+access token expires.</li>
+</ul>
+<p><strong>Please note:</strong> Even thought the <code>authInfo</code> method returns a Promise,
+the method does not call the API. The authentication information is
+saved locally in the <a href="token-store.html">token store</a>.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="try-it-in-command-line.html"><span class="title">Try it in command-line!</span></a></div>
+          <div class="right"><a href="calling-the-api.html"><span class="label">Next: </span><span class="title">Calling the API</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

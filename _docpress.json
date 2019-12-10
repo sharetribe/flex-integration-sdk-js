@@ -5,7 +5,207 @@
         "title": "Sharetribe Flex Integration SDK for JavaScript",
         "source": "README.md",
         "url": "index.html",
-        "slug": "index"
+        "slug": "index",
+        "headings": [
+          {
+            "title": "Table of Contents",
+            "depth": 2,
+            "id": "table-of-contents"
+          },
+          {
+            "title": "What is it?",
+            "depth": 2,
+            "id": "what-is-it"
+          },
+          {
+            "title": "Installation",
+            "depth": 2,
+            "id": "installation"
+          },
+          {
+            "title": "Usage",
+            "depth": 2,
+            "id": "usage"
+          },
+          {
+            "title": "Examples",
+            "depth": 2,
+            "id": "examples"
+          },
+          {
+            "title": "Documentation",
+            "depth": 2,
+            "id": "documentation"
+          },
+          {
+            "title": "Changelog",
+            "depth": 2,
+            "id": "changelog"
+          },
+          {
+            "title": "License",
+            "depth": 2,
+            "id": "license"
+          }
+        ]
+      },
+      {
+        "title": "Features",
+        "source": "docs/features.md",
+        "url": "features.html",
+        "slug": "features"
+      },
+      {
+        "title": "Try it in command-line!",
+        "source": "docs/try-it-in-command-line.md",
+        "url": "try-it-in-command-line.html",
+        "slug": "try-it-in-command-line"
+      },
+      {
+        "title": "Getting started",
+        "sections": [
+          {
+            "title": "Authentication",
+            "source": "docs/authentication.md",
+            "url": "authentication.html",
+            "slug": "authentication",
+            "headings": [
+              {
+                "title": "Revoke refresh token",
+                "depth": 2,
+                "id": "revoke-refresh-token"
+              },
+              {
+                "title": "Obtain authentication information",
+                "depth": 2,
+                "id": "obtain-authentication-information"
+              }
+            ]
+          },
+          {
+            "title": "Calling the API",
+            "source": "docs/calling-the-api.md",
+            "url": "calling-the-api.html",
+            "slug": "calling-the-api",
+            "headings": [
+              {
+                "title": "API Endpoints",
+                "depth": 2,
+                "id": "api-endpoints"
+              },
+              {
+                "title": "Parameters",
+                "depth": 2,
+                "id": "parameters",
+                "headings": [
+                  {
+                    "title": "Query method parameters",
+                    "depth": 3,
+                    "id": "query-method-parameters"
+                  }
+                ]
+              },
+              {
+                "title": "Response",
+                "depth": 2,
+                "id": "response",
+                "headings": [
+                  {
+                    "title": "Success response",
+                    "depth": 3,
+                    "id": "success-response"
+                  },
+                  {
+                    "title": "Error response",
+                    "depth": 3,
+                    "id": "error-response"
+                  }
+                ]
+              },
+              {
+                "title": "API documentation",
+                "depth": 2,
+                "id": "api-documentation"
+              }
+            ]
+          },
+          {
+            "title": "Types",
+            "source": "docs/types.md",
+            "url": "types.html",
+            "slug": "types"
+          }
+        ]
+      },
+      {
+        "title": "Advanced",
+        "sections": [
+          {
+            "title": "Configurations",
+            "source": "docs/configurations.md",
+            "url": "configurations.html",
+            "slug": "configurations"
+          },
+          {
+            "title": "Your own types",
+            "source": "docs/your-own-types.md",
+            "url": "your-own-types.html",
+            "slug": "your-own-types"
+          },
+          {
+            "title": "Serializing types to JSON",
+            "source": "docs/serializing-types-to-json.md",
+            "url": "serializing-types-to-json.html",
+            "slug": "serializing-types-to-json"
+          },
+          {
+            "title": "Token store",
+            "source": "docs/token-store.md",
+            "url": "token-store.html",
+            "slug": "token-store",
+            "headings": [
+              {
+                "title": "Memory store",
+                "depth": 2,
+                "id": "memory-store"
+              },
+              {
+                "title": "File store",
+                "depth": 2,
+                "id": "file-store"
+              },
+              {
+                "title": "Writing your own token store",
+                "depth": 2,
+                "id": "writing-your-own-token-store",
+                "headings": [
+                  {
+                    "title": "Interface",
+                    "depth": 3,
+                    "id": "interface"
+                  },
+                  {
+                    "title": "Examples",
+                    "depth": 3,
+                    "id": "examples"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Keep-Alive",
+            "source": "docs/keep-alive.md",
+            "url": "keep-alive.html",
+            "slug": "keep-alive"
+          }
+        ]
+      },
+      {
+        "title": "Developing SDK",
+        "source": "docs/developing-sdk.md",
+        "url": "developing-sdk.html",
+        "slug": "developing-sdk"
       }
     ]
   },
@@ -14,11 +214,212 @@
       "source": "README.md",
       "title": "Sharetribe Flex Integration SDK for JavaScript",
       "pageTitle": "Sharetribe Flex Integration SDK for JavaScript",
-      "slug": "index"
+      "slug": "index",
+      "headings": [
+        {
+          "title": "Table of Contents",
+          "depth": 2,
+          "id": "table-of-contents"
+        },
+        {
+          "title": "What is it?",
+          "depth": 2,
+          "id": "what-is-it"
+        },
+        {
+          "title": "Installation",
+          "depth": 2,
+          "id": "installation"
+        },
+        {
+          "title": "Usage",
+          "depth": 2,
+          "id": "usage"
+        },
+        {
+          "title": "Examples",
+          "depth": 2,
+          "id": "examples"
+        },
+        {
+          "title": "Documentation",
+          "depth": 2,
+          "id": "documentation"
+        },
+        {
+          "title": "Changelog",
+          "depth": 2,
+          "id": "changelog"
+        },
+        {
+          "title": "License",
+          "depth": 2,
+          "id": "license"
+        }
+      ]
+    },
+    "features.html": {
+      "source": "docs/features.md",
+      "title": "Features - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Features",
+      "slug": "features"
+    },
+    "try-it-in-command-line.html": {
+      "source": "docs/try-it-in-command-line.md",
+      "title": "Try it in command-line! - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Try it in command-line!",
+      "slug": "try-it-in-command-line"
+    },
+    "authentication.html": {
+      "source": "docs/authentication.md",
+      "title": "Authentication - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Authentication",
+      "slug": "authentication",
+      "headings": [
+        {
+          "title": "Revoke refresh token",
+          "depth": 2,
+          "id": "revoke-refresh-token"
+        },
+        {
+          "title": "Obtain authentication information",
+          "depth": 2,
+          "id": "obtain-authentication-information"
+        }
+      ]
+    },
+    "calling-the-api.html": {
+      "source": "docs/calling-the-api.md",
+      "title": "Calling the API - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Calling the API",
+      "slug": "calling-the-api",
+      "headings": [
+        {
+          "title": "API Endpoints",
+          "depth": 2,
+          "id": "api-endpoints"
+        },
+        {
+          "title": "Parameters",
+          "depth": 2,
+          "id": "parameters",
+          "headings": [
+            {
+              "title": "Query method parameters",
+              "depth": 3,
+              "id": "query-method-parameters"
+            }
+          ]
+        },
+        {
+          "title": "Response",
+          "depth": 2,
+          "id": "response",
+          "headings": [
+            {
+              "title": "Success response",
+              "depth": 3,
+              "id": "success-response"
+            },
+            {
+              "title": "Error response",
+              "depth": 3,
+              "id": "error-response"
+            }
+          ]
+        },
+        {
+          "title": "API documentation",
+          "depth": 2,
+          "id": "api-documentation"
+        }
+      ]
+    },
+    "types.html": {
+      "source": "docs/types.md",
+      "title": "Types - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Types",
+      "slug": "types"
+    },
+    "configurations.html": {
+      "source": "docs/configurations.md",
+      "title": "Configurations - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Configurations",
+      "slug": "configurations"
+    },
+    "your-own-types.html": {
+      "source": "docs/your-own-types.md",
+      "title": "Your own types - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Your own types",
+      "slug": "your-own-types"
+    },
+    "serializing-types-to-json.html": {
+      "source": "docs/serializing-types-to-json.md",
+      "title": "Serializing types to JSON - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Serializing types to JSON",
+      "slug": "serializing-types-to-json"
+    },
+    "token-store.html": {
+      "source": "docs/token-store.md",
+      "title": "Token store - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Token store",
+      "slug": "token-store",
+      "headings": [
+        {
+          "title": "Memory store",
+          "depth": 2,
+          "id": "memory-store"
+        },
+        {
+          "title": "File store",
+          "depth": 2,
+          "id": "file-store"
+        },
+        {
+          "title": "Writing your own token store",
+          "depth": 2,
+          "id": "writing-your-own-token-store",
+          "headings": [
+            {
+              "title": "Interface",
+              "depth": 3,
+              "id": "interface"
+            },
+            {
+              "title": "Examples",
+              "depth": 3,
+              "id": "examples"
+            }
+          ]
+        }
+      ]
+    },
+    "keep-alive.html": {
+      "source": "docs/keep-alive.md",
+      "title": "Keep-Alive - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Keep-Alive",
+      "slug": "keep-alive"
+    },
+    "developing-sdk.html": {
+      "source": "docs/developing-sdk.md",
+      "title": "Developing SDK - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Developing SDK",
+      "slug": "developing-sdk"
     }
   },
   "sources": {
     "README.md": "index.html",
+    "docs/features.md": "features.html",
+    "docs/try-it-in-command-line.md": "try-it-in-command-line.html",
+    "docs/authentication.md": "authentication.html",
+    "docs/calling-the-api.md": "calling-the-api.html",
+    "docs/types.md": "types.html",
+    "docs/configurations.md": "configurations.html",
+    "docs/your-own-types.md": "your-own-types.html",
+    "docs/serializing-types-to-json.md": "serializing-types-to-json.html",
+    "docs/token-store.md": "token-store.html",
+    "docs/keep-alive.md": "keep-alive.html",
+    "docs/developing-sdk.md": "developing-sdk.html",
     "docs/docpress.json": "docpress.json",
     "docs/scripts.js": "scripts.js",
     "docs/styles.css": "styles.css"

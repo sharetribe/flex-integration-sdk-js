@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=90051322">
+    <link rel="stylesheet" href="styles.css?t=6eea839d">
+    <script src="assets/script.js?t=93f1a66c"></script>
+    <script src="scripts.js?t=a9970145"></script>
+    <title>Developing SDK - Sharetribe Flex Integration SDK for JavaScript</title>
+    <meta name="viewport" content="width=device-width">
+    <script>if (false || window.location.hostname.indexOf("sharetribe.github.io") === window.location.hostname.length - 20) {
+        (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create',"UA-10178914-13",'auto')
+      }
+    </script>
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-try-it-in-command-line" href="try-it-in-command-line.html">Try it in command-line!</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Getting started</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-authentication" href="authentication.html">Authentication</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-calling-the-api" href="calling-the-api.html">Calling the API</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-types" href="types.html">Types</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Advanced</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-configurations" href="configurations.html">Configurations</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-your-own-types" href="your-own-types.html">Your own types</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-serializing-types-to-json" href="serializing-types-to-json.html">Serializing types to JSON</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-token-store" href="token-store.html">Token store</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title -active link-developing-sdk" href="developing-sdk.html">Developing SDK</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-developing-sdk">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/sharetribe/flex-integration-sdk-js" data-title="sharetribe/flex-integration-sdk-js">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="developing-sdk">Developing SDK</h1>
+<p>Here are the commands you need when developing the SDK:</p>
+<h4 id="install-dependencies:">Install dependencies:</h4>
+<pre><code class="lang-sh">$ yarn install
+</code></pre>
+<h4 id="build-the-package:">Build the package:</h4>
+<pre><code class="lang-sh">$ yarn run build
+</code></pre>
+<h4 id="run-tests:">Run tests:</h4>
+<pre><code class="lang-sh">$ yarn <span class="pl-c1">test</span>
+</code></pre>
+<h4 id="run-linter:">Run linter:</h4>
+<pre><code class="lang-sh">$ yarn run lint
+</code></pre>
+<h4 id="format-code-(run-prettier):">Format code (run Prettier):</h4>
+<pre><code class="lang-sh">$ yarn run format
+</code></pre>
+<h4 id="serve-the-docpress-docs">Serve the docpress docs</h4>
+<pre><code class="lang-sh">$ yarn run serve-docs
+</code></pre>
+<h4 id="build-the-docpress-docs">Build the docpress docs</h4>
+<pre><code class="lang-sh">$ yarn run build-docs
+</code></pre>
+<h4 id="update-the-github-pages">Update the Github Pages</h4>
+<pre><code class="lang-sh">$ yarn run build-docs
+$ mv _docpress ../
+$ git checkout gh-pages
+$ cp -r ../_docpress/* ./
+$ rm -r ../_docpress
+$ // git add, commit, push
+</code></pre>
+<h4 id="release-a-new-version-to-npm">Release a new version to NPM</h4>
+<ol>
+<li>
+<p>Update version in <code>package.json</code></p>
+</li>
+<li>
+<p>Update <a href="http://CHANGELOG.md">CHANGELOG.md</a></p>
+<ul>
+<li>Move everything in Unreleased to the corresponding version section</li>
+</ul>
+</li>
+<li>
+<p>Login as <code>sharetribe</code> with <code>npm login</code></p>
+<ul>
+<li>check credentials from password manager</li>
+</ul>
+</li>
+<li>
+<p>Publish with <code>npm publish</code></p>
+</li>
+<li>
+<p>Add a new tag</p>
+<pre><code class="lang-bash">git tag -a v1.2.3 -m v1.2.3
+</code></pre>
+</li>
+<li>
+<p>Update <code>latest</code> tag</p>
+<pre><code class="lang-bash">git push origin :refs/tags/latest
+git tag -f -a latest -m latest
+</code></pre>
+</li>
+<li>
+<p>Push the tag</p>
+<pre><code class="lang-bash">git push --tags
+</code></pre>
+</li>
+<li>
+<p>Go to <a href="https://github.com/sharetribe/flex-integration-sdk-js/releases/new">Github releases and draft a new release</a></p>
+<p>Use the following content:</p>
+<p><strong>Tag version:</strong> &lt;the newly created tag&gt;</p>
+<p><strong>Release title:</strong> &lt;version number&gt;</p>
+<p><strong>Describe this release:</strong></p>
+<pre><code class="lang-markdown"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">copy</span> <span class="hljs-attr">the</span> <span class="hljs-attr">content</span> <span class="hljs-attr">from</span> <span class="hljs-attr">the</span> [<span class="hljs-attr">CHANGELOG.md</span>](<span class="hljs-attr">CHANGELOG.md</span>)&gt;</span></span>
+</code></pre>
+<p>Here&apos;s a full example:</p>
+<p><strong>Tag version:</strong> v1.2.3</p>
+<p><strong>Release title:</strong> v1.2.3</p>
+<p><strong>Describe this release:</strong></p>
+<pre><code class="lang-markdown"><span class="hljs-section">### Added</span>
+<span class="hljs-bullet">
+- </span>Added many things
+
+<span class="hljs-section">### Changed</span>
+<span class="hljs-bullet">
+- </span>Changed this and that
+</code></pre>
+</li>
+<li>
+<p>Announce the new version in Slack</p>
+</li>
+</ol>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="keep-alive.html"><span class="title">Keep-Alive</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
