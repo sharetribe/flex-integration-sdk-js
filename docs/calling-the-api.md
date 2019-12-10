@@ -10,7 +10,7 @@ For example:
 
 `GET /integration_api/listings/query` maps to `integrationSdk.listings.query(...)`
 
- `POST /integration_api/listings/create` maps to `integrationSdk.listings.create(...)`
+<!-- `POST /integration_api/listings/create` maps to `integrationSdk.ownListings.create(...)` -->
 
 ## Parameters
 
@@ -39,12 +39,8 @@ integrationSdk.listings.query({perPage: 5})
 The `queryParams` is optional. If the endpoint doesn't require any
 query parameters, you can call the SDK method without any parameters.
 
+<!--
 ### Command method parameters
-
-**Please note:** Some of the commands given as examples in this document may not
-yet be supported by the Integration API. For up-to-date reference on supported
-endpoints, see the [Integration API
-reference](https://www.sharetribe.com/api-reference/integration.html).
 
 The *command* (POST) methods take three parameters:
 
@@ -85,6 +81,7 @@ const logProgress = (progressEvent) => {
 
 integrationSdk.listings.uploadImage({ image: file }, {}, { onUploadProgress: logProgress })
 ```
+-->
 
 ## Response
 
