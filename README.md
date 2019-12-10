@@ -37,7 +37,7 @@ yarn add sharetribe-flex-integration-sdk
 const sharetribeIntegrationSdk = require('sharetribe-flex-integration-sdk');
 
 // Create new SDK instance
-const integrationSdk = sharetribeSdk.createInstance({
+const integrationSdk = sharetribeIntegrationSdk.createInstance({
   clientId: '<Your Client ID here>',
   clientSecret: '<Your Client secret here>'
 });
