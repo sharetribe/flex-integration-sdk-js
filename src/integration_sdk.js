@@ -12,6 +12,8 @@ import FetchRefreshTokenForRevoke from './interceptors/fetch_refresh_token_for_r
 import FetchAuthTokenFromApi from './interceptors/fetch_auth_token_from_api';
 import FetchAuthTokenFromStore from './interceptors/fetch_auth_token_from_store';
 import AuthInfo from './interceptors/auth_info';
+import MultipartRequest from './interceptors/multipart_request';
+import TransitRequest from './interceptors/transit_request';
 import TransitResponse from './interceptors/transit_response';
 import { createDefaultTokenStore } from './token_store';
 import contextRunner from './context_runner';
@@ -117,6 +119,13 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'users/update_profile',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'listings/show',
     internal: false,
     method: 'get',
@@ -131,6 +140,34 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'listings/update',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'listings/approve',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'listings/open',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'listings/close',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'transactions/query',
     internal: false,
     method: 'get',
@@ -142,6 +179,34 @@ const endpointDefinitions = [
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'images/upload',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new MultipartRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'availability_exceptions/query',
+    internal: false,
+    method: 'get',
+    interceptors: [new TransitResponse()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'availability_exceptions/create',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'availability_exceptions/delete',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
   },
   { apiName: 'auth', path: 'token', internal: true, method: 'post', interceptors: [] },
   { apiName: 'auth', path: 'revoke', internal: true, method: 'post', interceptors: [] },
