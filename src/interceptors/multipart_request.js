@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const FormData = require('form-data');
+const fs = require('fs');
 
 /**
    Wraps FormData's async getLength fn in a Promise
@@ -15,7 +16,13 @@ const getLength = formData =>  new Promise((resolve, reject) => {
 });
 
 /**
-   Takes `params` from `ctx` and converts to `FormData`
+   Takes `params` from `ctx` and converts to `FormData`.
+
+   Accepted param types:
+
+   - A ReadStream that can be used to read a file
+   - A string denoting a path to a file
+
 
    Changes to `ctx`:
 
@@ -28,7 +35,10 @@ export default class MultipartRequest {
       const formData = _.reduce(
         params,
         (fd, val, key) => {
-          fd.append(key, val);
+          // convert a string param into a stream
+          const value = _.isString(val) ? fs.createReadStream(val) : val;
+
+          fd.append(key, value);
           return fd;
         },
         new FormData()
