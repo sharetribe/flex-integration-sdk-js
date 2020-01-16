@@ -8,6 +8,21 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] - xxxx-xx-xx
 
+## v1.1.0 - 2020-01-21
+
+### Added
+
+- New endpoints [#13](https://github.com/sharetribe/flex-integration-sdk-js/pull/13)
+  - `integrationSdk.users.updateProfile(/* ... */)`
+  - `integrationSdk.listings.update(/* ... */)`
+  - `integrationSdk.listings.approve(/* ... */)`
+  - `integrationSdk.listings.open(/* ... */)`
+  - `integrationSdk.listings.close(/* ... */)`
+  - `integrationSdk.images.upload(/* ... */)`
+  - `integrationSdk.availabilityExceptions.query(/* ... */)`
+  - `integrationSdk.availabilityExceptions.create(/* ... */)`
+  - `integrationSdk.availabilityExceptions.delete(/* ... */)`
+
 ## v1.0.0 - 2019-12-10
 
 This is the first version that is published in NPM.
