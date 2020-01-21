@@ -67,6 +67,8 @@
                   </li>
                   <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
                   </li>
+                  <li class="menu-item -level-2"><a class="link title  link-uploading-images" href="uploading-images.html">Uploading images</a>
+                  </li>
                 </ul>
               </li>
               <li class="menu-item -level-1"><a class="link title  link-developing-sdk" href="developing-sdk.html">Developing SDK</a>
@@ -107,7 +109,7 @@ of setting up the necessary boilerplate to communicate with the API.</p>
 <pre><code class="lang-js"><span class="pl-k">const</span> sharetribeIntegrationSdk = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-integration-sdk&apos;</span>);
 
 <span class="pl-c">// Create new SDK instance</span>
-<span class="pl-k">const</span> integrationSdk = sharetribeSdk.createInstance({
+<span class="pl-k">const</span> integrationSdk = sharetribeIntegrationSdk.createInstance({
   <span class="hljs-attr">clientId</span>: <span class="pl-s">&apos;&lt;Your Client ID here&gt;&apos;</span>,
   <span class="hljs-attr">clientSecret</span>: <span class="pl-s">&apos;&lt;Your Client secret here&gt;&apos;</span>
 });

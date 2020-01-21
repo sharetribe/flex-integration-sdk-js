@@ -198,6 +198,12 @@
             "source": "docs/keep-alive.md",
             "url": "keep-alive.html",
             "slug": "keep-alive"
+          },
+          {
+            "title": "Uploading images",
+            "source": "docs/uploading-images.md",
+            "url": "uploading-images.html",
+            "slug": "uploading-images"
           }
         ]
       },
@@ -400,6 +406,12 @@
       "pageTitle": "Keep-Alive",
       "slug": "keep-alive"
     },
+    "uploading-images.html": {
+      "source": "docs/uploading-images.md",
+      "title": "Uploading images - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Uploading images",
+      "slug": "uploading-images"
+    },
     "developing-sdk.html": {
       "source": "docs/developing-sdk.md",
       "title": "Developing SDK - Sharetribe Flex Integration SDK for JavaScript",
@@ -419,6 +431,7 @@
     "docs/serializing-types-to-json.md": "serializing-types-to-json.html",
     "docs/token-store.md": "token-store.html",
     "docs/keep-alive.md": "keep-alive.html",
+    "docs/uploading-images.md": "uploading-images.html",
     "docs/developing-sdk.md": "developing-sdk.html",
     "docs/docpress.json": "docpress.json",
     "docs/scripts.js": "scripts.js",
