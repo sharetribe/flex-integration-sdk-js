@@ -13,4 +13,5 @@
   * [Serializing types to JSON](./serializing-types-to-json.md)
   * [Token store](./token-store.md)
   * [Keep-Alive](./keep-alive.md)
+  * [Uploading images](./uploading-images.md)
 * [Developing SDK](./developing-sdk.md)

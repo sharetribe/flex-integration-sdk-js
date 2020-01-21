@@ -1,33 +1,65 @@
-import _ from 'lodash';
+const _ = require('lodash');
+const FormData = require('form-data');
+const fs = require('fs');
 
 /**
-   Takes `params` from `ctx` and converts to `FormData`
+   Wraps FormData's async getLength fn in a Promise
+*/
+const getLength = formData =>  new Promise((resolve, reject) => {
+  formData.getLength((err, length) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(length);
+    }
+  });
+});
+
+/**
+   Takes `params` from `ctx` and converts to `FormData`.
+
+   Accepted param types:
+
+   - A ReadStream that can be used to read a file
+   - A string denoting a path to a file
+
 
    Changes to `ctx`:
 
    - Modify `ctx.params`
  */
 export default class MultipartRequest {
-  enter({ params, ...ctx }) {
+  enter({ params, headers: ctxHeaders, ...ctx }) {
     if (_.isPlainObject(params)) {
       /* eslint-disable no-undef */
-      if (typeof FormData === 'undefined') {
-        throw new Error(
-          "Don't know how to create multipart request from Object, when the FormData is undefined"
-        );
-      }
-
-      const formDataObj = _.reduce(
+      const formData = _.reduce(
         params,
         (fd, val, key) => {
-          fd.append(key, val);
+          // convert a string param into a stream
+          const value = _.isString(val) ? fs.createReadStream(val) : val;
+
+          fd.append(key, value);
           return fd;
         },
         new FormData()
       );
       /* eslint-enable no-undef */
 
-      return { params: formDataObj, ...ctx };
+      const formDataHeaders = formData.getHeaders();
+
+      return getLength(formData)
+        .then(length => ({
+          params: formData,
+          headers: {
+            'Content-Length': length,
+            ...formDataHeaders,
+            ...ctxHeaders
+          },
+          ...ctx
+        }))
+        .catch(() => {
+          throw new Error("Could not read multipart request payload length.");
+        });
     }
 
     return { params, ...ctx };
