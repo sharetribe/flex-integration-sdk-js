@@ -5,15 +5,16 @@ const fs = require('fs');
 /**
    Wraps FormData's async getLength fn in a Promise
 */
-const getLength = formData =>  new Promise((resolve, reject) => {
-  formData.getLength((err, length) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(length);
-    }
+const getLength = formData =>
+  new Promise((resolve, reject) => {
+    formData.getLength((err, length) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(length);
+      }
+    });
   });
-});
 
 /**
    Takes `params` from `ctx` and converts to `FormData`.
@@ -53,12 +54,12 @@ export default class MultipartRequest {
           headers: {
             'Content-Length': length,
             ...formDataHeaders,
-            ...ctxHeaders
+            ...ctxHeaders,
           },
-          ...ctx
+          ...ctx,
         }))
         .catch(() => {
-          throw new Error("Could not read multipart request payload length.");
+          throw new Error('Could not read multipart request payload length.');
         });
     }
 
