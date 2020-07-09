@@ -39,6 +39,10 @@
                         <ul class="heading-list -depth-2">
                           <li class="heading-item -depth-3"><a class="hlink link-query-method-parameters" href="#query-method-parameters">Query method parameters</a>
                           </li>
+                          <li class="heading-item -depth-3"><a class="hlink link-command-method-parameters" href="#command-method-parameters">Command method parameters</a>
+                          </li>
+                          <li class="heading-item -depth-3"><a class="hlink link-command-method-options" href="#command-method-options">Command method options</a>
+                          </li>
                         </ul>
                       </li>
                       <li class="heading-item -depth-2"><a class="hlink link-response" href="#response">Response</a>
@@ -91,7 +95,7 @@
 <p>For example:</p>
 <p><code>GET /integration_api/marketplace/show</code> maps to <code>integrationSdk.marketplace.show(...)</code></p>
 <p><code>GET /integration_api/listings/query</code> maps to <code>integrationSdk.listings.query(...)</code></p>
-<!-- `POST /integration_api/listings/create` maps to `integrationSdk.ownListings.create(...)` -->
+<p><code>POST /integration_api/listings/update</code> maps to <code>integrationSdk.listings.update(...)</code></p>
 <h2 id="parameters">Parameters</h2>
 <p>You can pass a set of parameters to the SDK method you call. The
 <em>query</em> endpoints take one parameter, where as the <em>command</em> endpoints
@@ -111,49 +115,41 @@ invalid parameters, the request fill fail.</p>
 </code></pre>
 <p>The <code>queryParams</code> is optional. If the endpoint doesn&apos;t require any
 query parameters, you can call the SDK method without any parameters.</p>
-<!--
-### Command method parameters
+<h3 id="command-method-parameters">Command method parameters</h3>
+<p>The <em>command</em> (POST) methods take three parameters:</p>
+<ul>
+<li><code>bodyParams</code>: Object of body parameters</li>
+<li><code>queryParams</code>: Object of query parameters</li>
+<li><code>opts</code>: Additional options</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js">integrationSdk.listings.update({
+  <span class="hljs-attr">id</span>: <span class="pl-k">new</span> UUID(<span class="pl-s">&quot;e3dab126-8280-4f02-b9d6-f217ce406878&quot;</span>),
+  <span class="hljs-attr">title</span>: <span class="pl-s">&apos;New title&apos;</span>,
+  <span class="hljs-attr">price</span>: <span class="pl-k">new</span> Money(<span class="hljs-number">5000</span>, <span class="pl-s">&apos;USD&apos;</span>)
+}, {<span class="hljs-attr">expand</span>: <span class="pl-c1">true</span>});
 
-The *command* (POST) methods take three parameters:
-
-* `bodyParams`: Object of body parameters
-* `queryParams`: Object of query parameters
-* `opts`: Additional options
-
-**Example:**
-
-```js
-integrationSdk.listings.create({title: 'New listings', price: new Money(5000, 'USD')}, {expand: true});
-
-// Calls POST /integration_api/listings/create?expand=true
-// with title and price serialized in the request body
-```
-
-All parameters are optional. If the endpoint doesn't require any body
+<span class="pl-c">// Calls POST /integration_api/listings/update?expand=true</span>
+<span class="pl-c">// with id, title and price serialized in the request body</span>
+</code></pre>
+<p>All parameters are optional. If the endpoint doesn&apos;t require any body
 parameters, query parameters or options, you can call the SDK method
-without any parameters.
-
-If you wonder what the `new Money(...)` is, have a look at [Types](./types.md).
-
-### Command method options
-
-The third parameter for *command* methods is `opts`.
-
-Here's a list of available `opts`:
-
-* `onUploadProcess`: Takes a callback function that is called with [ProgressEvent](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent).
-
-**Example:**
-
-```js
-const logProgress = (progressEvent) => {
-  const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-  console.log(percentCompleted + '% completed');
+without any parameters.</p>
+<p>If you wonder what the <code>new Money(...)</code> is, have a look at <a href="types.html">Types</a>.</p>
+<h3 id="command-method-options">Command method options</h3>
+<p>The third parameter for <em>command</em> methods is <code>opts</code>.</p>
+<p>Here&apos;s a list of available <code>opts</code>:</p>
+<ul>
+<li><code>onUploadProcess</code>: Takes a callback function that is called with <a href="https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent">ProgressEvent</a>.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js"><span class="pl-k">const</span> logProgress = <span class="hljs-function">(<span class="hljs-params">progressEvent</span>) =&gt;</span> {
+  <span class="pl-k">const</span> percentCompleted = <span class="pl-c1">Math</span>.round((progressEvent.loaded * <span class="hljs-number">100</span>) / progressEvent.total);
+  <span class="pl-c1">console</span>.log(percentCompleted + <span class="pl-s">&apos;% completed&apos;</span>);
 }
 
-integrationSdk.listings.uploadImage({ image: file }, {}, { onUploadProgress: logProgress })
-```
--->
+integrationSdk.images.upload({ <span class="hljs-attr">image</span>: file }, {}, { <span class="hljs-attr">onUploadProgress</span>: logProgress })
+</code></pre>
 <h2 id="response">Response</h2>
 <p>Calling any SDK method will always return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>. The value of the Promise differs whether the request was successful or error. In case of successful request the Promise will be <em>fulfilled</em> where as in case of error the Promise will be <em>rejected</em>.</p>
 <p><strong>Example:</strong></p>

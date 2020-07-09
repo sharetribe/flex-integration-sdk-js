@@ -102,6 +102,16 @@
                     "title": "Query method parameters",
                     "depth": 3,
                     "id": "query-method-parameters"
+                  },
+                  {
+                    "title": "Command method parameters",
+                    "depth": 3,
+                    "id": "command-method-parameters"
+                  },
+                  {
+                    "title": "Command method options",
+                    "depth": 3,
+                    "id": "command-method-options"
                   }
                 ]
               },
@@ -314,6 +324,16 @@
               "title": "Query method parameters",
               "depth": 3,
               "id": "query-method-parameters"
+            },
+            {
+              "title": "Command method parameters",
+              "depth": 3,
+              "id": "command-method-parameters"
+            },
+            {
+              "title": "Command method options",
+              "depth": 3,
+              "id": "command-method-options"
             }
           ]
         },
