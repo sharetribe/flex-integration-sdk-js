@@ -3426,6 +3426,24 @@ var endpointDefinitions = [{
   interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
+  path: 'transactions/transition',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_19__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'transactions/transition_speculative',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_19__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'transactions/update_metadata',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_19__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
   path: 'images/upload',
   internal: false,
   method: 'post',
@@ -8097,7 +8115,7 @@ function () {
             }, formDataHeaders, {}, ctxHeaders)
           }, ctx);
         })["catch"](function () {
-          throw new Error("Could not read multipart request payload length.");
+          throw new Error('Could not read multipart request payload length.');
         });
       }
 
