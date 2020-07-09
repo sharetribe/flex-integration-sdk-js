@@ -182,6 +182,27 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'transactions/transition',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'transactions/transition_speculative',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'transactions/update_metadata',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'images/upload',
     internal: false,
     method: 'post',
