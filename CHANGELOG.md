@@ -8,6 +8,13 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] - xxxx-xx-xx
 
+### Added
+
+- New endpoints [#16](https://github.com/sharetribe/flex-integration-sdk-js/pull/16)
+  - `integrationSdk.transactions.transition(/* ... */)`
+  - `integrationSdk.transactions.transitionSpeculative(/* ... */)`
+  - `integrationSdk.transactions.updateMetadata(/* ... */)`
+
 ## v1.1.0 - 2020-01-21
 
 ### Added
