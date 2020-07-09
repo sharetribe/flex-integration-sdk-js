@@ -10,7 +10,7 @@ For example:
 
 `GET /integration_api/listings/query` maps to `integrationSdk.listings.query(...)`
 
-<!-- `POST /integration_api/listings/create` maps to `integrationSdk.ownListings.create(...)` -->
+`POST /integration_api/listings/update` maps to `integrationSdk.listings.update(...)`
 
 ## Parameters
 
@@ -39,7 +39,6 @@ integrationSdk.listings.query({perPage: 5})
 The `queryParams` is optional. If the endpoint doesn't require any
 query parameters, you can call the SDK method without any parameters.
 
-<!--
 ### Command method parameters
 
 The *command* (POST) methods take three parameters:
@@ -51,10 +50,14 @@ The *command* (POST) methods take three parameters:
 **Example:**
 
 ```js
-integrationSdk.listings.create({title: 'New listings', price: new Money(5000, 'USD')}, {expand: true});
+integrationSdk.listings.update({
+  id: new UUID("e3dab126-8280-4f02-b9d6-f217ce406878"),
+  title: 'New title',
+  price: new Money(5000, 'USD')
+}, {expand: true});
 
-// Calls POST /integration_api/listings/create?expand=true
-// with title and price serialized in the request body
+// Calls POST /integration_api/listings/update?expand=true
+// with id, title and price serialized in the request body
 ```
 
 All parameters are optional. If the endpoint doesn't require any body
@@ -79,9 +82,8 @@ const logProgress = (progressEvent) => {
   console.log(percentCompleted + '% completed');
 }
 
-integrationSdk.listings.uploadImage({ image: file }, {}, { onUploadProgress: logProgress })
+integrationSdk.images.upload({ image: file }, {}, { onUploadProgress: logProgress })
 ```
--->
 
 ## Response
 
