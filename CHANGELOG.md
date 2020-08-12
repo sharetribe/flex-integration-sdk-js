@@ -13,7 +13,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Added
 
 - A utility function to convert an object query parameter into a URL compatible
-  string. [21](https://github.com/sharetribe/flex-sdk-js/pull/21)
+  string. [21](https://github.com/sharetribe/flex-integration-sdk-js/pull/21)
 
 ## v1.2.0 - 2020-07-09
 
