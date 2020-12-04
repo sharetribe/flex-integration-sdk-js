@@ -50,7 +50,7 @@ var integrationSdk = sharetribeIntegrationSdk.createInstance({
   transitVerbose: false,
 
   // The API base URL (optional)
-  // Defaults to Sharetribe production (https://flex-api.sharetribe.com)
+  // Defaults to Sharetribe production (https://flex-integ-api.sharetribe.com)
   // Change this if you want to point the SDK to somewhere else (like localhost).
   // Useful mainly for Sharetribe's internal development
   baseUrl: "https://the-api-base-url.example.sharetribe.com/"

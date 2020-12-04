@@ -91,7 +91,7 @@ describe('new SharetribeSdk', () => {
     });
 
     return sdk.revoke().then(res => {
-      expect(res.data.url).toMatch(/^https:\/\/flex-api.sharetribe.com/);
+      expect(res.data.url).toMatch(/^https:\/\/flex-integ-api.sharetribe.com/);
     });
   });
 
