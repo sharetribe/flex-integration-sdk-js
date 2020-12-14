@@ -22,7 +22,7 @@ import contextRunner from './context_runner';
 
 const defaultSdkConfig = {
   clientId: null,
-  baseUrl: 'https://flex-api.sharetribe.com',
+  baseUrl: 'https://flex-integ-api.sharetribe.com',
   typeHandlers: [],
   endpoints: [],
   adapter: null,
@@ -228,6 +228,13 @@ const endpointDefinitions = [
     internal: false,
     method: 'post',
     interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'events/query',
+    internal: false,
+    method: 'get',
+    interceptors: [new TransitResponse()],
   },
   { apiName: 'auth', path: 'token', internal: true, method: 'post', interceptors: [] },
   { apiName: 'auth', path: 'revoke', internal: true, method: 'post', interceptors: [] },
