@@ -8,6 +8,28 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] - xxxx-xx-xx
 
+## v1.4.0 - 2020-12-15
+
+### Added
+
+- New endpoint [#24](https://github.com/sharetribe/flex-integration-sdk-js/pull/24)
+  - `integrationSdk.events.query(/* ... */)`
+
+### Changed
+
+- The default base URL for the Flex Integration API is now
+  `https://flex-integ-api.sharetribe.com`. Using the previous
+  `https://flex-api.sharetribe.com` is now DEPRECATED.
+
+### Security
+
+- Update dependencies
+  - lodash [#19](https://github.com/sharetribe/flex-integration-sdk-js/pull/19)
+  - elliptic [#20](https://github.com/sharetribe/flex-integration-sdk-js/pull/20)
+  - highlight.js [#23](https://github.com/sharetribe/flex-integration-sdk-js/pull/23)
+  - ini [#25](https://github.com/sharetribe/flex-integration-sdk-js/pull/25)
+  - dot-prop [#26](https://github.com/sharetribe/flex-integration-sdk-js/pull/26)
+
 ## v1.3.0 - 2020-08-12
 
 ### Added
