@@ -8,6 +8,7 @@ Example usage:
 
 ```js
 const fs = require('fs');
+const sharetribeIntegrationSdk = require('sharetribe-flex-integration-sdk');
 
 const clientId = "<your client ID here>";
 const clientSecret = "<your client secret here>"
