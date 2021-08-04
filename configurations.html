@@ -119,7 +119,19 @@
   <span class="pl-c">// Defaults to Sharetribe production (https://flex-integ-api.sharetribe.com)</span>
   <span class="pl-c">// Change this if you want to point the SDK to somewhere else (like localhost).</span>
   <span class="pl-c">// Useful mainly for Sharetribe&apos;s internal development</span>
-  baseUrl: <span class="pl-s">&quot;https://the-api-base-url.example.sharetribe.com/&quot;</span>
+  baseUrl: <span class="pl-s">&quot;https://the-api-base-url.example.sharetribe.com/&quot;</span>,
+
+  <span class="pl-c">// Allow use of Client Secret in browser (optional, defaults to false)</span>
+  <span class="pl-c">//</span>
+  <span class="pl-c">// Sharetribe Flex Integration SDK is meant to be used in a secure context, e.g.</span>
+  <span class="pl-c">// in a private Node.js server. Using it in an open website exposes the</span>
+  <span class="pl-c">// Client Secret to the public.</span>
+  <span class="pl-c">//</span>
+  <span class="pl-c">// By default, the SDK will display a warning if Client Secret is used in browser</span>
+  <span class="pl-c">// but if you know what you are doing, and you have secured the website properly so</span>
+  <span class="pl-c">// that Client Secret is not leaked, you can suppress the warning by setting this</span>
+  <span class="pl-c">// to `true`.</span>
+  dangerouslyAllowClientSecretInBrowser: <span class="pl-c1">false</span>
 
 });
 </code></pre>
