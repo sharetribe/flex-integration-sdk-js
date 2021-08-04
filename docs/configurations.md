@@ -53,7 +53,19 @@ var integrationSdk = sharetribeIntegrationSdk.createInstance({
   // Defaults to Sharetribe production (https://flex-integ-api.sharetribe.com)
   // Change this if you want to point the SDK to somewhere else (like localhost).
   // Useful mainly for Sharetribe's internal development
-  baseUrl: "https://the-api-base-url.example.sharetribe.com/"
+  baseUrl: "https://the-api-base-url.example.sharetribe.com/",
+
+  // Allow use of Client Secret in browser (optional, defaults to false)
+  //
+  // Sharetribe Flex Integration SDK is meant to be used in a secure context, e.g.
+  // in a private Node.js server. Using it in an open website exposes the
+  // Client Secret to the public.
+  //
+  // By default, the SDK will display a warning if Client Secret is used in browser
+  // but if you know what you are doing, and you have secured the website properly so
+  // that Client Secret is not leaked, you can suppress the warning by setting this
+  // to `true`.
+  dangerouslyAllowClientSecretInBrowser: false
 
 });
 ```

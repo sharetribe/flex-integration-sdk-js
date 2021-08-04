@@ -6,7 +6,12 @@ The format is based on [Keep a
 Changelog](http://keepachangelog.com/en/1.0.0/) and this project
 adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - xxxx-xx-xx
+## v1.4.1 - 2021-08-04
+
+### Changed
+
+- SDK shows a warning if Client Secret is used in a browser.
+  [#36](https://github.com/sharetribe/flex-integration-sdk-js/pull/36)
 
 ## v1.4.0 - 2020-12-15
 
