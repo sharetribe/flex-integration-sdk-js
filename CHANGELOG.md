@@ -15,6 +15,10 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - SDK shows a warning if Client Secret is used in a browser.
   [#36](https://github.com/sharetribe/flex-integration-sdk-js/pull/36)
 
+### Security
+
+- Update Axios to 0.21.1 [#126](https://github.com/sharetribe/flex-sdk-js/pull/126)
+
 ## v1.4.0 - 2020-12-15
 
 ### Added
