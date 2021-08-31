@@ -34,7 +34,6 @@ const report = responsePromise =>
  */
 const createSdk = (config = {}) => {
   const defaults = {
-    baseUrl: 'fake-adapter://fake-api/',
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
   };
@@ -75,7 +74,7 @@ describe('new SharetribeSdk', () => {
   it('uses default baseUrl, if none is set', () => {
     const adapter = createAdapter((config, resolve) => {
       // Fake adapter that echoes the URL
-      resolve({ data: { url: config.url } });
+      resolve({ data: { baseURL: config.baseURL} });
     });
 
     const authToken = adapter.tokenStore.createClientCredentialsToken(CLIENT_ID, CLIENT_SECRET);
@@ -91,7 +90,7 @@ describe('new SharetribeSdk', () => {
     });
 
     return sdk.revoke().then(res => {
-      expect(res.data.url).toMatch(/^https:\/\/flex-integ-api.sharetribe.com/);
+      expect(res.data.baseURL).toMatch(/^https:\/\/flex-integ-api.sharetribe.com/);
     });
   });
 
