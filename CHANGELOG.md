@@ -21,6 +21,14 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - Update Lodash to 4.17.21 [#131](https://github.com/sharetribe/flex-sdk-js/pull/131)
 - Update development dependencies with security vulnerabilities (multiple PRs)
 
+### Added
+
+- New endpoints [#35](https://github.com/sharetribe/flex-integration-sdk-js/pull/35)
+  - `integrationSdk.stockAdjustments.query(/* ... */)`
+  - `integrationSdk.stockAdjustments.create(/* ... */)`
+  - `integrationSdk.stock.compareAndSet(/* ... */)`
+  - `integrationSdk.stockReservations.show(/* ... */)`
+
 ## v1.4.0 - 2020-12-15
 
 ### Added
