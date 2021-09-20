@@ -8,6 +8,10 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+## v1.6.1 - 2021-09-20
+
+- Update Axios to 0.21.2 [#41](https://github.com/sharetribe/flex-integration-sdk-js/pull/41)
+
 ## v1.6.0 - 2021-09-20
 
 ### Added
