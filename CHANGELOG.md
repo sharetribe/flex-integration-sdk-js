@@ -8,18 +8,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
-## v1.5.0 - 2021-08-04
-
-### Changed
-
-- SDK shows a warning if Client Secret is used in a browser.
-  [#36](https://github.com/sharetribe/flex-integration-sdk-js/pull/36)
-
-### Security
-
-- Update Axios to 0.21.1 [#126](https://github.com/sharetribe/flex-sdk-js/pull/126)
-- Update Lodash to 4.17.21 [#131](https://github.com/sharetribe/flex-sdk-js/pull/131)
-- Update development dependencies with security vulnerabilities (multiple PRs)
+## v1.6.0 - 2021-09-20
 
 ### Added
 
@@ -28,6 +17,19 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   - `integrationSdk.stockAdjustments.create(/* ... */)`
   - `integrationSdk.stock.compareAndSet(/* ... */)`
   - `integrationSdk.stockReservations.show(/* ... */)`
+
+### Security
+
+- Update Axios to 0.21.1 [#126](https://github.com/sharetribe/flex-sdk-js/pull/126)
+- Update Lodash to 4.17.21 [#131](https://github.com/sharetribe/flex-sdk-js/pull/131)
+- Update development dependencies with security vulnerabilities (multiple PRs)
+
+## v1.5.0 - 2021-08-04
+
+### Changed
+
+- SDK shows a warning if Client Secret is used in a browser.
+  [#36](https://github.com/sharetribe/flex-integration-sdk-js/pull/36)
 
 ## v1.4.0 - 2020-12-15
 
