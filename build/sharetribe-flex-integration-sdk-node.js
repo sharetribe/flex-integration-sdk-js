@@ -3639,6 +3639,30 @@ var endpointDefinitions = [{
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */]()]
 }, {
+  apiName: 'integration_api',
+  path: 'stock_adjustments/query',
+  internal: false,
+  method: 'get',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'stock_adjustments/create',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_19__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'stock/compare_and_set',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_19__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'stock_reservations/show',
+  internal: false,
+  method: 'get',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_response__["a" /* default */]()]
+}, {
   apiName: 'auth',
   path: 'token',
   internal: true,
