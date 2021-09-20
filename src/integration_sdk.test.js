@@ -74,7 +74,7 @@ describe('new SharetribeSdk', () => {
   it('uses default baseUrl, if none is set', () => {
     const adapter = createAdapter((config, resolve) => {
       // Fake adapter that echoes the URL
-      resolve({ data: { baseURL: config.baseURL} });
+      resolve({ data: { baseURL: config.baseURL } });
     });
 
     const authToken = adapter.tokenStore.createClientCredentialsToken(CLIENT_ID, CLIENT_SECRET);
