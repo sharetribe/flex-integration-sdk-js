@@ -75,11 +75,11 @@
 <span class="pl-k">var</span> integrationSdk = sharetribeIntegrationSdk.createInstance({
 
   <span class="pl-c">// The API Client ID and client secret (mandatory)</span>
-  clientId: <span class="pl-s">&quot;&lt;your client ID here&gt;&quot;</span>,
+  <span class="hljs-attr">clientId</span>: <span class="pl-s">&quot;&lt;your client ID here&gt;&quot;</span>,
   <span class="hljs-attr">clientSecret</span>: <span class="pl-s">&quot;&lt;your client secret here&gt;&quot;</span>,
 
   <span class="pl-c">// List of custom type handlers</span>
-  typeHandlers: [
+  <span class="hljs-attr">typeHandlers</span>: [
     {
       <span class="hljs-attr">sdkType</span>: UUID,
       <span class="hljs-attr">appType</span>: MyUuidType,
@@ -89,37 +89,37 @@
       <span class="pl-c">//</span>
       <span class="pl-c">// E.g.</span>
       <span class="pl-c">// MyUuidType -&gt; UUID</span>
-      writer: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> UUID(v.myUuid),
+      <span class="hljs-attr">writer</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> UUID(v.myUuid),
 
       <span class="pl-c">// Reader fn type signature must be:</span>
       <span class="pl-c">// sdkType -&gt; appType</span>
       <span class="pl-c">//</span>
       <span class="pl-c">// E.g.</span>
       <span class="pl-c">// UUID -&gt; MyUuidType</span>
-      reader: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> MyUuidType(v.uuid),
+      <span class="hljs-attr">reader</span>: <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="pl-k">new</span> MyUuidType(v.uuid),
     }
   ],
 
   <span class="pl-c">// HTTP and HTTPS agents to be used when performing</span>
   <span class="pl-c">// http and https request. This allows defining non-default</span>
   <span class="pl-c">// options for agent, such as `{ keepAlive: false }`.</span>
-  httpAgent: httpAgent,
+  <span class="hljs-attr">httpAgent</span>: httpAgent,
   <span class="hljs-attr">httpsAgent</span>: httpsAgent,
 
   <span class="pl-c">// Token store</span>
-  tokenStore: sharetribeIntegrationSdk.tokenStore.memoryStore(),
+  <span class="hljs-attr">tokenStore</span>: sharetribeIntegrationSdk.tokenStore.memoryStore(),
 
   <span class="pl-c">// SDK uses Transit format to communicate with the API.</span>
   <span class="pl-c">// If this configuration is `true` a verbose Transit mode is enabled.</span>
   <span class="pl-c">// Useful for development.</span>
   <span class="pl-c">// Default: false</span>
-  transitVerbose: <span class="pl-c1">false</span>,
+  <span class="hljs-attr">transitVerbose</span>: <span class="pl-c1">false</span>,
 
   <span class="pl-c">// The API base URL (optional)</span>
   <span class="pl-c">// Defaults to Sharetribe production (https://flex-integ-api.sharetribe.com)</span>
   <span class="pl-c">// Change this if you want to point the SDK to somewhere else (like localhost).</span>
   <span class="pl-c">// Useful mainly for Sharetribe&apos;s internal development</span>
-  baseUrl: <span class="pl-s">&quot;https://the-api-base-url.example.sharetribe.com/&quot;</span>,
+  <span class="hljs-attr">baseUrl</span>: <span class="pl-s">&quot;https://the-api-base-url.example.sharetribe.com/&quot;</span>,
 
   <span class="pl-c">// Allow use of Client Secret in browser (optional, defaults to false)</span>
   <span class="pl-c">//</span>
@@ -131,7 +131,7 @@
   <span class="pl-c">// but if you know what you are doing, and you have secured the website properly so</span>
   <span class="pl-c">// that Client Secret is not leaked, you can suppress the warning by setting this</span>
   <span class="pl-c">// to `true`.</span>
-  dangerouslyAllowClientSecretInBrowser: <span class="pl-c1">false</span>
+  <span class="hljs-attr">dangerouslyAllowClientSecretInBrowser</span>: <span class="pl-c1">false</span>
 
 });
 </code></pre>
