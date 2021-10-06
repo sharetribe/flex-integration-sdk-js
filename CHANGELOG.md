@@ -14,6 +14,12 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   calling e.g. `sdk.listings.query` with `ids` parameter.
   [#45](https://github.com/sharetribe/flex-integration-sdk-js/pull/45)
 
+### Security
+
+- Update dependencies
+  [#40](https://github.com/sharetribe/flex-integration-sdk-js/pull/40)
+  [#44](https://github.com/sharetribe/flex-integration-sdk-js/pull/44)
+
 ## v1.6.1 - 2021-09-20
 
 ### Security
