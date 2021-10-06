@@ -8,6 +8,8 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+## v1.7.0 - 2021-10-06
+
 ### Added
 
 - Ability to serialize an array of SDK types, i.e. array of UUIDs. Useful when
