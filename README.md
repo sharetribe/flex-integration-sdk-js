@@ -57,6 +57,10 @@ integrationSdk.listings
   });
 ```
 
+Client ID and client secret are required to create a new SDK instance.
+See [this article](https://www.sharetribe.com/docs/integrations/getting-started-with-integration-api/#create-integration-api-application-in-flex-console)
+to learn how to get them.
+
 ## Examples
 
 See the
