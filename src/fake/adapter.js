@@ -74,6 +74,12 @@ export const defaultHandler = (config, resolve, reject, tokenStore) => {
       return requireAuth(config, reject, tokenStore).then(() =>
         api.listings.query(config, resolve)
       );
+
+    // This returns an error for listing ID "eeeeeeee-eeee-eeee-eeee-000000000500"
+    case 'integration_api/listings/show':
+      return requireAuth(config, reject, tokenStore).then(() =>
+        api.listings.show(config, resolve, reject)
+      );
     case 'auth/token':
       return auth.token(config, resolve, reject, tokenStore);
     case 'auth/revoke':

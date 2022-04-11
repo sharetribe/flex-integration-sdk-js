@@ -8,6 +8,8 @@ import memoryStore from './memory_store';
 const CLIENT_ID = '08ec69f6-d37e-414d-83eb-324e94afddf0';
 const CLIENT_SECRET = 'client-secret-value';
 
+const errorListingId = 'eeeeeeee-eeee-eeee-eeee-000000000500';
+
 /**
    Helper to improve error messages.
 
@@ -92,6 +94,46 @@ describe('new SharetribeSdk', () => {
     return sdk.revoke().then(res => {
       expect(res.data.baseURL).toMatch(/^https:\/\/flex-integ-api.sharetribe.com/);
     });
+  });
+
+  it('strips internals from the returned response object', () => {
+    const { sdk } = createSdk();
+
+    return report(
+      sdk.users.show({ id: '0e0b60fe-d9a2-11e6-bf26-cec0c932ce01' }).then(res => {
+        // Allow the following keys. Strip of some 'internals', i.e. config, headers, etc.
+        const expectedKeys = ['status', 'statusText', 'data'];
+        expect(expectedKeys).toEqual(expect.arrayContaining(Object.keys(res)));
+      })
+    );
+  });
+
+  it('strips internals from the returned error response object', () => {
+    const { sdk } = createSdk();
+
+    return report(
+      sdk.listings
+        .show({ id: errorListingId })
+        .then(() => {
+          // Fail
+          expect(true).toEqual(false);
+        })
+        .catch(e => {
+          expect(e).toBeInstanceOf(Error);
+          expect(e).toEqual(
+            expect.objectContaining({
+              status: 500,
+              statusText: 'Internal server error',
+              data: 'Internal server error',
+            })
+          );
+
+          const expectedKeys = ['status', 'statusText', 'data'];
+          expect(expectedKeys).toEqual(expect.arrayContaining(Object.keys(e)));
+
+          return Promise.resolve();
+        })
+    );
   });
 
   it('calls users endpoint with query params', () => {

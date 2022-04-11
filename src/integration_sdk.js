@@ -15,6 +15,7 @@ import AuthInfo from './interceptors/auth_info';
 import MultipartRequest from './interceptors/multipart_request';
 import TransitRequest from './interceptors/transit_request';
 import TransitResponse from './interceptors/transit_response';
+import FormatHttpResponse from './interceptors/format_http_response';
 import { createDefaultTokenStore } from './token_store';
 import contextRunner from './context_runner';
 
@@ -304,7 +305,7 @@ const sdkFnDefsFromEndpointDefs = epDefs =>
         method,
         path: fnPath,
         endpointInterceptorPath: fullFnPath,
-        interceptors: [...authenticateInterceptors],
+        interceptors: [new FormatHttpResponse(), ...authenticateInterceptors],
       };
     });
 
@@ -330,12 +331,6 @@ const additionalSdkFnDefinitions = [
   { path: 'authInfo', interceptors: [new AuthInfo()] },
 ];
 
-const handleSuccessResponse = response => {
-  const { status, statusText, data } = response;
-
-  return { status, statusText, data };
-};
-
 // GET requests: `params` includes query params. `queryParams` will be ignored
 // POST requests: `params` includes body params. `queryParams` includes URL query params
 const doRequest = ({ params = {}, queryParams = {}, httpOpts }) => {
@@ -359,7 +354,7 @@ const doRequest = ({ params = {}, queryParams = {}, httpOpts }) => {
     params: query,
   };
 
-  return axios.request(req).then(handleSuccessResponse);
+  return axios.request(req);
 };
 
 /**
@@ -398,8 +393,7 @@ const createEndpointInterceptors = ({ method, url, httpOpts }) => {
 const formatError = e => {
   /* eslint-disable no-param-reassign */
   if (e.response) {
-    const { status, statusText, data } = e.response;
-    Object.assign(e, { status, statusText, data });
+    Object.assign(e, e.response);
     delete e.response;
   }
 

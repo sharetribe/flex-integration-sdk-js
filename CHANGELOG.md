@@ -8,6 +8,12 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+### Changed
+
+- Read response data as Transit only if Content-Type header is
+  `application/transit+json`
+  [#53](https://github.com/sharetribe/flex-integration-sdk-js/pull/53)
+
 ## v1.7.0 - 2021-10-06
 
 ### Added
