@@ -162,6 +162,13 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'listings/create',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'listings/close',
     internal: false,
     method: 'post',
