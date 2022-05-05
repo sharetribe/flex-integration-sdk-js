@@ -1,6 +1,6 @@
 {
   "name": "sharetribe-flex-integration-sdk",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Sharetribe Flex Integration API SDK for JavaScript",
   "main": "build/sharetribe-flex-integration-sdk-node.js",
   "scripts": {

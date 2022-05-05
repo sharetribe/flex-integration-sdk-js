@@ -8,6 +8,13 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+## v1.8.0 - 2022-05-05
+
+### Added
+
+- New endpoint [#52](https://github.com/sharetribe/flex-integration-sdk-js/pull/52)
+  - `integrationSdk.listings.create(/* ... */)`
+
 ### Changed
 
 - Read response data as Transit only if Content-Type header is
