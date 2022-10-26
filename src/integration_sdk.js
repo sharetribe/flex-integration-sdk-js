@@ -28,8 +28,8 @@ const defaultSdkConfig = {
   endpoints: [],
   adapter: null,
   version: 'v1',
-  httpAgent: new http.Agent({ keepAlive: true }),
-  httpsAgent: new https.Agent({ keepAlive: true }),
+  httpAgent: new http.Agent({ keepAlive: true, maxSockets: 10 }),
+  httpsAgent: new https.Agent({ keepAlive: true, maxSockets: 10 }),
   transitVerbose: false,
 };
 
