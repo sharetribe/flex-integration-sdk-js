@@ -1,3 +1,4 @@
+import Bottleneck from 'bottleneck';
 import _ from 'lodash';
 
 /**
@@ -65,4 +66,109 @@ export const objectQueryString = obj => {
     .filter(([, v]) => v !== null && v !== undefined)
     .map(([k, v]) => `${k}:${serializeAttribute(v)}`)
     .join(';');
+};
+
+const validateRateLimiterConfig = config => {
+  const { bucketInitial, bucketIncreaseInterval, bucketIncreaseAmount, bucketMaximum } = config;
+
+  if (bucketIncreaseInterval && bucketIncreaseInterval % 250 !== 0) {
+    throw new Error('bucketIncreaseInterval must be a multiple of 250');
+  }
+
+  return { bucketInitial, bucketIncreaseInterval, bucketIncreaseAmount, bucketMaximum };
+};
+
+/**
+   Good default query rate limiter configuration for dev marketplace environments.
+
+   Example:
+
+   ```
+   queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+     sharetribeIntegrationSdk.util.devQueryLimiterConfig
+   );
+   ```
+*/
+export const devQueryLimiterConfig = {
+  bucketInitial: 100,
+  // 1 request per second, i.e. 60 requests per minute
+  bucketIncreaseInterval: 1000,
+  bucketIncreaseAmount: 1,
+  bucketMaximum: 200,
+};
+
+/**
+   Good default command rate limiter configuration for dev marketplace environments.
+
+   Example:
+
+   ```
+   commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+     sharetribeIntegrationSdk.util.devCommandLimiterConfig
+   );
+   ```
+*/
+export const devCommandLimiterConfig = {
+  bucketInitial: 50,
+  // 1 request per 2 seconds, i.e. 30 requests per minute
+  bucketIncreaseInterval: 2000,
+  bucketIncreaseAmount: 1,
+  bucketMaximum: 100,
+};
+
+/**
+   Create a rate limiter suitable for use with the SDK as `queryLimiter` and `commandLimiter`.
+   See also `devQueryLimiterConfig` and `devCommandLimiterConfig`.
+
+   The `config` parameters define an initial token bucket size, rate at which the
+   bucket refills and a maximum bucket size. Each request takes one token from
+   the bucket. When the bucket reaches 0, requests are queued and wait until
+   some tokens accumulate in the bucket.
+
+   `config` is an object with keys:
+
+   - bucketInitial: initial token bucket size
+   - bucketIncreaseAmount: number of tokens added to the bucket every
+     `bucketIncreaseInterval` milliseconds
+   - bucketIncreaseInterval: every this many milliseconds a
+     `bucketIncreaseAmount` number of tokens are added to the bucket
+   - bucketMaximum: maximum size of the bucket
+
+   Example:
+
+   ```
+   queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
+     bucketInitial: 10,
+     bucketIncreaseInterval: 1000,
+     bucketIncreaseAmount: 1,
+     bucketMaximum: 100,
+   });
+   commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
+     bucketInitial: 5,
+     bucketIncreaseInterval: 2000,
+     bucketIncreaseAmount: 1,
+     bucketMaximum: 50,
+   });
+   sdk = sharetribeIntegrationSdk.createInstance({
+     ...
+     queryLimiter: queryLimiter,
+     commandLimiter: commandLimiter,
+   ...
+   });
+   ```
+*/
+export const createRateLimiter = config => {
+  const {
+    bucketInitial,
+    bucketIncreaseInterval,
+    bucketIncreaseAmount,
+    bucketMaximum,
+  } = validateRateLimiterConfig(config);
+
+  return new Bottleneck({
+    reservoir: bucketInitial,
+    reservoirIncreaseInterval: bucketIncreaseInterval,
+    reservoirIncreaseAmount: bucketIncreaseAmount,
+    reservoirIncreaseMaximum: bucketMaximum,
+  });
 };
