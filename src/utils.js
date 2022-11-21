@@ -117,6 +117,44 @@ export const devCommandLimiterConfig = {
 };
 
 /**
+   Recommended query rate limiter configuration for production marketplace environments.
+
+   Example:
+
+   ```
+   queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+     sharetribeIntegrationSdk.util.prodQueryLimiterConfig
+   );
+   ```
+*/
+export const prodQueryLimiterConfig = {
+  bucketInitial: 500,
+  // 8 requests per second, i.e. 480 requests per minute
+  bucketIncreaseInterval: 250,
+  bucketIncreaseAmount: 2,
+  bucketMaximum: 500,
+};
+
+/**
+   Recommended command rate limiter configuration for production marketplace environments.
+
+   Example:
+
+   ```
+   commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+     sharetribeIntegrationSdk.util.prodCommandLimiterConfig
+   );
+   ```
+*/
+export const prodCommandLimiterConfig = {
+  bucketInitial: 250,
+  // 4 requests per second, i.e. 240 requests per minute
+  bucketIncreaseInterval: 250,
+  bucketIncreaseAmount: 1,
+  bucketMaximum: 250,
+};
+
+/**
    Create a rate limiter suitable for use with the SDK as `queryLimiter` and `commandLimiter`.
    See also `devQueryLimiterConfig` and `devCommandLimiterConfig`.
 

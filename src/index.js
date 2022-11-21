@@ -7,6 +7,8 @@ import {
   createRateLimiter,
   devQueryLimiterConfig,
   devCommandLimiterConfig,
+  prodQueryLimiterConfig,
+  prodCommandLimiterConfig,
 } from './utils';
 
 const createInstance = config => new SharetribeSdk(config);
@@ -23,6 +25,8 @@ const util = {
   createRateLimiter,
   devQueryLimiterConfig,
   devCommandLimiterConfig,
+  prodQueryLimiterConfig,
+  prodCommandLimiterConfig,
 };
 
 /* eslint-disable import/prefer-default-export */
