@@ -41,6 +41,15 @@ var integrationSdk = sharetribeIntegrationSdk.createInstance({
   httpAgent: httpAgent,
   httpsAgent: httpsAgent,
 
+  // For dev and demo marketplace environments, add query and command rate
+  // limiters:
+  queryLimiter: sharetribeIntegrationSdk.createRateLimiter(
+    sharetribeIntegrationSdk.util.devQueryLimiterConfig
+  ),
+  commandLimiter: sharetribeIntegrationSdk.createRateLimiter(
+    sharetribeIntegrationSdk.util.devCommandLimiterConfig
+  ),
+
   // Token store
   tokenStore: sharetribeIntegrationSdk.tokenStore.memoryStore(),
 
