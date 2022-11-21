@@ -37,6 +37,7 @@ var integrationSdk = sharetribeIntegrationSdk.createInstance({
   // HTTP and HTTPS agents to be used when performing
   // http and https request. This allows defining non-default
   // options for agent, such as `{ keepAlive: false }`.
+  // When creating custom httpsAgent, set `maxSockets` value to 10 or less.
   httpAgent: httpAgent,
   httpsAgent: httpsAgent,
 
