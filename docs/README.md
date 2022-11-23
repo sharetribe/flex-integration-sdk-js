@@ -14,5 +14,6 @@
   * [Object query parameters](./object-query-parameters.md)
   * [Token store](./token-store.md)
   * [Keep-Alive](./keep-alive.md)
+  * [Rate limits](./rate-limits.md)
   * [Uploading images](./uploading-images.md)
 * [Developing SDK](./developing-sdk.md)

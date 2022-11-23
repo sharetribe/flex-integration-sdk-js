@@ -31,6 +31,8 @@ const defaultSdkConfig = {
   httpAgent: new http.Agent({ keepAlive: true, maxSockets: 10 }),
   httpsAgent: new https.Agent({ keepAlive: true, maxSockets: 10 }),
   transitVerbose: false,
+  queryLimiter: null,
+  commandLimiter: null,
 };
 
 /**
@@ -463,12 +465,22 @@ const createSdkGetFn = sdkFnParams => (params = {}) =>
 
    It's meant to used by the user of the SDK.
  */
-const createSdkFn = ({ method, ...sdkFnParams }) => {
+const createSdkFn = ({ queryLimiter, commandLimiter, method, ...sdkFnParams }) => {
+  let fn = null;
+
   if (method && method.toLowerCase() === 'post') {
-    return createSdkPostFn(sdkFnParams);
+    fn = createSdkPostFn(sdkFnParams);
+    if (commandLimiter) {
+      return commandLimiter.wrap(fn);
+    }
+    return fn;
   }
 
-  return createSdkGetFn(sdkFnParams);
+  fn = createSdkGetFn(sdkFnParams);
+  if (queryLimiter) {
+    return queryLimiter.wrap(fn);
+  }
+  return fn;
 };
 
 // Take SDK configurations, do transformation and return.
@@ -489,13 +501,14 @@ const validateSdkConfig = sdkConfig => {
   }
 
   /* global window, console */
-  if (sdkConfig.httpsAgent && (!sdkConfig.httpsAgent.maxSockets || sdkConfig.httpsAgent.maxSockets > 10)) {
+  if (
+    sdkConfig.httpsAgent &&
+    (!sdkConfig.httpsAgent.maxSockets || sdkConfig.httpsAgent.maxSockets > 10)
+  ) {
     console.warn(
       'The supplied httpsAgent does not restrict concurrent requests sufficiently and some requests may be rejected by the API.'
     );
-    console.warn(
-      'In order to avoid this, set the agent\'s `maxSockets` value to 10 or less.'
-    );
+    console.warn("In order to avoid this, set the agent's `maxSockets` value to 10 or less.");
   }
 
   const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
@@ -528,6 +541,8 @@ export default class SharetribeSdk {
     const sdkConfig = validateSdkConfig(
       transformSdkConfig({ ...defaultSdkConfig, ...userSdkConfig })
     );
+
+    const { queryLimiter, commandLimiter } = sdkConfig;
 
     // Instantiate API configs
     const apiConfigs = _.mapValues(apis, apiConfig => apiConfig(sdkConfig));
@@ -578,6 +593,8 @@ export default class SharetribeSdk {
       ({ path, method, endpointInterceptorPath, interceptors }) => ({
         path,
         fn: createSdkFn({
+          queryLimiter,
+          commandLimiter,
           method,
           ctx,
           endpointInterceptors: _.get(endpointInterceptors, endpointInterceptorPath) || [],

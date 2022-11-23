@@ -4,6 +4,7 @@ import { UUID, LatLng } from './types';
 import { createAdapter, defaultHandler } from './fake/adapter';
 import SharetribeSdk from './integration_sdk';
 import memoryStore from './memory_store';
+import { createRateLimiter } from './utils';
 
 const CLIENT_ID = '08ec69f6-d37e-414d-83eb-324e94afddf0';
 const CLIENT_SECRET = 'client-secret-value';
@@ -38,6 +39,12 @@ const createSdk = (config = {}) => {
   const defaults = {
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
+    queryLimiter: createRateLimiter({
+      bucketInitial: 1,
+      bucketIncreaseInterval: 250,
+      bucketIncreaseAmount: 1,
+      bucketMaximum: 5,
+    }),
   };
 
   const sdkTokenStore = memoryStore();
