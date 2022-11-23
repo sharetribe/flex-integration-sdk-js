@@ -2,6 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import http from 'http';
 import https from 'https';
+import sdkVersion from './version';
 import { fnPath as urlPathToFnPath, trimEndSlash, formData } from './utils';
 import paramsSerializer from './params_serializer';
 import AddAuthHeader from './interceptors/add_auth_header';
@@ -34,6 +35,9 @@ const defaultSdkConfig = {
   queryLimiter: null,
   commandLimiter: null,
 };
+
+// User-Agent string for the SDK
+const sdkUserAgentString = `sharetribe-flex-integration-sdk-js/${sdkVersion}`;
 
 /**
    Basic configurations for different 'apis'.
@@ -343,7 +347,7 @@ const additionalSdkFnDefinitions = [
 // GET requests: `params` includes query params. `queryParams` will be ignored
 // POST requests: `params` includes body params. `queryParams` includes URL query params
 const doRequest = ({ params = {}, queryParams = {}, httpOpts }) => {
-  const { method = 'get' } = httpOpts;
+  const { method = 'get', headers } = httpOpts;
 
   let data = null;
   let query = null;
@@ -358,6 +362,7 @@ const doRequest = ({ params = {}, queryParams = {}, httpOpts }) => {
 
   const req = {
     ...httpOpts,
+    headers: { ...headers, 'User-Agent': sdkUserAgentString },
     method,
     data,
     params: query,
