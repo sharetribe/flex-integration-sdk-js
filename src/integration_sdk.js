@@ -501,13 +501,14 @@ const validateSdkConfig = sdkConfig => {
   }
 
   /* global window, console */
-  if (sdkConfig.httpsAgent && (!sdkConfig.httpsAgent.maxSockets || sdkConfig.httpsAgent.maxSockets > 10)) {
+  if (
+    sdkConfig.httpsAgent &&
+    (!sdkConfig.httpsAgent.maxSockets || sdkConfig.httpsAgent.maxSockets > 10)
+  ) {
     console.warn(
       'The supplied httpsAgent does not restrict concurrent requests sufficiently and some requests may be rejected by the API.'
     );
-    console.warn(
-      'In order to avoid this, set the agent\'s `maxSockets` value to 10 or less.'
-    );
+    console.warn("In order to avoid this, set the agent's `maxSockets` value to 10 or less.");
   }
 
   const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
