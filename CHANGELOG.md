@@ -8,6 +8,9 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+- Send custom `User-Agent` string for SDK calls
+  [#60](https://github.com/sharetribe/flex-integration-sdk-js/pull/60)
+
 ## v1.8.0 - 2022-05-05
 
 ### Added
