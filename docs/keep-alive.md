@@ -24,8 +24,9 @@ const app = express();
 // Instantiate HTTP(S) Agents with keepAlive set to false.
 // This can increase the request time for consecutive requests,
 // because each connection has to be set up separately.
-const httpAgent = new http.Agent({ keepAlive: false });
-const httpsAgent = new https.Agent({ keepAlive: false });
+// Set `maxSockets` value to 10 or less.
+const httpAgent = new http.Agent({ keepAlive: false, maxSockets: 10 });
+const httpsAgent = new https.Agent({ keepAlive: false, maxSockets: 10 });
 
 app.get('/', (req, res) => {
   // Initialize the SDK instance

@@ -28,8 +28,8 @@ const defaultSdkConfig = {
   endpoints: [],
   adapter: null,
   version: 'v1',
-  httpAgent: new http.Agent({ keepAlive: true }),
-  httpsAgent: new https.Agent({ keepAlive: true }),
+  httpAgent: new http.Agent({ keepAlive: true, maxSockets: 10 }),
+  httpsAgent: new https.Agent({ keepAlive: true, maxSockets: 10 }),
   transitVerbose: false,
 };
 
@@ -489,6 +489,15 @@ const validateSdkConfig = sdkConfig => {
   }
 
   /* global window, console */
+  if (sdkConfig.httpsAgent && (!sdkConfig.httpsAgent.maxSockets || sdkConfig.httpsAgent.maxSockets > 10)) {
+    console.warn(
+      'The supplied httpsAgent does not restrict concurrent requests sufficiently and some requests may be rejected by the API.'
+    );
+    console.warn(
+      'In order to avoid this, set the agent\'s `maxSockets` value to 10 or less.'
+    );
+  }
+
   const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
 
   if (isBrowser && sdkConfig.clientSecret && !sdkConfig.dangerouslyAllowClientSecretInBrowser) {
