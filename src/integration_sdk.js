@@ -2,6 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import http from 'http';
 import https from 'https';
+import sdkVersion from './version';
 import { fnPath as urlPathToFnPath, trimEndSlash, formData } from './utils';
 import paramsSerializer from './params_serializer';
 import AddAuthHeader from './interceptors/add_auth_header';
@@ -34,6 +35,23 @@ const defaultSdkConfig = {
   queryLimiter: null,
   commandLimiter: null,
 };
+
+/* global window, navigator, process */
+const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+const navigatorUserAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+const nodeVersion =
+  typeof process !== 'undefined' && typeof process.versions !== 'undefined'
+    ? process.versions.node
+    : '';
+
+// User-Agent string for the SDK
+// For browsers, append to the browser's user agent string,
+let sdkUserAgentString = `sharetribe-flex-integration-sdk-js/${sdkVersion}`;
+if (isBrowser && navigatorUserAgent !== '') {
+  sdkUserAgentString = `${navigatorUserAgent} ${sdkUserAgentString}`;
+} else if (nodeVersion !== '') {
+  sdkUserAgentString = `${sdkUserAgentString} (node/${nodeVersion})`;
+}
 
 /**
    Basic configurations for different 'apis'.
@@ -343,7 +361,7 @@ const additionalSdkFnDefinitions = [
 // GET requests: `params` includes query params. `queryParams` will be ignored
 // POST requests: `params` includes body params. `queryParams` includes URL query params
 const doRequest = ({ params = {}, queryParams = {}, httpOpts }) => {
-  const { method = 'get' } = httpOpts;
+  const { method = 'get', headers } = httpOpts;
 
   let data = null;
   let query = null;
@@ -358,6 +376,7 @@ const doRequest = ({ params = {}, queryParams = {}, httpOpts }) => {
 
   const req = {
     ...httpOpts,
+    headers: { ...headers, 'User-Agent': sdkUserAgentString },
     method,
     data,
     params: query,
@@ -500,7 +519,8 @@ const validateSdkConfig = sdkConfig => {
     throw new Error('baseUrl must be provided');
   }
 
-  /* global window, console */
+  /* global console */
+  /* eslint-disable no-console */
   if (
     sdkConfig.httpsAgent &&
     (!sdkConfig.httpsAgent.maxSockets || sdkConfig.httpsAgent.maxSockets > 10)
@@ -511,10 +531,7 @@ const validateSdkConfig = sdkConfig => {
     console.warn("In order to avoid this, set the agent's `maxSockets` value to 10 or less.");
   }
 
-  const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
-
   if (isBrowser && sdkConfig.clientSecret && !sdkConfig.dangerouslyAllowClientSecretInBrowser) {
-    /* eslint-disable no-console */
     console.warn(
       'Security warning! You are using client secret in a browser. This may expose the client secret to the public.'
     );
@@ -524,8 +541,8 @@ const validateSdkConfig = sdkConfig => {
     console.warn(
       'In the future SDK versions, we may change this warning to an error causing the site not to work properly, unless `dangerouslyAllowClientSecretInBrowser` is set'
     );
-    /* eslint-enable no-console */
   }
+  /* eslint-enable no-console */
 
   return sdkConfig;
 };
