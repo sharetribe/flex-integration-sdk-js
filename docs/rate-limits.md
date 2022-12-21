@@ -17,11 +17,11 @@ etc).
 ```js
 const sharetribeIntegrationSdk = require('sharetribe-flex-integration-sdk');
 
-queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+const queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
   sharetribeIntegrationSdk.util.devQueryLimiterConfig
 );
 
-commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+const commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
   sharetribeIntegrationSdk.util.devCommandLimiterConfig
 );
 
@@ -40,11 +40,11 @@ const integrationSdk = sharetribeIntegrationSdk.createInstance({
 ```js
 const sharetribeIntegrationSdk = require('sharetribe-flex-integration-sdk');
 
-queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+const queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
   sharetribeIntegrationSdk.util.prodQueryLimiterConfig
 );
 
-commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+const commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
   sharetribeIntegrationSdk.util.prodCommandLimiterConfig
 );
 
@@ -73,7 +73,7 @@ The `createRateLimiter()` constructor takes a config object with:
 const sharetribeIntegrationSdk = require('sharetribe-flex-integration-sdk');
 
 // 100 initial requests and then 2 requests per 500ms (i.e. 4 requests per second)
-queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
+const queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
   bucketInitial: 100,
   bucketIncreaseAmount: 2,
   bucketIncreaseInterval: 500,
@@ -81,7 +81,7 @@ queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
 });
 
 // 100 initial requests and then 1 request per second
-commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
+const commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
   bucketInitial: 100,
   bucketIncreaseAmount: 1,
   bucketIncreaseInterval: 1000,
