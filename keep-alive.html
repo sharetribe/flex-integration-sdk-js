@@ -51,6 +51,8 @@
                   </li>
                   <li class="menu-item -level-2"><a class="link title -active link-keep-alive" href="keep-alive.html">Keep-Alive</a>
                   </li>
+                  <li class="menu-item -level-2"><a class="link title  link-rate-limits" href="rate-limits.html">Rate limits</a>
+                  </li>
                   <li class="menu-item -level-2"><a class="link title  link-uploading-images" href="uploading-images.html">Uploading images</a>
                   </li>
                 </ul>
@@ -87,8 +89,9 @@ custom <code>httpAgent</code> and <code>httpsAgent</code>, where the <code>keepA
 <span class="pl-c">// Instantiate HTTP(S) Agents with keepAlive set to false.</span>
 <span class="pl-c">// This can increase the request time for consecutive requests,</span>
 <span class="pl-c">// because each connection has to be set up separately.</span>
-<span class="pl-k">const</span> httpAgent = <span class="pl-k">new</span> http.Agent({ <span class="hljs-attr">keepAlive</span>: <span class="pl-c1">false</span> });
-<span class="pl-k">const</span> httpsAgent = <span class="pl-k">new</span> https.Agent({ <span class="hljs-attr">keepAlive</span>: <span class="pl-c1">false</span> });
+<span class="pl-c">// Set `maxSockets` value to 10 or less.</span>
+<span class="pl-k">const</span> httpAgent = <span class="pl-k">new</span> http.Agent({ <span class="hljs-attr">keepAlive</span>: <span class="pl-c1">false</span>, <span class="hljs-attr">maxSockets</span>: <span class="hljs-number">10</span> });
+<span class="pl-k">const</span> httpsAgent = <span class="pl-k">new</span> https.Agent({ <span class="hljs-attr">keepAlive</span>: <span class="pl-c1">false</span>, <span class="hljs-attr">maxSockets</span>: <span class="hljs-number">10</span> });
 
 app.get(<span class="pl-s">&apos;/&apos;</span>, (req, res) =&gt; {
   <span class="pl-c">// Initialize the SDK instance</span>
@@ -109,7 +112,7 @@ app.get(<span class="pl-s">&apos;/&apos;</span>, (req, res) =&gt; {
         </div>
         <div class="footer-nav">
           <div class="left"><a href="token-store.html"><span class="title">Token store</span></a></div>
-          <div class="right"><a href="uploading-images.html"><span class="label">Next: </span><span class="title">Uploading images</span></a></div>
+          <div class="right"><a href="rate-limits.html"><span class="label">Next: </span><span class="title">Rate limits</span></a></div>
         </div>
       </div>
     </div>

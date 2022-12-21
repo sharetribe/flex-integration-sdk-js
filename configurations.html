@@ -51,6 +51,8 @@
                   </li>
                   <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
                   </li>
+                  <li class="menu-item -level-2"><a class="link title  link-rate-limits" href="rate-limits.html">Rate limits</a>
+                  </li>
                   <li class="menu-item -level-2"><a class="link title  link-uploading-images" href="uploading-images.html">Uploading images</a>
                   </li>
                 </ul>
@@ -70,7 +72,7 @@
         <div class="markdown-body"><h1 id="configurations">Configurations</h1>
 <p>There are a few configuration options that can given to the
 <code>createInstance</code> method:</p>
-<pre><code class="lang-js"><span class="pl-k">const</span> sharetribeIntegrationSdk = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-integration-sdk&apos;</span>);
+<pre><code class="lang-js"><span class="pl-k">const</span> sharetribeIntegrationSdk = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-sdk&apos;</span>);
 
 <span class="pl-k">var</span> integrationSdk = sharetribeIntegrationSdk.createInstance({
 
@@ -103,8 +105,18 @@
   <span class="pl-c">// HTTP and HTTPS agents to be used when performing</span>
   <span class="pl-c">// http and https request. This allows defining non-default</span>
   <span class="pl-c">// options for agent, such as `{ keepAlive: false }`.</span>
+  <span class="pl-c">// When creating custom httpsAgent, set `maxSockets` value to 10 or less.</span>
   <span class="hljs-attr">httpAgent</span>: httpAgent,
   <span class="hljs-attr">httpsAgent</span>: httpsAgent,
+
+  <span class="pl-c">// For dev and demo marketplace environments, add query and command rate</span>
+  <span class="pl-c">// limiters:</span>
+  <span class="hljs-attr">queryLimiter</span>: sharetribeIntegrationSdk.createRateLimiter(
+    sharetribeIntegrationSdk.util.devQueryLimiterConfig
+  ),
+  <span class="hljs-attr">commandLimiter</span>: sharetribeIntegrationSdk.createRateLimiter(
+    sharetribeIntegrationSdk.util.devCommandLimiterConfig
+  ),
 
   <span class="pl-c">// Token store</span>
   <span class="hljs-attr">tokenStore</span>: sharetribeIntegrationSdk.tokenStore.memoryStore(),

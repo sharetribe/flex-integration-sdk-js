@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=90051322">
+    <link rel="stylesheet" href="styles.css?t=6eea839d">
+    <script src="assets/script.js?t=93f1a66c"></script>
+    <script src="scripts.js?t=a9970145"></script>
+    <title>Rate limits - Sharetribe Flex Integration SDK for JavaScript</title>
+    <meta name="viewport" content="width=device-width">
+    <script>if (false || window.location.hostname.indexOf("sharetribe.github.io") === window.location.hostname.length - 20) {
+        (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create',"UA-10178914-13",'auto')
+      }
+    </script>
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-try-it-in-command-line" href="try-it-in-command-line.html">Try it in command-line!</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Getting started</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-authentication" href="authentication.html">Authentication</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-calling-the-api" href="calling-the-api.html">Calling the API</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-types" href="types.html">Types</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><span class="title">Advanced</span>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title  link-configurations" href="configurations.html">Configurations</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-your-own-types" href="your-own-types.html">Your own types</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-serializing-types-to-json" href="serializing-types-to-json.html">Serializing types to JSON</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-object-query-parameters" href="object-query-parameters.html">Object query parameters</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-token-store" href="token-store.html">Token store</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-keep-alive" href="keep-alive.html">Keep-Alive</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title -active link-rate-limits" href="rate-limits.html">Rate limits</a>
+                    <ul class="headings heading-list">
+                      <li class="heading-item -depth-2"><a class="hlink link-dev-and-demo-marketplace-environments" href="#dev-and-demo-marketplace-environments">Dev and demo marketplace environments</a>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-production-marketplace-environments" href="#production-marketplace-environments">Production marketplace environments</a>
+                      </li>
+                      <li class="heading-item -depth-2"><a class="hlink link-custom-rate-limits" href="#custom-rate-limits">Custom rate limits</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title  link-uploading-images" href="uploading-images.html">Uploading images</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title  link-developing-sdk" href="developing-sdk.html">Developing SDK</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body page-rate-limits">
+        <div class="header-nav">
+          <div class="right"><a class="iconlink" href="https://github.com/sharetribe/flex-integration-sdk-js" data-title="sharetribe/flex-integration-sdk-js">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="rate-limits">Rate limits</h1>
+<p>The SDK can be configured to use client-side rate limits. This can help
+implementations stay within the API rate limits in dev and demo marketplace
+environments that the Integration API enforces. It is recommended to use
+client-side rate limits for production, as well.</p>
+<p>The SDK accepts two rate limiters as configuration: the <code>queryLimiter</code> applies
+to all API queries (i.e. reading data from the API) and the <code>commandLimiter</code>
+applies to all API commands (i.e. write operations that create, update data,
+etc).</p>
+<h2 id="dev-and-demo-marketplace-environments">Dev and demo marketplace environments</h2>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js"><span class="pl-k">const</span> sharetribeIntegrationSdk = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-integration-sdk&apos;</span>);
+
+<span class="pl-k">const</span> queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+  sharetribeIntegrationSdk.util.devQueryLimiterConfig
+);
+
+<span class="pl-k">const</span> commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+  sharetribeIntegrationSdk.util.devCommandLimiterConfig
+);
+
+<span class="pl-k">const</span> integrationSdk = sharetribeIntegrationSdk.createInstance({
+  <span class="hljs-attr">clientId</span>: <span class="pl-s">&quot;&lt;your Client ID&gt;&quot;</span>,
+  <span class="hljs-attr">clientSecret</span>: <span class="pl-s">&quot;&lt;your Client secret&gt;&quot;</span>,
+  <span class="hljs-attr">queryLimiter</span>: queryLimiter,
+  <span class="hljs-attr">commandLimiter</span>: commandLimiter,
+});
+</code></pre>
+<h2 id="production-marketplace-environments">Production marketplace environments</h2>
+<p><strong>Example using recommended rate limits:</strong></p>
+<pre><code class="lang-js"><span class="pl-k">const</span> sharetribeIntegrationSdk = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-integration-sdk&apos;</span>);
+
+<span class="pl-k">const</span> queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+  sharetribeIntegrationSdk.util.prodQueryLimiterConfig
+);
+
+<span class="pl-k">const</span> commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter(
+  sharetribeIntegrationSdk.util.prodCommandLimiterConfig
+);
+
+<span class="pl-k">const</span> integrationSdk = sharetribeIntegrationSdk.createInstance({
+  <span class="hljs-attr">clientId</span>: <span class="pl-s">&quot;&lt;your Client ID&gt;&quot;</span>,
+  <span class="hljs-attr">clientSecret</span>: <span class="pl-s">&quot;&lt;your Client secret&gt;&quot;</span>,
+  <span class="hljs-attr">queryLimiter</span>: queryLimiter,
+  <span class="hljs-attr">commandLimiter</span>: commandLimiter,
+});
+</code></pre>
+<h2 id="custom-rate-limits">Custom rate limits</h2>
+<p>The <code>createRateLimiter()</code> constructor takes a config object with:</p>
+<ul>
+<li><code>bucketInitial</code>: initial token bucket size</li>
+<li><code>bucketIncreaseAmount</code>: number of tokens added to the bucket every
+<code>bucketIncreaseInterval</code> milliseconds</li>
+<li><code>bucketIncreaseInterval</code>: every this many milliseconds a
+<code>bucketIncreaseAmount</code> number of tokens are added to the bucket</li>
+<li><code>bucketMaximum</code>: maximum size of the bucket</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-js"><span class="pl-k">const</span> sharetribeIntegrationSdk = <span class="pl-c1">require</span>(<span class="pl-s">&apos;sharetribe-flex-integration-sdk&apos;</span>);
+
+<span class="pl-c">// 100 initial requests and then 2 requests per 500ms (i.e. 4 requests per second)</span>
+<span class="pl-k">const</span> queryLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
+  <span class="hljs-attr">bucketInitial</span>: <span class="hljs-number">100</span>,
+  <span class="hljs-attr">bucketIncreaseAmount</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">bucketIncreaseInterval</span>: <span class="hljs-number">500</span>,
+  <span class="hljs-attr">bucketMaximum</span>: <span class="hljs-number">100</span>,
+});
+
+<span class="pl-c">// 100 initial requests and then 1 request per second</span>
+<span class="pl-k">const</span> commandLimiter = sharetribeIntegrationSdk.util.createRateLimiter({
+  <span class="hljs-attr">bucketInitial</span>: <span class="hljs-number">100</span>,
+  <span class="hljs-attr">bucketIncreaseAmount</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">bucketIncreaseInterval</span>: <span class="hljs-number">1000</span>,
+  <span class="hljs-attr">bucketMaximum</span>: <span class="hljs-number">100</span>,
+});
+
+<span class="pl-k">const</span> integrationSdk = sharetribeIntegrationSdk.createInstance({
+  <span class="hljs-attr">clientId</span>: <span class="pl-s">&quot;&lt;your Client ID&gt;&quot;</span>,
+  <span class="hljs-attr">clientSecret</span>: <span class="pl-s">&quot;&lt;your Client secret&gt;&quot;</span>,
+  <span class="hljs-attr">queryLimiter</span>: queryLimiter,
+  <span class="hljs-attr">commandLimiter</span>: commandLimiter,
+});
+</code></pre>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="keep-alive.html"><span class="title">Keep-Alive</span></a></div>
+          <div class="right"><a href="uploading-images.html"><span class="label">Next: </span><span class="title">Uploading images</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

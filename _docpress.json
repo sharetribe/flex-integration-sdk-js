@@ -216,6 +216,29 @@
             "slug": "keep-alive"
           },
           {
+            "title": "Rate limits",
+            "source": "docs/rate-limits.md",
+            "url": "rate-limits.html",
+            "slug": "rate-limits",
+            "headings": [
+              {
+                "title": "Dev and demo marketplace environments",
+                "depth": 2,
+                "id": "dev-and-demo-marketplace-environments"
+              },
+              {
+                "title": "Production marketplace environments",
+                "depth": 2,
+                "id": "production-marketplace-environments"
+              },
+              {
+                "title": "Custom rate limits",
+                "depth": 2,
+                "id": "custom-rate-limits"
+              }
+            ]
+          },
+          {
             "title": "Uploading images",
             "source": "docs/uploading-images.md",
             "url": "uploading-images.html",
@@ -438,6 +461,29 @@
       "pageTitle": "Keep-Alive",
       "slug": "keep-alive"
     },
+    "rate-limits.html": {
+      "source": "docs/rate-limits.md",
+      "title": "Rate limits - Sharetribe Flex Integration SDK for JavaScript",
+      "pageTitle": "Rate limits",
+      "slug": "rate-limits",
+      "headings": [
+        {
+          "title": "Dev and demo marketplace environments",
+          "depth": 2,
+          "id": "dev-and-demo-marketplace-environments"
+        },
+        {
+          "title": "Production marketplace environments",
+          "depth": 2,
+          "id": "production-marketplace-environments"
+        },
+        {
+          "title": "Custom rate limits",
+          "depth": 2,
+          "id": "custom-rate-limits"
+        }
+      ]
+    },
     "uploading-images.html": {
       "source": "docs/uploading-images.md",
       "title": "Uploading images - Sharetribe Flex Integration SDK for JavaScript",
@@ -464,6 +510,7 @@
     "docs/object-query-parameters.md": "object-query-parameters.html",
     "docs/token-store.md": "token-store.html",
     "docs/keep-alive.md": "keep-alive.html",
+    "docs/rate-limits.md": "rate-limits.html",
     "docs/uploading-images.md": "uploading-images.html",
     "docs/developing-sdk.md": "developing-sdk.html",
     "docs/docpress.json": "docpress.json",
