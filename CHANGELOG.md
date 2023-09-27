@@ -8,6 +8,14 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+## v.1.10.0 - 2023-09-27
+
+### Changed
+
+- Update Axios to newest version. The new version will improve performance by
+  enabling gzip compression.
+  [#68](https://github.com/sharetribe/flex-integration-sdk-js/pull/68)
+
 ## v1.9.0 - 2022-12-21
 
 ### Changed
