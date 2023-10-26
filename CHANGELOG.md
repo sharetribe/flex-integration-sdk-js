@@ -8,6 +8,10 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+### Changed
+
+- Remove references to Flex in documentation. [#69](https://github.com/sharetribe/flex-integration-sdk-js/pull/69)
+
 ## v.1.10.0 - 2023-09-27
 
 ### Changed
