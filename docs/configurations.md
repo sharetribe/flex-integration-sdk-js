@@ -67,7 +67,7 @@ var integrationSdk = sharetribeIntegrationSdk.createInstance({
 
   // Allow use of Client Secret in browser (optional, defaults to false)
   //
-  // Sharetribe Flex Integration SDK is meant to be used in a secure context, e.g.
+  // Sharetribe Integration SDK is meant to be used in a secure context, e.g.
   // in a private Node.js server. Using it in an open website exposes the
   // Client Secret to the public.
   //

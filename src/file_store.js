@@ -11,7 +11,7 @@ const dirname = 'flex-integration-sdk';
 // not for Mac OS. However, many common tools store config files
 // to ~/.config according to the XDG spec.
 //
-// This is also what Flex CLI does, so for consistency we'll also
+// This is also what Sharetribe CLI does, so for consistency we'll also
 // use the XDG base dir here.
 const configDir =
   os.platform() === 'darwin' ? path.join(xdgBasedir.config, dirname) : envPaths(dirname).config;
