@@ -34,7 +34,7 @@ If you want to pass a Sharetribe SDK UUID to a Sharetribe Integration SDK
 call, for example, you can use the `toType` function:
 
 ```js
-const marketplaceSDKlistingUUID = marketplaceSKDlisting.listingId;
+const marketplaceSDKlistingUUID = marketplaceSDKlisting.listingId;
 const integrationSDKlistingUUID = integrationSdk.types.toType(marketplaceSDKlistingUUID);
 
 integrationSdk.listings.show({ id: integrationSDKlistingUUID })
