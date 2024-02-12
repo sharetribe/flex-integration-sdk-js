@@ -1,6 +1,6 @@
 # Documentation
 
-* [Sharetribe Flex Integration SDK for JavaScript](../README.md)
+* [Sharetribe Integration SDK for JavaScript](../README.md)
 * [Features](./features.md)
 * [Try it in command-line!](./try-it-in-command-line.md)
 * Getting started

@@ -1,7 +1,7 @@
 # Authentication
 
 The SDK is ready to make API calls as soon as it is instantiated. It will
-automatically use the Flex Authentication API to obtain access and refresh
+automatically use the Sharetribe Authentication API to obtain access and refresh
 tokens.
 
 ## Revoke refresh token
@@ -10,7 +10,7 @@ tokens.
 
 Revokes the current refresh token and returns a Promise.
 
-The SDK automatically obtains access and refresh tokens from the [Flex
+The SDK automatically obtains access and refresh tokens from the [Sharetribe
 Authentication
 API](https://www.sharetribe.com/api-reference/authentication.html). It uses the
 configured [token store](./token-store.md) to hold the tokens. If the store is

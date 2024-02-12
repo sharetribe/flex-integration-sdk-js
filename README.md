@@ -1,6 +1,6 @@
-# Sharetribe Flex Integration SDK for JavaScript
+# Sharetribe Integration SDK for JavaScript
 
-Use Sharetribe Flex Integration API with ease.
+Use Sharetribe Integration API with ease.
 
 [![CircleCI](https://circleci.com/gh/sharetribe/flex-integration-sdk-js.svg?style=svg&circle-token=5d118cf6f162884ba97e421c29c94f5c848ba28a)](https://circleci.com/gh/sharetribe/flex-integration-sdk-js)
 
@@ -15,7 +15,7 @@ Use Sharetribe Flex Integration API with ease.
 
 ## What is it?
 
-The SDK is the **easiest** way to interact with Sharetribe Flex Integration API.
+The SDK is the **easiest** way to interact with Sharetribe Integration API.
 
 It handles **groundwork** such as authentication, renewing authentication tokens
 and serializing and deserializing data to and from JavaScript data structures.
@@ -58,13 +58,13 @@ integrationSdk.listings
 ```
 
 Client ID and client secret are required to create a new SDK instance.
-See [this article](https://www.sharetribe.com/docs/integrations/getting-started-with-integration-api/#create-integration-api-application-in-flex-console)
+See [this article](https://www.sharetribe.com/docs/introduction/getting-started-with-integration-api/#create-integration-api-application-in-sharetribe-console)
 to learn how to get them.
 
 ## Examples
 
 See the
-[flex-integration-api-examples](https://github.com/sharetribe/flex-integration-api-examples)
+[integration-api-examples](https://github.com/sharetribe/integration-api-examples)
 repository on GitHub.
 
 ## Documentation
