@@ -6,7 +6,9 @@ The format is based on [Keep a
 Changelog](http://keepachangelog.com/en/1.0.0/) and this project
 adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased - xxxx-xx-xx
+## [Unreleased] - xxxx-xx-xx
+
+## [v1.10.1] - 2024-05-28
 
 ### Fixed
 
@@ -17,7 +19,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 - Remove references to Flex in documentation. [#69](https://github.com/sharetribe/flex-integration-sdk-js/pull/69)
 
-## v.1.10.0 - 2023-09-27
+## [v1.10.0] - 2023-09-27
 
 ### Changed
 
@@ -25,7 +27,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   enabling gzip compression.
   [#68](https://github.com/sharetribe/flex-integration-sdk-js/pull/68)
 
-## v1.9.0 - 2022-12-21
+## [v1.9.0] - 2022-12-21
 
 ### Changed
 
@@ -39,7 +41,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - Add support for using client side rate limiters
   [#58](https://github.com/sharetribe/flex-integration-sdk-js/pull/58)
 
-## v1.8.0 - 2022-05-05
+## [v1.8.0] - 2022-05-05
 
 ### Added
 
@@ -52,7 +54,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   `application/transit+json`
   [#53](https://github.com/sharetribe/flex-integration-sdk-js/pull/53)
 
-## v1.7.0 - 2021-10-06
+## [v1.7.0] - 2021-10-06
 
 ### Added
 
@@ -66,13 +68,13 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   [#40](https://github.com/sharetribe/flex-integration-sdk-js/pull/40)
   [#44](https://github.com/sharetribe/flex-integration-sdk-js/pull/44)
 
-## v1.6.1 - 2021-09-20
+## [v1.6.1] - 2021-09-20
 
 ### Security
 
 - Update Axios to 0.21.2 [#41](https://github.com/sharetribe/flex-integration-sdk-js/pull/41)
 
-## v1.6.0 - 2021-09-20
+## [v1.6.0] - 2021-09-20
 
 ### Added
 
@@ -88,14 +90,14 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - Update Lodash to 4.17.21 [#33](https://github.com/sharetribe/flex-integration-sdk-js/pull/33)
 - Update development dependencies with security vulnerabilities (multiple PRs)
 
-## v1.5.0 - 2021-08-04
+## [v1.5.0] - 2021-08-04
 
 ### Changed
 
 - SDK shows a warning if Client Secret is used in a browser.
   [#36](https://github.com/sharetribe/flex-integration-sdk-js/pull/36)
 
-## v1.4.0 - 2020-12-15
+## [v1.4.0] - 2020-12-15
 
 ### Added
 
@@ -117,14 +119,14 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   - ini [#25](https://github.com/sharetribe/flex-integration-sdk-js/pull/25)
   - dot-prop [#26](https://github.com/sharetribe/flex-integration-sdk-js/pull/26)
 
-## v1.3.0 - 2020-08-12
+## [v1.3.0] - 2020-08-12
 
 ### Added
 
 - A utility function to convert an object query parameter into a URL compatible
   string. [21](https://github.com/sharetribe/flex-integration-sdk-js/pull/21)
 
-## v1.2.0 - 2020-07-09
+## [v1.2.0] - 2020-07-09
 
 ### Added
 
@@ -139,7 +141,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   - handlebars [#14](https://github.com/sharetribe/flex-integration-sdk-js/pull/14)
   - websocket-extensions [#15](https://github.com/sharetribe/flex-integration-sdk-js/pull/15)
 
-## v1.1.0 - 2020-01-21
+## [v1.1.0] - 2020-01-21
 
 ### Added
 
@@ -159,3 +161,19 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 This is the first version that is published in NPM.
 
 See: https://www.npmjs.com/package/sharetribe-flex-integration-sdk
+
+[unreleased]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.10.1...HEAD
+
+[v1.10.1]: https://github.com/sharetribe/flex-sdk-js/compare/v1.10.0...v1.10.1
+[v1.10.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.9.0...v1.10.0
+[v1.9.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.8.0...v1.9.0
+[v1.8.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.7.0...v1.8.0
+[v1.7.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.6.1...v1.7.0
+[v1.6.1]: https://github.com/sharetribe/flex-sdk-js/compare/v1.6.0...v1.6.1
+[v1.6.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.5.0...v1.6.0
+[v1.5.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.4.0...v1.5.0
+[v1.4.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.3.0...v1.4.0
+[v1.3.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.2.0...v1.3.0
+[v1.3.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.2.0...v1.3.0
+[v1.2.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.1.0...v1.2.0
+[v1.1.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.0.0...v1.1.0
