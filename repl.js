@@ -11,9 +11,6 @@ const sharetribeIntegrationSdk = require('./src/index');
 // Start REPL
 const replInstance = repl.start('> ');
 
-// Attach history
-require('repl.history')(replInstance, './.repl_history');
-
 // Assign SDK as global
 const ctx = replInstance.context;
 ctx.sharetribeIntegrationSdk = sharetribeIntegrationSdk;
