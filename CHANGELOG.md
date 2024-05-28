@@ -8,6 +8,11 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - xxxx-xx-xx
 
+### Fixed
+
+- Bug: Integration SDK failed to send any extended data if it had a key `length`
+  with a number type value. [#71](https://github.com/sharetribe/flex-integration-sdk-js/pull/71)
+
 ### Changed
 
 - Remove references to Flex in documentation. [#69](https://github.com/sharetribe/flex-integration-sdk-js/pull/69)
