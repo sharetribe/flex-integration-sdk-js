@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css?t=6eea839d">
     <script src="assets/script.js?t=93f1a66c"></script>
     <script src="scripts.js?t=a9970145"></script>
-    <title>Types - Sharetribe Flex Integration SDK for JavaScript</title>
+    <title>Types - Sharetribe Integration SDK for JavaScript</title>
     <meta name="viewport" content="width=device-width">
     <script>if (false || window.location.hostname.indexOf("sharetribe.github.io") === window.location.hostname.length - 20) {
         (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -21,7 +21,7 @@
         <ul>
           <li class="menu-item -level-0 -parent">
             <ul class="submenu">
-              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Integration SDK for JavaScript</a>
               </li>
               <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
               </li>
@@ -124,6 +124,17 @@ given as parameters for the <em>queries</em> and <em>commands</em>.</p>
 
 <span class="pl-c1">console</span>.log(<span class="pl-s">&quot;Amount in subunit (i.e. cents): &quot;</span> + price.amount)
 <span class="pl-c1">console</span>.log(<span class="pl-s">&quot;Currency: &quot;</span> + price.currency)
+</code></pre>
+<p><strong>Note:</strong> If you are using the Sharetribe SDK and the Sharetribe Integration SDK
+in the same application, it is good to note that the types are currently
+NOT interchangeable between SDKs, even though they have the same shape.</p>
+<p>If you want to pass a Sharetribe SDK UUID to a Sharetribe Integration SDK
+call, for example, you can use the <code>toType</code> function:</p>
+<pre><code class="lang-js"><span class="pl-k">const</span> marketplaceSDKlistingUUID = marketplaceSDKlisting.listingId;
+<span class="pl-k">const</span> integrationSDKlistingUUID = integrationSdk.types.toType(marketplaceSDKlistingUUID);
+
+integrationSdk.listings.show({ <span class="hljs-attr">id</span>: integrationSDKlistingUUID })
+  .then(...)
 </code></pre>
 
         </div>

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css?t=6eea839d">
     <script src="assets/script.js?t=93f1a66c"></script>
     <script src="scripts.js?t=a9970145"></script>
-    <title>Developing SDK - Sharetribe Flex Integration SDK for JavaScript</title>
+    <title>Developing SDK - Sharetribe Integration SDK for JavaScript</title>
     <meta name="viewport" content="width=device-width">
     <script>if (false || window.location.hostname.indexOf("sharetribe.github.io") === window.location.hostname.length - 20) {
         (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -21,7 +21,7 @@
         <ul>
           <li class="menu-item -level-0 -parent">
             <ul class="submenu">
-              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Flex Integration SDK for JavaScript</a>
+              <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Sharetribe Integration SDK for JavaScript</a>
               </li>
               <li class="menu-item -level-1"><a class="link title  link-features" href="features.html">Features</a>
               </li>
@@ -93,23 +93,40 @@
 <pre><code class="lang-sh">$ yarn run build-docs
 </code></pre>
 <h4 id="update-the-github-pages">Update the Github Pages</h4>
-<pre><code class="lang-sh">$ yarn run build-docs
+<pre><code class="lang-sh">$ git checkout master
+$ yarn run build-docs
 $ mv _docpress ../
 $ git checkout gh-pages
 $ cp -r ../_docpress/* ./
 $ rm -r ../_docpress
-$ // git add, commit, push
+$ git add .
+$ git commit -m <span class="pl-s">&quot;Update docs&quot;</span>
+$ git push --force
+$ git checkout master
 </code></pre>
 <h4 id="release-a-new-version-to-npm">Release a new version to NPM</h4>
 <ol>
 <li>
-<p>Update version in <code>package.json</code> and <code>src/version.js</code></p>
+<p>Update versions:</p>
+<ul>
+<li><code>package.json</code></li>
+<li><code>src/version.js</code></li>
+</ul>
+</li>
+<li>
+<p>Make a new build (as <code>src/version.js</code> needs to be up-to-date in the build) and commit</p>
+<pre><code class="lang-bash">yarn run build
+</code></pre>
 </li>
 <li>
 <p>Update <a href="http://CHANGELOG.md">CHANGELOG.md</a></p>
 <ul>
 <li>Move everything in Unreleased to the corresponding version section</li>
+<li>Update the version links found at the very bottom of the <a href="http://CHANGELOG.md">CHANGELOG.md</a> file</li>
 </ul>
+</li>
+<li>
+<p>Commit and push</p>
 </li>
 <li>
 <p>Login as <code>sharetribe</code> with <code>npm login</code></p>
