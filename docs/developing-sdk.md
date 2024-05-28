@@ -48,8 +48,6 @@ $ yarn run build-docs
 
 ```sh
 $ git checkout master
-$ yarn run build
-$ cp build/sharetribe-flex-sdk-web.js docs/sharetribe-flex-sdk-web.js
 $ yarn run build-docs
 $ mv _docpress ../
 $ git checkout gh-pages
