@@ -1,3 +1,5 @@
+import { entries } from '../utils';
+
 const _ = require('lodash');
 const FormData = require('form-data');
 const fs = require('fs');
@@ -32,19 +34,15 @@ const getLength = formData =>
 export default class MultipartRequest {
   enter({ params, headers: ctxHeaders, ...ctx }) {
     if (_.isPlainObject(params)) {
-      /* eslint-disable no-undef */
-      const formData = _.reduce(
-        params,
-        (fd, val, key) => {
-          // convert a string param into a stream
-          const value = _.isString(val) ? fs.createReadStream(val) : val;
+      const formData = entries(params).reduce((fd, entry) => {
+        const [key, val] = entry;
 
-          fd.append(key, value);
-          return fd;
-        },
-        new FormData()
-      );
-      /* eslint-enable no-undef */
+        // convert a string param into a stream
+        const value = _.isString(val) ? fs.createReadStream(val) : val;
+
+        fd.append(key, value);
+        return fd;
+      }, new FormData());
 
       const formDataHeaders = formData.getHeaders();
 

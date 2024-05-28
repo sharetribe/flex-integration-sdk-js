@@ -33,6 +33,11 @@ describe('utils', () => {
         formData({ username: 'joe.dunphy@example.com', password: '}4$3.872487=3&&]/6?.' })
       ).toEqual('username=joe.dunphy%40example.com&password=%7D4%243.872487%3D3%26%26%5D%2F6%3F.');
     });
+
+    it('encodes Object with key length', () => {
+      // See: https://github.com/lodash/lodash/issues/5870
+      expect(formData({ length: 10 })).toEqual('length=10');
+    });
   });
 
   describe('objectQueryString', () => {
