@@ -2,7 +2,7 @@
 
 Use Sharetribe Integration API with ease.
 
-[![CircleCI](https://circleci.com/gh/sharetribe/flex-integration-sdk-js.svg?style=svg&circle-token=5d118cf6f162884ba97e421c29c94f5c848ba28a)](https://circleci.com/gh/sharetribe/flex-integration-sdk-js)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/sharetribe/flex-integration-sdk-js/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/sharetribe/flex-integration-sdk-js/tree/master)
 
 ## Table of Contents
 
