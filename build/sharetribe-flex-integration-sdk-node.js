@@ -5075,6 +5075,18 @@ var endpointDefinitions = [{
   interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_request__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
+  path: 'users/approve',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'users/update_permissions',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
   path: 'listings/show',
   internal: false,
   method: 'get',
