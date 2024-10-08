@@ -147,6 +147,20 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'users/approve',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'users/update_permissions',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'listings/show',
     internal: false,
     method: 'get',
