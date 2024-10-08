@@ -10,6 +10,8 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [v1.11.0] - 2024-10-08
 
+### Added
+
 - New endpoints [#72](https://github.com/sharetribe/flex-integration-sdk-js/pull/72)
   - `integrationSdk.users.approve(/* ... */)`
   - `integrationSdk.users.updatePermissions(/* ... */)`
