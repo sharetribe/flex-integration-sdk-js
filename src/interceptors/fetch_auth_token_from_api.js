@@ -2,6 +2,8 @@ import contextRunner from '../context_runner';
 import SaveToken from './save_token';
 import AddAuthTokenResponse from './add_auth_token_response';
 
+const ongoingRequests = new Map();
+
 /**
    If there's no `authToken` stored to the `ctx`, try to fetch new auth token from the API.
 
@@ -17,7 +19,14 @@ export default class FetchAuthTokenFromApi {
       return ctx;
     }
 
-    return contextRunner([
+    if (ongoingRequests.has(clientId)) {
+      return ongoingRequests.get(clientId).then(({ authToken: newAuthToken }) => ({
+        ...ctx,
+        authToken: newAuthToken,
+      }));
+    }
+
+    const ongoingRequest = contextRunner([
       new SaveToken(),
       new AddAuthTokenResponse(),
       ...endpointInterceptors.auth.token,
@@ -29,6 +38,21 @@ export default class FetchAuthTokenFromApi {
         scope: 'integ',
       },
       tokenStore,
-    }).then(({ authToken: newAuthToken }) => ({ ...ctx, authToken: newAuthToken }));
+    })
+      .then(res => {
+        ongoingRequests.delete(clientId);
+        return res;
+      })
+      .catch(err => {
+        ongoingRequests.delete(clientId);
+        throw err;
+      });
+
+    ongoingRequests.set(clientId, ongoingRequest);
+
+    return ongoingRequest.then(({ authToken: newAuthToken }) => ({
+      ...ctx,
+      authToken: newAuthToken,
+    }));
   }
 }
