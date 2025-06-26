@@ -13,14 +13,6 @@ describe('FetchAuthTokenFromApi', () => {
 
   it('should only fetch one token when called concurrently', async () => {
     const mockAuthToken = { access_token: 'new_token' };
-    const mockContextRunnerInnerFn = jest.fn(ctx => {
-      // Simulate the behavior of contextRunner by calling the enter method of the interceptor
-      return endpointInterceptors.auth.token[0]
-        .enter(ctx)
-        .then(res => ({ ...res, authToken: mockAuthToken }));
-    });
-    contextRunner.mockImplementation(() => mockContextRunnerInnerFn);
-
     const tokenStore = {
       getToken: () => Promise.resolve(null),
       setToken: jest.fn(),
@@ -35,6 +27,14 @@ describe('FetchAuthTokenFromApi', () => {
         ],
       },
     };
+
+    const mockContextRunnerInnerFn = jest.fn(ctx =>
+      // Simulate the behavior of contextRunner by calling the enter method of the interceptor
+      endpointInterceptors.auth.token[0]
+        .enter(ctx)
+        .then(res => ({ ...res, authToken: mockAuthToken }))
+    );
+    contextRunner.mockImplementation(() => mockContextRunnerInnerFn);
 
     const interceptor = new FetchAuthTokenFromApi();
 
