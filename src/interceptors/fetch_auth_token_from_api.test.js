@@ -38,11 +38,13 @@ describe('FetchAuthTokenFromApi', () => {
 
     const interceptor = new FetchAuthTokenFromApi();
 
+    const ongoingRequests = new Map();
     const ctx1 = {
       tokenStore,
       endpointInterceptors,
       clientId: 'test_client',
       clientSecret: 'test_secret',
+      ongoingRequests,
     };
 
     const ctx2 = {
@@ -50,6 +52,7 @@ describe('FetchAuthTokenFromApi', () => {
       endpointInterceptors,
       clientId: 'test_client',
       clientSecret: 'test_secret',
+      ongoingRequests,
     };
 
     const promise1 = interceptor.enter(ctx1);

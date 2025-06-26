@@ -2,8 +2,6 @@ import contextRunner from '../context_runner';
 import SaveToken from './save_token';
 import AddAuthTokenResponse from './add_auth_token_response';
 
-const ongoingRequests = new Map();
-
 /**
    If there's no `authToken` stored to the `ctx`, try to fetch new auth token from the API.
 
@@ -13,7 +11,14 @@ const ongoingRequests = new Map();
 */
 export default class FetchAuthTokenFromApi {
   enter(ctx) {
-    const { tokenStore, authToken, endpointInterceptors, clientId, clientSecret } = ctx;
+    const {
+      tokenStore,
+      authToken,
+      endpointInterceptors,
+      clientId,
+      clientSecret,
+      ongoingRequests,
+    } = ctx;
 
     if (authToken) {
       return ctx;
