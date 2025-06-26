@@ -42,8 +42,9 @@ export default class RetryWithRefreshToken {
     }
 
     if (errorCtx.res && errorCtx.res.status === 401 && authToken.refresh_token) {
-      if (ongoingRequests.has(clientId)) {
-        return ongoingRequests.get(clientId).then(({ authToken: newAuthToken }) => ({
+      const requestKey = `refresh_token:${clientId}`;
+      if (ongoingRequests.has(requestKey)) {
+        return ongoingRequests.get(requestKey).then(({ authToken: newAuthToken }) => ({
           ...errorCtx,
           authToken: newAuthToken,
           enterQueue: retryQueue,
@@ -62,28 +63,30 @@ export default class RetryWithRefreshToken {
           refresh_token: authToken.refresh_token,
         },
         tokenStore,
+        ongoingRequests,
       })
         .then(res => {
-          ongoingRequests.delete(clientId);
+          ongoingRequests.delete(requestKey);
           return res;
         })
         .catch(e => {
-          ongoingRequests.delete(clientId);
+          ongoingRequests.delete(requestKey);
           throw e;
         });
 
-      ongoingRequests.set(clientId, ongoingRequest);
+      ongoingRequests.set(requestKey, ongoingRequest);
 
-      return ongoingRequest.then(({ authToken: newAuthToken }) => ({
-        ...errorCtx,
-        authToken: newAuthToken,
-        enterQueue: retryQueue,
-        error: null,
-      }))
-      .catch(e => ({
-        ...errorCtx,
-        refreshTokenRetry: { retryQueue, attempts, res: e.response },
-      }));
+      return ongoingRequest
+        .then(({ authToken: newAuthToken }) => ({
+          ...errorCtx,
+          authToken: newAuthToken,
+          enterQueue: retryQueue,
+          error: null,
+        }))
+        .catch(e => ({
+          ...errorCtx,
+          refreshTokenRetry: { retryQueue, attempts, res: e.response },
+        }));
     }
 
     return errorCtx;
