@@ -34,6 +34,7 @@ export default class RetryWithRefreshToken {
       tokenStore,
       endpointInterceptors,
       refreshTokenRetry: { retryQueue, attempts },
+      ongoingRequests,
     } = errorCtx;
 
     if (attempts > 1) {
@@ -41,7 +42,16 @@ export default class RetryWithRefreshToken {
     }
 
     if (errorCtx.res && errorCtx.res.status === 401 && authToken.refresh_token) {
-      return contextRunner([
+      if (ongoingRequests.has(clientId)) {
+        return ongoingRequests.get(clientId).then(({ authToken: newAuthToken }) => ({
+          ...errorCtx,
+          authToken: newAuthToken,
+          enterQueue: retryQueue,
+          error: null,
+        }));
+      }
+
+      const ongoingRequest = contextRunner([
         new SaveToken(),
         new AddAuthTokenResponse(),
         ...endpointInterceptors.auth.token,
@@ -53,16 +63,27 @@ export default class RetryWithRefreshToken {
         },
         tokenStore,
       })
-        .then(({ authToken: newAuthToken }) => ({
-          ...errorCtx,
-          authToken: newAuthToken,
-          enterQueue: retryQueue,
-          error: null,
-        }))
-        .catch(e => ({
-          ...errorCtx,
-          refreshTokenRetry: { retryQueue, attempts, res: e.response },
-        }));
+        .then(res => {
+          ongoingRequests.delete(clientId);
+          return res;
+        })
+        .catch(e => {
+          ongoingRequests.delete(clientId);
+          throw e;
+        });
+
+      ongoingRequests.set(clientId, ongoingRequest);
+
+      return ongoingRequest.then(({ authToken: newAuthToken }) => ({
+        ...errorCtx,
+        authToken: newAuthToken,
+        enterQueue: retryQueue,
+        error: null,
+      }))
+      .catch(e => ({
+        ...errorCtx,
+        refreshTokenRetry: { retryQueue, attempts, res: e.response },
+      }));
     }
 
     return errorCtx;
