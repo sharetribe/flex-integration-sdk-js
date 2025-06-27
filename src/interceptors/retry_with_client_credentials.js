@@ -34,6 +34,7 @@ export default class RetryWithClientCredentials {
       tokenStore,
       endpointInterceptors,
       clientCredentialsRetry: { retryQueue, attempts },
+      ongoingRequests,
     } = errorCtx;
 
     if (attempts > 1) {
@@ -41,7 +42,17 @@ export default class RetryWithClientCredentials {
     }
 
     if (errorCtx.res && errorCtx.res.status === 401) {
-      return contextRunner([
+      const requestKey = `client_credentials:${clientId}`;
+      if (ongoingRequests.has(requestKey)) {
+        return ongoingRequests.get(requestKey).then(({ authToken: newAuthToken }) => ({
+          ...errorCtx,
+          authToken: newAuthToken,
+          enterQueue: retryQueue,
+          error: null,
+        }));
+      }
+
+      const ongoingRequest = contextRunner([
         new SaveToken(),
         new AddAuthTokenResponse(),
         ...endpointInterceptors.auth.token,
@@ -53,7 +64,20 @@ export default class RetryWithClientCredentials {
           scope: 'integ',
         },
         tokenStore,
+        ongoingRequests,
       })
+        .then(res => {
+          ongoingRequests.delete(requestKey);
+          return res;
+        })
+        .catch(e => {
+          ongoingRequests.delete(requestKey);
+          throw e;
+        });
+
+      ongoingRequests.set(requestKey, ongoingRequest);
+
+      return ongoingRequest
         .then(({ authToken: newAuthToken }) => ({
           ...errorCtx,
           authToken: newAuthToken,
