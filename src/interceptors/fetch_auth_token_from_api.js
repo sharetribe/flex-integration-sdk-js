@@ -24,8 +24,9 @@ export default class FetchAuthTokenFromApi {
       return ctx;
     }
 
-    if (ongoingRequests.has(clientId)) {
-      return ongoingRequests.get(clientId).then(({ authToken: newAuthToken }) => ({
+    const requestKey = `fetch_from_api:${clientId}`;
+    if (ongoingRequests.has(requestKey)) {
+      return ongoingRequests.get(requestKey).then(({ authToken: newAuthToken }) => ({
         ...ctx,
         authToken: newAuthToken,
       }));
@@ -45,15 +46,15 @@ export default class FetchAuthTokenFromApi {
       tokenStore,
     })
       .then(res => {
-        ongoingRequests.delete(clientId);
+        ongoingRequests.delete(requestKey);
         return res;
       })
       .catch(err => {
-        ongoingRequests.delete(clientId);
+        ongoingRequests.delete(requestKey);
         throw err;
       });
 
-    ongoingRequests.set(clientId, ongoingRequest);
+    ongoingRequests.set(requestKey, ongoingRequest);
 
     return ongoingRequest.then(({ authToken: newAuthToken }) => ({
       ...ctx,

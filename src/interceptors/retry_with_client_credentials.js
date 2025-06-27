@@ -42,8 +42,9 @@ export default class RetryWithClientCredentials {
     }
 
     if (errorCtx.res && errorCtx.res.status === 401) {
-      if (ongoingRequests.has(clientId)) {
-        return ongoingRequests.get(clientId).then(({ authToken: newAuthToken }) => ({
+      const requestKey = `client_credentials:${clientId}`;
+      if (ongoingRequests.has(requestKey)) {
+        return ongoingRequests.get(requestKey).then(({ authToken: newAuthToken }) => ({
           ...errorCtx,
           authToken: newAuthToken,
           enterQueue: retryQueue,
@@ -66,15 +67,15 @@ export default class RetryWithClientCredentials {
         ongoingRequests,
       })
         .then(res => {
-          ongoingRequests.delete(clientId);
+          ongoingRequests.delete(requestKey);
           return res;
         })
         .catch(e => {
-          ongoingRequests.delete(clientId);
+          ongoingRequests.delete(requestKey);
           throw e;
         });
 
-      ongoingRequests.set(clientId, ongoingRequest);
+      ongoingRequests.set(requestKey, ongoingRequest);
 
       return ongoingRequest
         .then(({ authToken: newAuthToken }) => ({
