@@ -5087,6 +5087,12 @@ var endpointDefinitions = [{
   interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_request__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
+  path: 'users/verify_email',
+  internal: false,
+  method: 'post',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_20__interceptors_transit_request__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
   path: 'listings/show',
   internal: false,
   method: 'get',
@@ -8307,7 +8313,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_173__;
 
 "use strict";
 // Update this when updating package.json
-var sdkVersion = '1.11.0';
+var sdkVersion = '1.12.0-beta.0';
 /* harmony default export */ __webpack_exports__["a"] = (sdkVersion);
 
 /***/ }),
