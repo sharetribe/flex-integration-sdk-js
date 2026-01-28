@@ -161,6 +161,13 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'users/verify_email',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'listings/show',
     internal: false,
     method: 'get',
