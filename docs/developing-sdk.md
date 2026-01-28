@@ -72,7 +72,7 @@ $ git checkout master
     yarn run build
     ```
 
-1. Update CHANGELOG.md
+1. Update CHANGELOG.md (skip this for beta release)
 
    - Move everything in Unreleased to the corresponding version section 
    - Update the version links found at the very bottom of the CHANGELOG.md file
