@@ -83,7 +83,7 @@ $ git checkout master
 
    - check credentials from password manager
 
-1. Publish with `npm publish`
+1. Publish with `npm publish`. For beta release, do `npm publish --tag beta`
 
 1. Add a new tag
 
@@ -91,7 +91,7 @@ $ git checkout master
     git tag -a v1.2.3 -m v1.2.3
     ```
 
-1.  Update `latest` tag
+1.  Update `latest` tag (skip this for beta release)
 
     ```bash
     git push origin :refs/tags/latest
@@ -104,7 +104,7 @@ $ git checkout master
     git push --tags
     ```
 
-1.  Go to [Github releases and draft a new release](https://github.com/sharetribe/flex-integration-sdk-js/releases/new)
+1.  Go to [Github releases and draft a new release](https://github.com/sharetribe/flex-integration-sdk-js/releases/new) (skip this for beta release)
 
     Use the following content:
 
@@ -136,4 +136,4 @@ $ git checkout master
     - Changed this and that
     ```
 
-1.  Announce the new version in Slack
+1.  Announce the new version in Slack (can be skipped for beta release, when appropriate)
