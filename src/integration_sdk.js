@@ -259,6 +259,20 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'files/query',
+    internal: false,
+    method: 'get',
+    interceptors: [new TransitResponse()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'file_attachments/query',
+    internal: false,
+    method: 'get',
+    interceptors: [new TransitResponse()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'availability_exceptions/query',
     internal: false,
     method: 'get',
