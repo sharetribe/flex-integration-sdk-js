@@ -10,6 +10,9 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- New endpoints [#76](https://github.com/sharetribe/flex-integration-sdk-js/pull/76)
+  - `integrationSdk.messages.query(/* ... */)`
+
 - New endpoints [#75](https://github.com/sharetribe/flex-integration-sdk-js/pull/75)
   - `integrationSdk.files.query(/* ... */)`
   - `integrationSdk.file_attachments.query(/* ... */)`

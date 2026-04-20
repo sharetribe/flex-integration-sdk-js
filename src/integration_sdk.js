@@ -327,6 +327,13 @@ const endpointDefinitions = [
     method: 'get',
     interceptors: [new TransitResponse()],
   },
+  {
+    apiName: 'integration_api',
+    path: 'messages/query',
+    internal: false,
+    method: 'get',
+    interceptors: [new TransitResponse()],
+  },
   { apiName: 'auth', path: 'token', internal: true, method: 'post', interceptors: [] },
   { apiName: 'auth', path: 'revoke', internal: true, method: 'post', interceptors: [] },
 
