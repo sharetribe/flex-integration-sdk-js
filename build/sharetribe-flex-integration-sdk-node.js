@@ -8313,7 +8313,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_173__;
 
 "use strict";
 // Update this when updating package.json
-var sdkVersion = '1.12.0-beta.0';
+var sdkVersion = '1.12.0';
 /* harmony default export */ __webpack_exports__["a"] = (sdkVersion);
 
 /***/ }),
