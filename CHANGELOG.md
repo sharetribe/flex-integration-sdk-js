@@ -8,6 +8,8 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] - xxxx-xx-xx
 
+## [v1.12.0] - 2026-05-06
+
 ### Added
 
 - New endpoint [#74](https://github.com/sharetribe/flex-integration-sdk-js/pull/74)
@@ -177,6 +179,7 @@ See: https://www.npmjs.com/package/sharetribe-flex-integration-sdk
 
 [unreleased]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.10.1...HEAD
 
+[v1.12.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.11.0...v1.12.0
 [v1.11.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.10.1...v1.11.0
 [v1.10.1]: https://github.com/sharetribe/flex-sdk-js/compare/v1.10.0...v1.10.1
 [v1.10.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.9.0...v1.10.0
