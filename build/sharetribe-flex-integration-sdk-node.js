@@ -5171,6 +5171,18 @@ var endpointDefinitions = [{
   interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */](), new __WEBPACK_IMPORTED_MODULE_19__interceptors_multipart_request__["a" /* default */]()]
 }, {
   apiName: 'integration_api',
+  path: 'files/query',
+  internal: false,
+  method: 'get',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'file_attachments/query',
+  internal: false,
+  method: 'get',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
   path: 'availability_exceptions/query',
   internal: false,
   method: 'get',
@@ -5214,6 +5226,12 @@ var endpointDefinitions = [{
 }, {
   apiName: 'integration_api',
   path: 'stock_reservations/show',
+  internal: false,
+  method: 'get',
+  interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */]()]
+}, {
+  apiName: 'integration_api',
+  path: 'messages/query',
   internal: false,
   method: 'get',
   interceptors: [new __WEBPACK_IMPORTED_MODULE_21__interceptors_transit_response__["a" /* default */]()]
@@ -8313,7 +8331,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_173__;
 
 "use strict";
 // Update this when updating package.json
-var sdkVersion = '1.12.0';
+var sdkVersion = '1.13.0';
 /* harmony default export */ __webpack_exports__["a"] = (sdkVersion);
 
 /***/ }),
