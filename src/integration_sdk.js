@@ -259,10 +259,31 @@ const endpointDefinitions = [
   },
   {
     apiName: 'integration_api',
+    path: 'files/create',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
     path: 'files/query',
     internal: false,
     method: 'get',
     interceptors: [new TransitResponse()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'file_uploads/create',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
+  },
+  {
+    apiName: 'integration_api',
+    path: 'file_downloads/create',
+    internal: false,
+    method: 'post',
+    interceptors: [new TransitResponse(), new TransitRequest()],
   },
   {
     apiName: 'integration_api',
