@@ -8,6 +8,15 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] - xxxx-xx-xx
 
+### Added
+
+- New endpoints and file helpers for uploading and downloading files [#80](https://github.com/sharetribe/flex-integration-sdk-js/pull/80)
+  - `integrationSdk.files.create(/* ... */)` - create a file record
+  - `integrationSdk.file_uploads.create(/* ... */)` - initiate a file upload to cloud storage
+  - `integrationSdk.file_downloads.create(/* ... */)` - create a file download URL
+  - `file.metadata(file)` - extract name, MIME type, and size from a File object for use with `integrationSdk.files.create()`
+  - `file.upload({ url, file, ... })` - upload a file directly to cloud storage using a URL from `integrationSdk.file_uploads.create()`
+
 ## [v1.13.0] - 2026-05-25
 
 ### Added
