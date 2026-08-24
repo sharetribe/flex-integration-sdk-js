@@ -32312,7 +32312,7 @@ var external_https_default = /*#__PURE__*/__webpack_require__.n(external_https_)
 
 // CONCATENATED MODULE: ./src/version.js
 // Update this when updating package.json
-var sdkVersion = '1.14.0';
+var sdkVersion = '1.14.1';
 /* harmony default export */ var src_version = (sdkVersion);
 // EXTERNAL MODULE: ./node_modules/lodash/isPlainObject.js
 var isPlainObject = __webpack_require__(54);
