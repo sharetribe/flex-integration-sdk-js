@@ -41,6 +41,14 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - Remove redundant babel-jest direct dependency. jest 29 bundles its own babel-jest, and the old direct dependency was pulling in vulnerable babel-traverse 6.26.0. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
 - Update @babel/* dependencies. Fixes (CVE-2023-45133). [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
 - Update jest from 29 to 30. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Update development-time transitive dependencies in yarn.lock. [#82](https://github.com/sharetribe/flex-integration-sdk-js/pull/82)
+  - shell-quote 1.8.1 to 1.9.0 (CVE-2026-9277)
+  - websocket-driver 0.7.4 to 0.7.5 (CVE-2026-54466)
+  - sha.js 2.4.11 to 2.4.12 (CVE-2025-9288)
+  - cipher-base 1.0.4 to 1.0.5 (CVE-2025-9287)
+  - pbkdf2 3.1.2 to 3.1.3 (CVE-2025-6547, CVE-2025-6545)
+  - elliptic 6.5.4 to 6.6.1
+  - handlebars 4.7.8 to 4.7.9 (CVE-2026-33937)
 
 ## [v1.11.0] - 2024-10-08
 
