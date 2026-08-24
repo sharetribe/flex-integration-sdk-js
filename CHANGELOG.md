@@ -35,6 +35,10 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - New endpoint [#74](https://github.com/sharetribe/flex-integration-sdk-js/pull/74)
   - `integrationSdk.users.verifyEmail(/* ... */)`
 
+### Changed
+
+- Update webpack from 3 to 4. [#85](https://github.com/sharetribe/flex-integration-sdk-js/pull/85)
+
 ### Security
 
 - Update docpress from 0.7 to 0.8. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)

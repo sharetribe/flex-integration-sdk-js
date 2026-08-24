@@ -23,9 +23,13 @@ const output =  {
 
 export default {
   entry,
+  mode: 'production',
   output,
   target: 'node',
   module,
+  optimization: {
+    minimize: false
+  },
   externals: [
     'axios',
   ],
