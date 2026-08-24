@@ -6,6 +6,31 @@ The format is based on [Keep a
 Changelog](http://keepachangelog.com/en/1.0.0/) and this project
 adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [v1.14.1] - 2026-08-24
+
+### Changed
+
+- Update webpack from 3 to 4. [#85](https://github.com/sharetribe/flex-integration-sdk-js/pull/85)
+
+### Security
+
+- Update docpress from 0.7 to 0.8. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Remove redundant babel-jest direct dependency. jest 29 bundles its own babel-jest, and the old direct dependency was pulling in vulnerable babel-traverse 6.26.0. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Update @babel/* dependencies. Fixes (CVE-2023-45133). [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Update jest from 29 to 30. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Update development-time transitive dependencies in yarn.lock. [#82](https://github.com/sharetribe/flex-integration-sdk-js/pull/82)
+  - shell-quote 1.8.1 to 1.9.0 (CVE-2026-9277)
+  - websocket-driver 0.7.4 to 0.7.5 (CVE-2026-54466)
+  - sha.js 2.4.11 to 2.4.12 (CVE-2025-9288)
+  - cipher-base 1.0.4 to 1.0.5 (CVE-2025-9287)
+  - pbkdf2 3.1.2 to 3.1.3 (CVE-2025-6547, CVE-2025-6545)
+  - elliptic 6.5.4 to 6.6.1
+  - handlebars 4.7.8 to 4.7.9 (CVE-2026-33937)
+- Update form-data from 3.0.1 to 3.0.5. Fixes unsafe random boundary generation (CVE-2025-7783). [#83](https://github.com/sharetribe/flex-integration-sdk-js/pull/83)
+- Update axios from 1.5.1 to 1.18.1. Also fixes form-data transitive dependency (CVE-2025-7783). [#83](https://github.com/sharetribe/flex-integration-sdk-js/pull/83)
+
 ## [v1.14.0] - 2026-07-13
 
 ### Added
@@ -34,27 +59,6 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 - New endpoint [#74](https://github.com/sharetribe/flex-integration-sdk-js/pull/74)
   - `integrationSdk.users.verifyEmail(/* ... */)`
-
-### Changed
-
-- Update webpack from 3 to 4. [#85](https://github.com/sharetribe/flex-integration-sdk-js/pull/85)
-
-### Security
-
-- Update docpress from 0.7 to 0.8. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
-- Remove redundant babel-jest direct dependency. jest 29 bundles its own babel-jest, and the old direct dependency was pulling in vulnerable babel-traverse 6.26.0. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
-- Update @babel/* dependencies. Fixes (CVE-2023-45133). [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
-- Update jest from 29 to 30. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
-- Update development-time transitive dependencies in yarn.lock. [#82](https://github.com/sharetribe/flex-integration-sdk-js/pull/82)
-  - shell-quote 1.8.1 to 1.9.0 (CVE-2026-9277)
-  - websocket-driver 0.7.4 to 0.7.5 (CVE-2026-54466)
-  - sha.js 2.4.11 to 2.4.12 (CVE-2025-9288)
-  - cipher-base 1.0.4 to 1.0.5 (CVE-2025-9287)
-  - pbkdf2 3.1.2 to 3.1.3 (CVE-2025-6547, CVE-2025-6545)
-  - elliptic 6.5.4 to 6.6.1
-  - handlebars 4.7.8 to 4.7.9 (CVE-2026-33937)
-- Update form-data from 3.0.1 to 3.0.5. Fixes unsafe random boundary generation (CVE-2025-7783). [#83](https://github.com/sharetribe/flex-integration-sdk-js/pull/83)
-- Update axios from 1.5.1 to 1.18.1. Also fixes form-data transitive dependency (CVE-2025-7783). [#83](https://github.com/sharetribe/flex-integration-sdk-js/pull/83)
 
 ## [v1.11.0] - 2024-10-08
 
@@ -218,20 +222,21 @@ This is the first version that is published in NPM.
 
 See: https://www.npmjs.com/package/sharetribe-flex-integration-sdk
 
-[unreleased]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.10.1...HEAD
-
-[v1.12.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.11.0...v1.12.0
-[v1.11.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.10.1...v1.11.0
-[v1.10.1]: https://github.com/sharetribe/flex-sdk-js/compare/v1.10.0...v1.10.1
-[v1.10.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.9.0...v1.10.0
-[v1.9.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.8.0...v1.9.0
-[v1.8.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.7.0...v1.8.0
-[v1.7.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.6.1...v1.7.0
-[v1.6.1]: https://github.com/sharetribe/flex-sdk-js/compare/v1.6.0...v1.6.1
-[v1.6.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.5.0...v1.6.0
-[v1.5.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.4.0...v1.5.0
-[v1.4.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.3.0...v1.4.0
-[v1.3.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.2.0...v1.3.0
-[v1.3.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.2.0...v1.3.0
-[v1.2.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.1.0...v1.2.0
-[v1.1.0]: https://github.com/sharetribe/flex-sdk-js/compare/v1.0.0...v1.1.0
+[unreleased]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.14.1...HEAD
+[v1.14.1]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.14.0...v1.14.1
+[v1.14.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.13.0...v1.14.0
+[v1.13.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.12.0...v1.13.0
+[v1.12.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.11.0...v1.12.0
+[v1.11.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.10.1...v1.11.0
+[v1.10.1]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.10.0...v1.10.1
+[v1.10.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.9.0...v1.10.0
+[v1.9.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.8.0...v1.9.0
+[v1.8.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.7.0...v1.8.0
+[v1.7.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.6.1...v1.7.0
+[v1.6.1]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.6.0...v1.6.1
+[v1.6.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.5.0...v1.6.0
+[v1.5.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.4.0...v1.5.0
+[v1.4.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.3.0...v1.4.0
+[v1.3.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.2.0...v1.3.0
+[v1.2.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.1.0...v1.2.0
+[v1.1.0]: https://github.com/sharetribe/flex-integration-sdk-js/compare/v1.0.0...v1.1.0
