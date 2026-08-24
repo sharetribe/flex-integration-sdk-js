@@ -35,6 +35,13 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - New endpoint [#74](https://github.com/sharetribe/flex-integration-sdk-js/pull/74)
   - `integrationSdk.users.verifyEmail(/* ... */)`
 
+### Security
+
+- Update docpress from 0.7 to 0.8. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Remove redundant babel-jest direct dependency. jest 29 bundles its own babel-jest, and the old direct dependency was pulling in vulnerable babel-traverse 6.26.0. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Update @babel/* dependencies. Fixes (CVE-2023-45133). [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+- Update jest from 29 to 30. [#81](https://github.com/sharetribe/flex-integration-sdk-js/pull/81)
+
 ## [v1.11.0] - 2024-10-08
 
 ### Added

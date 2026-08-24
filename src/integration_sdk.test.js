@@ -67,7 +67,7 @@ const createSdk = (config = {}) => {
 
 describe('new SharetribeSdk', () => {
   it('validates presence of clientId', () => {
-    expect(() => new SharetribeSdk()).toThrowError('clientId must be provided');
+    expect(() => new SharetribeSdk()).toThrow('clientId must be provided');
   });
 
   it('validates presence of baseUrl', () => {
@@ -77,7 +77,7 @@ describe('new SharetribeSdk', () => {
           clientId: CLIENT_ID,
           baseUrl: null,
         })
-    ).toThrowError('baseUrl must be provided');
+    ).toThrow('baseUrl must be provided');
   });
 
   it('uses default baseUrl, if none is set', () => {

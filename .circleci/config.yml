@@ -5,7 +5,7 @@ jobs:
       ignore:
         - gh-pages
     docker:
-      - image: node:16.18.0
+      - image: node:18.20.8
     steps:
       - checkout
       - run:
