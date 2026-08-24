@@ -50,6 +50,7 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
   - elliptic 6.5.4 to 6.6.1
   - handlebars 4.7.8 to 4.7.9 (CVE-2026-33937)
 - Update form-data from 3.0.1 to 3.0.5. Fixes unsafe random boundary generation (CVE-2025-7783). [#83](https://github.com/sharetribe/flex-integration-sdk-js/pull/83)
+- Update axios from 1.5.1 to 1.18.1. Also fixes form-data transitive dependency (CVE-2025-7783). [#83](https://github.com/sharetribe/flex-integration-sdk-js/pull/83)
 
 ## [v1.11.0] - 2024-10-08
 
