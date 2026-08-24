@@ -2894,14 +2894,14 @@ cliui@^3.2.0:
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
 
-cliui@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/cliui/-/cliui-5.0.0.tgz#deefcfdb2e800784aa34f46fa08e06851c7bbbc5"
-  integrity sha512-PYeGSEmmHM6zvoef2w8TPzlrnNpXIjTipYK780YswmIP9vjxmd6Y2a3CB2Ks6/AU8NHjZugXvo8w3oWM2qnwXA==
+cliui@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/cliui/-/cliui-6.0.0.tgz#511d702c0c4e41ca156d7d0e96021f23e13225b1"
+  integrity sha512-t6wbgtoCXvAzst7QgXxJYqPt0usEfbgQdftEPbLL/cvv6HPE5VgvqCuAIDR0NgU52ds6rFwqrgakNLrHEjCbrQ==
   dependencies:
-    string-width "^3.1.0"
-    strip-ansi "^5.2.0"
-    wrap-ansi "^5.1.0"
+    string-width "^4.2.0"
+    strip-ansi "^6.0.0"
+    wrap-ansi "^6.2.0"
 
 cliui@^8.0.1:
   version "8.0.1"
@@ -3608,32 +3608,32 @@ docpress-base@~0.8.0:
     uglifyify "3.0.4"
     ware "1.3.0"
 
-docpress-core@~0.9.0:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/docpress-core/-/docpress-core-0.9.1.tgz#9a76a21cd9a33a0fb7755081c1e13e95226d543b"
-  integrity sha512-Px8+KjZDxV7WJPomsE8WS+seEv+JbxhHL3vu41nwFR2h7fep4x+RMQZtSWV2nV7RyOl6VM9Tiy5DJ+CFyezTow==
+docpress-core@~0.10.0:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/docpress-core/-/docpress-core-0.10.1.tgz#b5121ecd573bf32e27d22355f4735608d53cf97f"
+  integrity sha512-E+QsD42MdQb9kgl5HODdCqhqZL025l5+POC8/2HecFAux5VOQBHl0DiDDIwo8A1+10ZeCqffAlNyBhI8OR7Ipg==
   dependencies:
     cheerio "0.22.0"
     debug "^4.1.0"
     highlight.js "^9.13.1"
     lodash "^4.17.15"
     lru-cache "^4.1.3"
-    markdown-it "^8.4.2"
+    markdown-it "^10.0.0"
     markdown-it-decorate "1.2.2"
     marked "^0.7.0"
     metalsmith "2.3.0"
     slugify "^1.3.2"
     ware "1.3.0"
 
-docpress@^0.7.6:
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/docpress/-/docpress-0.7.9.tgz#04be57722926972d0f72e7452204a53bfa8d9ae4"
-  integrity sha512-2hXEIfci0kCqgIdHCtwAazwpC0d/2Pk6krOptpygTjxeb5aitnwMFCFTbcwCu/FGw/kw7uqdePeG2IkYO/ipsA==
+docpress@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/docpress/-/docpress-0.8.2.tgz#9e1c9fb41208adebbccd75565fc51b3a24b01621"
+  integrity sha512-rSaeJw7HVzMflHhUvtFAt7CdI+Yq5z/EZMXeADBJDcMxpx0u/al3vf5ZBmBUBZ+E/ivDhtmbH1IRXYtUmyCzDg==
   dependencies:
     docpress-base "~0.8.0"
-    docpress-core "~0.9.0"
-    metalsmith-start rstacruz/metalsmith-start#e88a7cd
-    yargs "^14.2.0"
+    docpress-core "~0.10.0"
+    metalsmith-start rstacruz/metalsmith-start#e88a7cdbb20aac1db176c121b429008073d8e9eb
+    yargs "^15.0.2"
 
 doctrine@^2.1.0:
   version "2.1.0"
@@ -3828,6 +3828,11 @@ entities@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
+
+entities@~2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-2.0.3.tgz#5c487e5742ab93c15abb5da22759b8590ec03b7f"
+  integrity sha512-MyoZ0jgnLvB2X3Lg5HqpFmn1kybDiIfEQmKzTb5apr51Rb+T3KdmMiqa70T+bhGnyv7bQ6WMj2QMHpGMmlrUYQ==
 
 env-paths@^2.2.0:
   version "2.2.1"
@@ -6638,13 +6643,13 @@ markdown-it-decorate@1.2.2:
   resolved "https://registry.yarnpkg.com/markdown-it-decorate/-/markdown-it-decorate-1.2.2.tgz#f1e11d11d837ae78906198f8a2c974f0e646acb7"
   integrity sha512-7BFWJ97KBXgkaPVjKHISQnhSW8RWQ7yRNXpr8pPUV2Rw4GHvGrgb6CelKCM+GSijP0uSLCAVfc/knWIz+2v/Sw==
 
-markdown-it@^8.4.2:
-  version "8.4.2"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
-  integrity sha512-GcRz3AWTqSUphY3vsUqQSFMbgR38a4Lh3GWlHRh/7MRwz8mcu9n2IO7HOh+bXHrR9kOPDl5RNCaEsrneb+xhHQ==
+markdown-it@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-10.0.0.tgz#abfc64f141b1722d663402044e43927f1f50a8dc"
+  integrity sha512-YWOP1j7UbDNz+TumYP1kpwnP0aEa711cJjrAQrzd0UXlbJfc5aAq0F/PZHjiioqDC1NKgvIMX+o+9Bk7yuM2dg==
   dependencies:
     argparse "^1.0.7"
-    entities "~1.1.1"
+    entities "~2.0.0"
     linkify-it "^2.0.0"
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
@@ -6708,7 +6713,7 @@ merge-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
-metalsmith-start@rstacruz/metalsmith-start#e88a7cd:
+"metalsmith-start@github:rstacruz/metalsmith-start#e88a7cdbb20aac1db176c121b429008073d8e9eb":
   version "2.0.1"
   resolved "https://codeload.github.com/rstacruz/metalsmith-start/tar.gz/e88a7cdbb20aac1db176c121b429008073d8e9eb"
   dependencies:
@@ -8912,7 +8917,7 @@ string-width@^2.0.0, string-width@^2.1.0, string-width@^2.1.1:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
-string-width@^3.0.0, string-width@^3.1.0:
+string-width@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-3.1.0.tgz#22767be21b62af1081574306f69ac51b62203961"
   integrity sha512-vafcv6KjVZKSgz06oM/H6GDBrAtz8vdhQakGjFIvNrHA6y3HCF1CInLy+QLq8dTJPQ1b+KDUqDFctkdRW44e1w==
@@ -9022,7 +9027,7 @@ strip-ansi@^4.0.0:
   dependencies:
     ansi-regex "^3.0.0"
 
-strip-ansi@^5.0.0, strip-ansi@^5.1.0, strip-ansi@^5.2.0:
+strip-ansi@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-5.2.0.tgz#8c9a536feb6afc962bdfa5b104a5091c1ad9c0ae"
   integrity sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==
@@ -10046,14 +10051,14 @@ wrap-ansi@^2.0.0:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
 
-wrap-ansi@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-5.1.0.tgz#1fd1f67235d5b6d0fee781056001bfb694c03b09"
-  integrity sha512-QC1/iN/2/RPVJ5jYK8BGttj5z83LmSKmvbvrXPNCLZSEb32KKVDJDl/MOt2N01qU2H/FkzEa9PKto1BqDjtd7Q==
+wrap-ansi@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
+  integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
   dependencies:
-    ansi-styles "^3.2.0"
-    string-width "^3.0.0"
-    strip-ansi "^5.0.0"
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
 
 wrap-ansi@^7.0.0:
   version "7.0.0"
@@ -10161,10 +10166,10 @@ yargs-parser@^10.0.0:
   dependencies:
     camelcase "^4.1.0"
 
-yargs-parser@^15.0.1:
-  version "15.0.3"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-15.0.3.tgz#316e263d5febe8b38eef61ac092b33dfcc9b1115"
-  integrity sha512-/MVEVjTXy/cGAjdtQf8dW3V9b97bPN7rNn8ETj6BmAQL7ibC7O1Q9SPJbGjgh3SlwoBNXMzj/ZGIj8mBgl12YA==
+yargs-parser@^18.1.2:
+  version "18.1.3"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
+  integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
   dependencies:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
@@ -10181,22 +10186,22 @@ yargs-parser@^7.0.0:
   dependencies:
     camelcase "^4.1.0"
 
-yargs@^14.2.0:
-  version "14.2.3"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.2.3.tgz#1a1c3edced1afb2a2fea33604bc6d1d8d688a414"
-  integrity sha512-ZbotRWhF+lkjijC/VhmOT9wSgyBQ7+zr13+YLkhfsSiTriYsMzkTUFP18pFhWwBeMa5gUc1MzbhrO6/VB7c9Xg==
+yargs@^15.0.2:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
+  integrity sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==
   dependencies:
-    cliui "^5.0.0"
+    cliui "^6.0.0"
     decamelize "^1.2.0"
-    find-up "^3.0.0"
+    find-up "^4.1.0"
     get-caller-file "^2.0.1"
     require-directory "^2.1.1"
     require-main-filename "^2.0.0"
     set-blocking "^2.0.0"
-    string-width "^3.0.0"
+    string-width "^4.2.0"
     which-module "^2.0.0"
     y18n "^4.0.0"
-    yargs-parser "^15.0.1"
+    yargs-parser "^18.1.2"
 
 yargs@^17.7.2:
   version "17.7.3"
