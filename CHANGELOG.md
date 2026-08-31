@@ -60,6 +60,10 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - New endpoint [#74](https://github.com/sharetribe/flex-integration-sdk-js/pull/74)
   - `integrationSdk.users.verifyEmail(/* ... */)`
 
+### Fixed
+
+- Optimize fetching of access tokens. [#73](https://github.com/sharetribe/flex-integration-sdk-js/pull/73)
+
 ## [v1.11.0] - 2024-10-08
 
 ### Added

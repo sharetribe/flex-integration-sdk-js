@@ -11,13 +11,28 @@ import AddAuthTokenResponse from './add_auth_token_response';
 */
 export default class FetchAuthTokenFromApi {
   enter(ctx) {
-    const { tokenStore, authToken, endpointInterceptors, clientId, clientSecret } = ctx;
+    const {
+      tokenStore,
+      authToken,
+      endpointInterceptors,
+      clientId,
+      clientSecret,
+      ongoingRequests,
+    } = ctx;
 
     if (authToken) {
       return ctx;
     }
 
-    return contextRunner([
+    const requestKey = `fetch_from_api:${clientId}`;
+    if (ongoingRequests.has(requestKey)) {
+      return ongoingRequests.get(requestKey).then(({ authToken: newAuthToken }) => ({
+        ...ctx,
+        authToken: newAuthToken,
+      }));
+    }
+
+    const ongoingRequest = contextRunner([
       new SaveToken(),
       new AddAuthTokenResponse(),
       ...endpointInterceptors.auth.token,
@@ -29,6 +44,21 @@ export default class FetchAuthTokenFromApi {
         scope: 'integ',
       },
       tokenStore,
-    }).then(({ authToken: newAuthToken }) => ({ ...ctx, authToken: newAuthToken }));
+    })
+      .then(res => {
+        ongoingRequests.delete(requestKey);
+        return res;
+      })
+      .catch(err => {
+        ongoingRequests.delete(requestKey);
+        throw err;
+      });
+
+    ongoingRequests.set(requestKey, ongoingRequest);
+
+    return ongoingRequest.then(({ authToken: newAuthToken }) => ({
+      ...ctx,
+      authToken: newAuthToken,
+    }));
   }
 }

@@ -666,6 +666,7 @@ export default class SharetribeSdk {
       clientSecret: sdkConfig.clientSecret,
       typeHandlers: sdkConfig.typeHandlers,
       transitVerbose: sdkConfig.transitVerbose,
+      ongoingRequests: new Map(),
     };
 
     // Create SDK functions
